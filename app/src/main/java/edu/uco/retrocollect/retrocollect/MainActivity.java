@@ -30,7 +30,9 @@ public class MainActivity extends Activity {
         searchButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //Do stuff for search
+                Intent searchActivity = new Intent(MainActivity.this, SearchActivity.class);
+                searchActivity.putExtra("game", searchEditText.getText().toString());
+                startActivity(searchActivity);
             }
         });
 

@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RetroCollect.iml" filepath="$PROJECT_DIR$/RetroCollect.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/libs.iml" filepath="$PROJECT_DIR$/libs/libs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/unirest-java-1.4.10-SNAPSHOT-withDependency-ShadedForAndroid/unirest-java-1.4.10-SNAPSHOT-withDependency-ShadedForAndroid.iml" filepath="$PROJECT_DIR$/libs/unirest-java-1.4.10-SNAPSHOT-withDependency-ShadedForAndroid/unirest-java-1.4.10-SNAPSHOT-withDependency-ShadedForAndroid.iml" />
     </modules>
   </component>
 </project>
