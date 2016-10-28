@@ -23,10 +23,14 @@ public class SearchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         lstView = (ListView) findViewById(R.id.lstView);
+
+        //Bundle from Main Activity
         bundle = getIntent().getExtras();
         if(bundle != null)
         {
+            //Get string from bundle
             String game_name = bundle.getString("game");
+            //Api async call
             new IgdbApiTask().execute(game_name);
         }
 
@@ -34,11 +38,16 @@ public class SearchActivity extends Activity {
    }
 
     private class IgdbApiTask extends AsyncTask <Object, Void, HttpResponse<JsonNode>> {
+
+        //Network Activities must be done in  doInBackground
         @Override
         protected HttpResponse<JsonNode> doInBackground(Object[] objects) {
             HttpResponse<JsonNode> response = null;
             try {
+                //Get my string from the objects
                 String game_name = (String) objects[0];
+
+                //API Request
                 String searchString = JsonGameParser.parseSearchString(game_name);
                  response = Unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/" +
                          "?fields=name&limit=30&offset=0&order=release_dates.date%3Adesc&search=" + searchString)
