@@ -8,15 +8,16 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 public class SearchActivity extends Activity {
     ListView lstView;
     Bundle bundle;
+    ArrayList<Game> loadedGames;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,18 +33,18 @@ public class SearchActivity extends Activity {
 
    }
 
-    private class IgdbApiTask extends AsyncTask <Object, Void, HttpResponse<String>> {
+    private class IgdbApiTask extends AsyncTask <Object, Void, HttpResponse<JsonNode>> {
         @Override
-        protected HttpResponse<String> doInBackground(Object[] objects) {
-            HttpResponse<String> response = null;
+        protected HttpResponse<JsonNode> doInBackground(Object[] objects) {
+            HttpResponse<JsonNode> response = null;
             try {
                 String game_name = (String) objects[0];
-                String game = game_name.replace(" ", "+");
+                String searchString = JsonGameParser.parseSearchString(game_name);
                  response = Unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/" +
-                         "?fields=name&limit=10&offset=0&order=release_dates.date%3Adesc&search=zelda")
+                         "?fields=name&limit=30&offset=0&order=release_dates.date%3Adesc&search=" + searchString)
                         .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7jsnV3lAlo5HH0wK")
                         .header("Accept", "application/json")
-                        .asString();
+                        .asJson();
 
                return response;
             } catch (UnirestException e) {
@@ -53,8 +54,8 @@ public class SearchActivity extends Activity {
             return null;
         }
         @Override
-        protected void onPostExecute(HttpResponse<String> response) {
-            if (response == null | response.getBody().length() <= 0) {
+        protected void onPostExecute(HttpResponse<JsonNode> response) {
+            if (response == null ) {
                 Toast.makeText(SearchActivity.this,
                         "Invalid data. Possibly a wrong query",
                         Toast.LENGTH_SHORT).show();
@@ -63,20 +64,16 @@ public class SearchActivity extends Activity {
             else
             {
 
-                String modresponse = response.getBody().replace("\"name\":", "");
-                ArrayList<String> responseList = new ArrayList<>();
-
-                StringTokenizer stringTokenizer = new StringTokenizer(modresponse, "[{}],");
-                while(stringTokenizer.hasMoreTokens())
+                ArrayList<Game> gameArrayList = JsonGameParser.getGameList(response);
+                String[] rl = new String[gameArrayList.size()];
+                for(int i = 0; i < gameArrayList.size(); i++)
                 {
-                    stringTokenizer.nextToken();
-                    responseList.add(stringTokenizer.nextToken());
+                    rl[i] = gameArrayList.get(i).getTitle();
                 }
-                String[] rl = new String[responseList.size()];
-                        rl = responseList.toArray(rl);
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                         SearchActivity.this, android.R.layout.simple_list_item_1, rl);
                 lstView.setAdapter(arrayAdapter);
+                loadedGames = gameArrayList;
             }
 
 
@@ -85,6 +82,8 @@ public class SearchActivity extends Activity {
 
 
     }
+
+
 }
 
 

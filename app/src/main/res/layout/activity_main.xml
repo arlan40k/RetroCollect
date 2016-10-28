@@ -15,7 +15,9 @@
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Hello World!"
+        style="@android:style/Widget.AutoCompleteTextView"
+        android:inputType="textAutoComplete" />
 
     <Button
         android:layout_below="@id/searchBar"
