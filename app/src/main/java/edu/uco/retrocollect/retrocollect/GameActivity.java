@@ -1,24 +1,29 @@
 package edu.uco.retrocollect.retrocollect;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
-
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-
-import java.util.ArrayList;
 
 public class GameActivity extends Activity {
-
+    Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        bundle = getIntent().getExtras();
+        if( bundle != null)
+        {
+          //do shit
+
+          // Example
+          String name = bundle.getString("game");
+            if(name != null)
+            {
+                //Set fields
+            }
+
+        }
+
     }
 /*    private class IgdbApiGameInfoTask extends AsyncTask<Object, Void, HttpResponse<JsonNode>> {
 
