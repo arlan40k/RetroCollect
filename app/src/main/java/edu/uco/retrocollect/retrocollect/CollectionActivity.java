@@ -69,7 +69,7 @@ public class CollectionActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(CollectionActivity.this, MainActivity.class);
+                Intent intent = new Intent(CollectionActivity.this, GameActivity.class);
                 //will go to main activity until game activity is created
                 String gameName = "abc";
                 intent.putExtra("gameName", gameName);
