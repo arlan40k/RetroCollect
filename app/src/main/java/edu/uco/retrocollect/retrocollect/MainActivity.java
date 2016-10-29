@@ -39,15 +39,16 @@ public class MainActivity extends Activity {
         collectionButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent contactsActivity = new Intent(MainActivity.this, CollectionActivity.class);
-                startActivityForResult(contactsActivity, RETURN);
+                Intent collectionActivity = new Intent(MainActivity.this, CollectionActivity.class);
+                startActivityForResult(collectionActivity, RETURN);
             }
         });
 
         wishListButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //do stuff for wishList
+                Intent wishListActivity = new Intent(MainActivity.this, WishListActivity.class);
+                startActivityForResult(wishListActivity, RETURN);
             }
         });
 

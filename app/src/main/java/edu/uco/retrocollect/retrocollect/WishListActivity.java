@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CollectionActivity extends Activity {
+public class WishListActivity extends Activity {
 
     private Button tempGameButton;
     private ListView gamesList;
@@ -59,7 +59,7 @@ public class CollectionActivity extends Activity {
                 android.R.layout.simple_list_item_1, list);
 
         //ArrayAdapter adapter = new ArrayAdapter<String>
-          //      (this, R.layout.activity_collection, gameSampleArray);
+        //      (this, R.layout.activity_collection, gameSampleArray);
 
 
         gamesList.setAdapter(adapter);
@@ -69,7 +69,7 @@ public class CollectionActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(CollectionActivity.this, MainActivity.class);
+                Intent intent = new Intent(WishListActivity.this, MainActivity.class);
                 //will go to main activity until game activity is created
                 String gameName = "abc";
                 intent.putExtra("gameName", gameName);
