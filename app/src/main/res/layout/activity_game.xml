@@ -30,35 +30,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/gameReleaseDateLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/gameReleaseLayout"
-        android:layout_alignLeft="@+id/gameReleaseLayout"
-        android:layout_alignStart="@+id/gameReleaseLayout">
-
-        <TextView
-            android:id="@+id/gameReleaseDateLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Release Date: " />
-
-        <TextView
-            android:id="@+id/gameReleaseDateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/gamePublisherLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/gameReleaseDateLayout"
-        android:layout_alignLeft="@+id/gameReleaseDateLayout"
-        android:layout_alignStart="@+id/gameReleaseDateLayout">
+        android:layout_below="@id/gameTitleLayout"
+        >
 
         <TextView
             android:id="@+id/gamePublisherLabel"
@@ -78,9 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/gamePublisherLayout"
-        android:layout_alignLeft="@+id/gamePublisherLayout"
-        android:layout_alignStart="@+id/gamePublisherLayout">
+        android:layout_below="@id/gamePublisherLayout">
 
         <TextView
             android:id="@+id/gameStudioLabel"
@@ -96,37 +71,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/gameRatingLayout"
+        android:id="@+id/gameReleaseYearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@id/gameStudioLayout"
-        android:layout_alignLeft="@+id/gameStudioLayout"
-        android:layout_alignStart="@+id/gameStudioLayout">
-
-        <TextView
-            android:id="@+id/gameRatingLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rating: " />
-
-        <TextView
-            android:id="@+id/gameRatingTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/gameReleaseLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/gameTitleLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="73dp"
-        android:layout_marginStart="73dp">
+        >
 
         <TextView
             android:id="@+id/gameReleaseYearLabel"
@@ -141,5 +91,45 @@
             />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/gameReleaseDateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/gameReleaseYearLayout"
+        >
 
+        <TextView
+            android:id="@+id/gameReleaseDateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Release Date: " />
+
+        <TextView
+            android:id="@+id/gameReleaseDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/gameRatingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/gameReleaseDateLayout"
+        >
+
+        <TextView
+            android:id="@+id/gameRatingLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating: " />
+
+        <TextView
+            android:id="@+id/gameRatingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
 </RelativeLayout>
