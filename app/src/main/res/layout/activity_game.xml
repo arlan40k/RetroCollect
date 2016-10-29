@@ -33,15 +33,7 @@
         android:id="@+id/gamePublisherLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-<<<<<<< HEAD
-        android:layout_below="@+id/gameReleaseLayout"
-        android:layout_alignLeft="@+id/gameReleaseLayout"
-        android:layout_alignStart="@+id/gameReleaseLayout">
-=======
-        android:layout_below="@id/gameTitleLayout"
-        >
->>>>>>> origin/master
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/gamePublisherLabel"
@@ -55,6 +47,7 @@
             android:layout_height="wrap_content"
             />
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/gameStudioLayout"
