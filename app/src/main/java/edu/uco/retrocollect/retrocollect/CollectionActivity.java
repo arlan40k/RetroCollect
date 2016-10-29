@@ -18,6 +18,8 @@ public class CollectionActivity extends Activity {
 
 /*    private Button tempGameButton;*/
     private ListView gamesList;
+    private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate, gameRating;
+    private Game temporaryGame;
     String[] gameSampleArray = {"Game1","Game2","Game3","Game4","Game5",
             "Game1","Game2","Game3","Game4","Game5",
             "Game1","Game2","Game3","Game4","Game5",
@@ -27,7 +29,7 @@ public class CollectionActivity extends Activity {
             "Game1","Game2","Game3","Game4","Game5",};
 
     Game[] gameArray = {new Game("Cool game", 1992.0, "April 2"),
-            new Game("Neat Game", 1997.0, "July 4"),
+            new Game("Neat Game", 1997.0, "July 4", "YouBeSoft", "YourMomsStudio"),
             new Game("bad Game", 2007.0, "June 4"),
             new Game("good Game", 1862.0, "July 8"),
             new Game("ok Game", 9201.0, "August 14"),
@@ -69,13 +71,28 @@ public class CollectionActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
+
                 Intent intent = new Intent(CollectionActivity.this, GameActivity.class);
-                String gameTitle = gameArray[position].getTitle();
+                temporaryGame = gameArray[position];
+
+                gameTitle = temporaryGame.getTitle();
                 intent.putExtra("gameTitle", gameTitle);
-                String gameReleaseYear = String.valueOf(gameArray[position].getReleaseYear());
+
+                gamePublisher = temporaryGame.getPublisher();
+                intent.putExtra("gamePublisher", gamePublisher);
+
+                gameStudio = temporaryGame.getStudio();
+                intent.putExtra("gameStudio", gameStudio);
+
+                gameReleaseYear = String.valueOf(temporaryGame.getReleaseYear());
                 intent.putExtra("gameReleaseYear", gameReleaseYear);
-                String gameReleaseDate = gameArray[position].getReleaseDate();
+
+                gameReleaseDate = temporaryGame.getReleaseDate();
                 intent.putExtra("gameReleaseDate", gameReleaseDate);
+
+                gameRating = String.valueOf(temporaryGame.getRating());
+                intent.putExtra("gameRating", gameRating);
+
                 startActivity(intent);
             }
         });
