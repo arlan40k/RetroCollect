@@ -21,11 +21,11 @@
     </ListView>
 
 
-    <Button
+  <!--  <Button
         android:id="@+id/tempGameButton"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="temp button to access game activity"/>
+        android:text="temp button to access game activity"/> -->
 
 </RelativeLayout>
