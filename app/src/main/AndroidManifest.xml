@@ -34,8 +34,7 @@
             />
 
         <activity
-            android:name=".LocalMerchantActivity"
-            android:label="@string/title_activity_local_merchant"></activity>
+            android:name=".LocalMerchantActivity"/>
         <activity android:name=".CollectionActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".WishListActivity"></activity>

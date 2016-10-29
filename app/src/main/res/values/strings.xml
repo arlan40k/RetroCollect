@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">RetroCollect</string>
     <string name="title_activity_local_merchant">Map</string>
+    <string name="search">Search</string>
+    <string name="collection">Collection</string>
+    <string name="wishList">Wish List</string>
 </resources>
