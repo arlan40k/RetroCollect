@@ -70,9 +70,10 @@ public class CollectionActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(CollectionActivity.this, GameActivity.class);
-                //will go to main activity until game activity is created
-                String gameName = "abc";
+                String gameName = gameArray[position].getTitle();
                 intent.putExtra("gameName", gameName);
+                String gameDate = gameArray[position].getReleaseDate() +" "+ gameArray[position].getReleaseYear();
+                intent.putExtra("gameDate", gameDate);
                 startActivity(intent);
             }
         });
