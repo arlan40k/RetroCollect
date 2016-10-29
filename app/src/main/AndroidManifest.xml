@@ -30,14 +30,13 @@
             android:value="@string/google_maps_key" />
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"
-            />
+            android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".LocalMerchantActivity"/>
+        <activity android:name=".LocalMerchantActivity" />
         <activity android:name=".CollectionActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".WishListActivity"></activity>
+        <activity android:name=".WishListActivity" />
+        <activity android:name=".GameActivity"></activity>
     </application>
 
 </manifest>
