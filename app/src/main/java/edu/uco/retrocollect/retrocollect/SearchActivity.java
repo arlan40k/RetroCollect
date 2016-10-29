@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ public class SearchActivity extends Activity {
     ListView lstView;
     Bundle bundle;
     ArrayList<Game> loadedGames;
+    EditText txtSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,7 @@ public class SearchActivity extends Activity {
             new IgdbApiTask().execute(game_name);
         }
 
+        txtSearch = (EditText) findViewById(R.id.txtSearch);
 
    }
 
