@@ -9,6 +9,20 @@ public class Game {
     private String gameStudio;
     private double gameRating;
 
+    //Added by Adam Bilby
+    //Static Enumerations of Various API Features
+    static enum ESRBRatings
+    {
+        ERROR, RP, EC, E, E10, T, M, AO
+    }
+    static enum PegiRatings
+    {
+        ERROR, Three, Seven, Twelve, Sixteen, Eighteen
+    }
+    static enum region
+    {
+        Error, EU, NA, AU, NZ, JP, CH, AS, WW
+    }
     //Overloaded Constructor
     public Game(String title){
         this.gameTitle = title;
