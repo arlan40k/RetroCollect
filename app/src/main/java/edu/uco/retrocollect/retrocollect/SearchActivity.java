@@ -1,8 +1,12 @@
 package edu.uco.retrocollect.retrocollect;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -37,9 +41,26 @@ public class SearchActivity extends Activity {
         }
 
         txtSearch = (EditText) findViewById(R.id.txtSearch);
+        lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent gameActivity = new Intent(SearchActivity.this, GameActivity.class);
+                gameActivity.putExtra("game_name", loadedGames.get(i).getTitle());
+                startActivity(gameActivity);
+            }
+        });
 
    }
+    //How to search on enter key...
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
 
+            new IgdbApiTask().execute(txtSearch.getText().toString());
+            return true;
+        }
+        return super.dispatchKeyEvent(e);
+    };
     private class IgdbApiTask extends AsyncTask <Object, Void, HttpResponse<JsonNode>> {
 
         //Network Activities must be done in  doInBackground
