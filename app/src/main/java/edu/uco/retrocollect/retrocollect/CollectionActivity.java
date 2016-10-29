@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CollectionActivity extends Activity {
 
-    private Button tempGameButton;
+/*    private Button tempGameButton;*/
     private ListView gamesList;
     String[] gameSampleArray = {"Game1","Game2","Game3","Game4","Game5",
             "Game1","Game2","Game3","Game4","Game5",
@@ -70,27 +70,29 @@ public class CollectionActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(CollectionActivity.this, GameActivity.class);
-                String gameName = gameArray[position].getTitle();
-                intent.putExtra("gameName", gameName);
-                String gameDate = gameArray[position].getReleaseDate() +" "+ gameArray[position].getReleaseYear();
-                intent.putExtra("gameDate", gameDate);
+                String gameTitle = gameArray[position].getTitle();
+                intent.putExtra("gameTitle", gameTitle);
+                String gameReleaseYear = String.valueOf(gameArray[position].getReleaseYear());
+                intent.putExtra("gameReleaseYear", gameReleaseYear);
+                String gameReleaseDate = gameArray[position].getReleaseDate();
+                intent.putExtra("gameReleaseDate", gameReleaseDate);
                 startActivity(intent);
             }
         });
 
-        Button tempGameButton = (Button) findViewById(R.id.tempGameButton);
+/*        Button tempGameButton = (Button) findViewById(R.id.tempGameButton);
 
         tempGameButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-            /* nic do whatever you gotta do here to get to game activity while testing
+            *//* nic do whatever you gotta do here to get to game activity while testing
             I'm leaving this here until i can populate the collection properly
             will be here until stable passing to game from clicking titles
-            */
+            *//*
 
 
             }
-        });
+        });*/
 
 
 

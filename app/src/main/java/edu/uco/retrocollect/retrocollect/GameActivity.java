@@ -2,24 +2,62 @@ package edu.uco.retrocollect.retrocollect;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class GameActivity extends Activity {
     Bundle bundle;
+    private TextView gameTitleTextView, gamePublisherTextView, gameStudioTextView,
+            gameReleaseYearTextView, gameReleaseDateTextView, gameRatingTextView;
+    private final String dataErrorString = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        gameTitleTextView = (TextView) findViewById(R.id.gameTitleTextView);
+        gamePublisherTextView = (TextView) findViewById(R.id.gamePublisherTextView);
+        gameStudioTextView = (TextView) findViewById(R.id.gameStudioTextView);
+        gameReleaseYearTextView = (TextView) findViewById(R.id.gameReleaseYearTextView);
+        gameReleaseDateTextView = (TextView) findViewById(R.id.gameReleaseDateTextView);
+        gameRatingTextView = (TextView) findViewById(R.id.gameRatingTextView);
 
         bundle = getIntent().getExtras();
-        if( bundle != null)
-        {
-          //do shit
+        if (bundle != null) {
 
-          // Example
-          String name = bundle.getString("game");
-            if(name != null)
-            {
-                //Set fields
+            String title = bundle.getString("gameTitle");
+            if (title != null) {
+                gameTitleTextView.setText(title);
+            } else {
+                gameTitleTextView.setText(dataErrorString);
+            }
+            String publisher = bundle.getString("gamePublisher");
+            if (title != null) {
+                gamePublisherTextView.setText(publisher);
+            } else {
+                gamePublisherTextView.setText(dataErrorString);
+            }
+            String studio = bundle.getString("gameStudio");
+            if (title != null) {
+                gameStudioTextView.setText(studio);
+            } else {
+                gameStudioTextView.setText(dataErrorString);
+            }
+            String year = bundle.getString("gameReleaseYear");
+            if (year != null) {
+                gameReleaseYearTextView.setText(year);
+            } else {
+                gameReleaseYearTextView.setText(dataErrorString);
+            }
+            String date = bundle.getString("gameReleaseDate");
+            if (date != null) {
+                gameReleaseDateTextView.setText(date);
+            } else {
+                gameReleaseDateTextView.setText(dataErrorString);
+            }
+            String rating = bundle.getString("gameRating");
+            if (title != null) {
+                gameRatingTextView.setText(rating);
+            } else {
+                gameRatingTextView.setText(dataErrorString);
             }
 
         }
