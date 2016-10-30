@@ -55,7 +55,9 @@ public class GameActivity extends Activity {
             } else {
                 gameReleaseDateTextView.setText(dataErrorString);
             }
-            String rating = Double.toString(bundle.getDouble("gameRating"));
+
+            //Change made by Adam
+            String rating = Double.toString(bundle.getDouble("gameRating")).substring(0, 5);
             if (title != null) {
                 gameRatingTextView.setText(rating);
             } else {
