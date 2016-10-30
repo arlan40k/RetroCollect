@@ -45,7 +45,8 @@ public class SearchActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent gameActivity = new Intent(SearchActivity.this, GameActivity.class);
-                gameActivity.putExtra("game_name", loadedGames.get(i).getTitle());
+                //Changed "game_name" to "gameTitle" so that GameActivity can access it
+                gameActivity.putExtra("gameTitle", loadedGames.get(i).getTitle());
                 startActivity(gameActivity);
             }
         });
