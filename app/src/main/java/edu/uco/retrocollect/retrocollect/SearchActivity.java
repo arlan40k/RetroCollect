@@ -48,11 +48,11 @@ public class SearchActivity extends Activity {
                 Intent gameActivity = new Intent(SearchActivity.this, GameActivity.class);
                 //Changed "game_name" to "gameTitle" so that GameActivity can access it
                 gameActivity.putExtra("gameTitle", loadedGames.get(i).getTitle());
-                gameActivity.putExtra("gameReleaseYear", loadedGames.get(i).getReleaseYear());
+                gameActivity.putExtra("gameReleaseYear", Double.toString(loadedGames.get(i).getReleaseYear()).substring(0,4));
                 gameActivity.putExtra("gameReleaseDate", loadedGames.get(i).getReleaseDate());
-                //gameActivity.putExtra("gameStudio", loadedGames.get(i).getStudio());
-                //gameActivity.putExtra("gamePublisher", loadedGames.get(i).getPublisher());
-                gameActivity.putExtra("gameRating", loadedGames.get(i).getRating());
+                gameActivity.putExtra("gameStudio", loadedGames.get(i).getStudio());
+                gameActivity.putExtra("gamePublisher", loadedGames.get(i).getPublisher());
+                gameActivity.putExtra("gameRating", Double.toString(loadedGames.get(i).getRating()).substring(0,5));
                 startActivity(gameActivity);
             }
         });

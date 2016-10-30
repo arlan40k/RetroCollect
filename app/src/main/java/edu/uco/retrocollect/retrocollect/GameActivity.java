@@ -41,9 +41,7 @@ public class GameActivity extends Activity {
             } else {
                 gameStudioTextView.setText(dataErrorString);
             }
-            //Change Made By Adam
-            String year = Double.toString(bundle.getDouble("gameReleaseYear")).substring(0,4);
-
+            String year = Double.toString(bundle.getDouble("gameReleaseYear"));
             if (year != null) {
                 gameReleaseYearTextView.setText(year);
             } else {
@@ -55,9 +53,7 @@ public class GameActivity extends Activity {
             } else {
                 gameReleaseDateTextView.setText(dataErrorString);
             }
-
-            //Change made by Adam
-            String rating = Double.toString(bundle.getDouble("gameRating")).substring(0, 5);
+            String rating = bundle.getString("gameRating");
             if (title != null) {
                 gameRatingTextView.setText(rating);
             } else {
