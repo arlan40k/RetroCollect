@@ -24,6 +24,7 @@ public class SearchActivity extends Activity {
     Bundle bundle;
     ArrayList<Game> loadedGames;
     EditText txtSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +50,8 @@ public class SearchActivity extends Activity {
                 gameActivity.putExtra("gameTitle", loadedGames.get(i).getTitle());
                 gameActivity.putExtra("gameReleaseYear", loadedGames.get(i).getReleaseYear());
                 gameActivity.putExtra("gameReleaseDate", loadedGames.get(i).getReleaseDate());
-                gameActivity.putExtra("gameStudio", loadedGames.get(i).getStudio());
-                gameActivity.putExtra("gamePublisher", loadedGames.get(i).getPublisher());
+                //gameActivity.putExtra("gameStudio", loadedGames.get(i).getStudio());
+                //gameActivity.putExtra("gamePublisher", loadedGames.get(i).getPublisher());
                 gameActivity.putExtra("gameRating", loadedGames.get(i).getRating());
                 startActivity(gameActivity);
             }
