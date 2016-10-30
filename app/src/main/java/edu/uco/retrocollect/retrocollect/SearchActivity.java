@@ -47,6 +47,11 @@ public class SearchActivity extends Activity {
                 Intent gameActivity = new Intent(SearchActivity.this, GameActivity.class);
                 //Changed "game_name" to "gameTitle" so that GameActivity can access it
                 gameActivity.putExtra("gameTitle", loadedGames.get(i).getTitle());
+                gameActivity.putExtra("gameReleaseYear", loadedGames.get(i).getReleaseYear());
+                gameActivity.putExtra("gameReleaseDate", loadedGames.get(i).getReleaseDate());
+                gameActivity.putExtra("gameStudio", loadedGames.get(i).getStudio());
+                gameActivity.putExtra("gamePublisher", loadedGames.get(i).getPublisher());
+                gameActivity.putExtra("gameRating", loadedGames.get(i).getRating());
                 startActivity(gameActivity);
             }
         });
@@ -75,7 +80,7 @@ public class SearchActivity extends Activity {
                 //API Request
                 String searchString = JsonGameParser.parseSearchString(game_name);
                  response = Unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/" +
-                         "?fields=name&limit=30&offset=0&order=release_dates.date%3Adesc&search=" + searchString)
+                         "?fields=*&limit=30&offset=0&order=release_dates.date%3Adesc&search=" + searchString)
                         .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7jsnV3lAlo5HH0wK")
                         .header("Accept", "application/json")
                         .asJson();
