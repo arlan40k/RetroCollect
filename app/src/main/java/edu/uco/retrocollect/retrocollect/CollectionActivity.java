@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -30,20 +29,21 @@ public class CollectionActivity extends Activity {
 
     Game[] gameArray = {new Game("Cool game", 1992.0, "April 2"),
             new Game("Neat Game", 1997.0, "July 4", "YouBeSoft", "YourMomsStudio"),
-            new Game("bad Game", 2007.0, "June 4"),
-            new Game("good Game", 1862.0, "July 8"),
-            new Game("ok Game", 9201.0, "August 14"),
-            new Game("awesome Game", 2020.0, "July 4"),
-            new Game("Neat Game", 1997.0, "July 4"),
-            new Game("bad Game", 2007.0, "June 4"),
-            new Game("good Game", 1862.0, "July 8"),
-            new Game("ok Game", 9201.0, "August 14"),
-            new Game("awesome Game", 2020.0, "July 4"),
-            new Game("Neat Game", 1997.0, "July 4"),
-            new Game("bad Game", 2007.0, "June 4"),
-            new Game("good Game", 1862.0, "July 8"),
-            new Game("ok Game", 9201.0, "August 14"),
-            new Game("awesome Game", 2020.0, "July 4"),};
+            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
+            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
+            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
+            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
+            new Game("Neat Game", 1997.0, "July 4", "sample", "sample"),
+            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
+            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
+            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
+            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
+            new Game("Neat Game", 1997.0, "July 4", "sample", "sample"),
+            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
+            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
+            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
+            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
