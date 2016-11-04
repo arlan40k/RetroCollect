@@ -27,38 +27,40 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static edu.uco.retrocollect.retrocollect.R.id.map;
+
 public class LocalMerchantActivity extends FragmentActivity implements OnMapReadyCallback,  GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
-
     private static ArrayList<Marker> markers = new ArrayList<>();
-    private Marker clickedMarker;
-    private HashMap<Marker, String> placeIDs = new HashMap<>();
-    private String storeName;
-    public static boolean markerSelected = false;
+    private HashMap<String, String> placeIDs = new HashMap<>();
+    private HashMap<Marker, ArrayList<String>> storeInfo = new HashMap<>();
+
+    public static boolean isInit = true;
     private LatLng loc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         String lat = getIntent().getStringExtra("LAT");
         String lng = getIntent().getStringExtra("LNG");
+
         markers.clear();
         placeIDs.clear();
+        storeInfo.clear();
+        isInit = true;
         if(!lat.equals("") && !lng.equals(""))
             loc = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
         else
             loc = new LatLng(35.638033, -97.485540);
 
-        //First Coord: 35.653479, -97.460443
-        //Second Coord: 35.638033, -97.485540
         setContentView(R.layout.activity_local_merchant);
-        storeName = "GameStop";
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(map);
         mapFragment.getMapAsync(this);
-
     }
 
 
@@ -80,6 +82,8 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
         // mMap.addMarker(new MarkerOptions().position(loc).title("Marker in Edmond"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
         new HttpGet().execute();
+        Thread t1 = new Waiter();
+        t1.start();
         //comgooglemaps://?q=Pizza&center=37.759748,-122.427135
 
         //https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=YOUR_API_KEY
@@ -101,46 +105,82 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
                 return null;
             }
         });
+/*        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                for(Marker marker : markers) {
+                    if(Math.abs(marker.getPosition().latitude - latLng.latitude) < 0.005 && Math.abs(marker.getPosition().longitude - latLng.longitude) < 0.005) {
+
+                        Bundle bundle = new Bundle();
+                        ArrayList<String> tmp = storeInfo.get(marker);
+                        bundle.putStringArrayList("data", storeInfo.get(marker));
+                        LocalMerchantInfoFragment frag = new LocalMerchantInfoFragment();
+                        frag.setArguments(bundle);
+                        frag.show(getFragmentManager(), "test");
+
+                        break;
+                    }
+                }
+            }
+        });*/
+
     }
+
+
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-
-        clickedMarker = marker;
-        markerSelected = true;
-        new HttpGet().execute();
-
+        Bundle bundle = new Bundle();
+        ArrayList<String> tmp = storeInfo.get(marker);
+        bundle.putStringArrayList("data", storeInfo.get(marker));
+        LocalMerchantInfoFragment frag = new LocalMerchantInfoFragment();
+        frag.setArguments(bundle);
+        frag.show(getFragmentManager(), "test");
         return false;
     }
+
+
 
     private class HttpGet extends AsyncTask<String, Void, ArrayList<String>> {
 
         //https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4&key=YOUR_API_KEY
         final String LocalPlace_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
         final String SpecificPlace_URL = "https://maps.googleapis.com/maps/api/place/details/json?";
+
         @Override
         protected ArrayList<String> doInBackground(String... strings) {
+            String hash = "";
+            String tmpId = "";
+            if(strings.length > 0){
+                hash = strings[0];
+                for(String s : placeIDs.keySet())
+                    if(s.equals(hash))
+                        tmpId = placeIDs.get(s);
+            }
+
+
             InputStream input = null;
             HttpURLConnection httpUrlConnection = null;
             ArrayList<String> results = null;
 
             try {
                 //If marker is selected
-                if(markerSelected){
+                if (!isInit) {
+
                     //ChIJk3qurLwfsocRDjVezvHTnbo
                     Uri builtUri = Uri.parse(SpecificPlace_URL).buildUpon()
-                            .appendQueryParameter("placeid", placeIDs.get(clickedMarker))
+                            .appendQueryParameter("placeid", tmpId)
                             .appendQueryParameter("key", "AIzaSyDl1oGJ5P5LR6nEnhLkYHOhEIqUaa8J1fU")
                             .build();
                     URL url = new URL(builtUri.toString());
                     httpUrlConnection = (HttpURLConnection) url.openConnection();
                     input = new BufferedInputStream(httpUrlConnection.getInputStream());
                     String data = readStream(input);
-                    results = LocalMerchantData.getData(data);
-                }else{
+                    results = JsonMerchantDataParser.getData(data);
+                } else {
                     Uri builtUri = Uri.parse(LocalPlace_URL).buildUpon()
                             //.appendQueryParameter("location", Double.toString(loc.latitude) + "," + Double.toString(loc.longitude))
-                            .appendQueryParameter("location", Double.toString(loc.latitude)+ "," + Double.toString(loc.longitude))
+                            .appendQueryParameter("location", Double.toString(loc.latitude) + "," + Double.toString(loc.longitude))
                             .appendQueryParameter("radius", "8046.72")
                             .appendQueryParameter("type", "store")
                             .appendQueryParameter("keyword", "GameStop")
@@ -151,7 +191,7 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
                     httpUrlConnection = (HttpURLConnection) url.openConnection();
                     input = new BufferedInputStream(httpUrlConnection.getInputStream());
                     String data = readStream(input);
-                    results = LocalMerchantData.getData(data);
+                    results = JsonMerchantDataParser.getData(data);
                 }
             } catch (Exception ex) {
 
@@ -175,22 +215,40 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
                 Toast.makeText(LocalMerchantActivity.this, "Search Failed", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(markerSelected){
-                String phone = results.remove(0);
-                String web = results.remove(0);
-                String status = results.remove(0);
-                if(status.equals("true"))
-                    status = "open";
-                else
-                    status = "closed";
-                clickedMarker.setSnippet("phone:" + phone + ", " +
-                        "status: " + status );
-                clickedMarker.showInfoWindow();
+
+             if (!isInit) {
+                 Marker tmpMarker;
+                 String name = results.remove(0);
+                 String phone = results.remove(0);
+                 String web = results.remove(0);
+                 String status = results.remove(0);
+                 String placeId = results.remove(0);
+                 String weekdays = results.remove(0);
+
+                 if (status.equals("true"))
+                     status = "Status: open";
+                 else
+                     status = "Status: closed";
 
 
+                 ArrayList<String> tmp = new ArrayList<>();
+                 tmp.add(name);
+                 tmp.add(status);
+                 tmp.add(phone);
+                 tmp.add(web);
 
+                 tmp.add(weekdays);
 
-                markerSelected = false;
+                 for(String s : placeIDs.keySet()){
+                     if(placeId.equals(placeIDs.get(s))){
+                         for (Marker m : markers)
+                             if(String.valueOf(m.hashCode()).equals(s)){
+                                 storeInfo.put(m, tmp);
+                             }
+
+                     }
+                 }
+
             } else {
                 while (results.size() > 0) {
                     String name = results.remove(0);
@@ -198,11 +256,13 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
                     double lon = Double.valueOf(results.remove(0));
                     String id = results.remove(0);
                     Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lon)).title(name));
-                    placeIDs.put(marker, id);
+                    String i = String.valueOf(marker.hashCode());
+                    placeIDs.put(i, id);
                     markers.add(marker);
                 }
-                for(Marker m : markers)
-                    Log.d("ID" , placeIDs.get(m));
+                isInit = false;
+/*                for (Marker m : markers)
+                    Log.d("ID", placeIDs.get(m));*/
             }
 
         }
@@ -230,5 +290,15 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
             }
             return data.toString();
         }
+
     }
+        private class Waiter extends Thread {
+            public void run(){
+                while(isInit){}
+                for(Marker m : markers){
+                    new HttpGet().execute(String.valueOf(m.hashCode()));
+                }
+            }
+        }
+
 }
