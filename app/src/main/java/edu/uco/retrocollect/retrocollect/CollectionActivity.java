@@ -15,36 +15,13 @@ import java.util.List;
 
 public class CollectionActivity extends Activity {
 
-/*    private Button tempGameButton;*/
     private ListView gamesList;
     private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate, gameRating;
     private Game temporaryGame;
-    String[] gameSampleArray = {"Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",};
+
 //Adam Bilby
 //Static games will now be dynamic with database games
     Game[] gameArray = {
-//            new Game("Cool game", 1992.0, "April 2"),
-//            new Game("Neat Game", 1997.0, "July 4", "YouBeSoft", "YourMomsStudio"),
-//            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
-//            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
-//            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
-//            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
-//            new Game("Neat Game", 1997.0, "July 4", "sample", "sample"),
-//            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
-//            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
-//            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
-//            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
-//            new Game("Neat Game", 1997.0, "July 4", "sample", "sample"),
-//            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
-//            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
-//            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
-//            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
     };
 
     @Override
@@ -108,20 +85,17 @@ public class CollectionActivity extends Activity {
             }
         });
 
-/*        Button tempGameButton = (Button) findViewById(R.id.tempGameButton);
-
-        tempGameButton.setOnClickListener(new View.OnClickListener(){
+        gamesList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onClick(View view){
-            *//* nic do whatever you gotta do here to get to game activity while testing
-            I'm leaving this here until i can populate the collection properly
-            will be here until stable passing to game from clicking titles
-            *//*
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
 
+                //lets finish this bish in the A.M.
+                return false;
 
             }
-        });*/
 
+        });
 
 
     }
