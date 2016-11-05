@@ -1,8 +1,10 @@
 package edu.uco.retrocollect.retrocollect;
 
 
+
 public class Game {
     private String gameTitle;
+    private String gameId;
     private double gameReleaseYear;
     private String gameReleaseDate;
     private String gamePublisher;
@@ -23,39 +25,55 @@ public class Game {
     {
         Error, EU, NA, AU, NZ, JP, CH, AS, WW
     }
-    //Overloaded Constructor
-    public Game(String title){
-        this.gameTitle = title;
+
+    public Game(String gameTitle) {
+        this.gameTitle = gameTitle;
     }
 
-    //Overloaded Constructor
-    public Game(String title, Double releaseYear, String releaseDate){
-        this.gameTitle = title;
-        this.gameReleaseYear = releaseYear;
-        this.gameReleaseDate = releaseDate;
-
+    public Game(String gameTitle, String gameId) {
+        this.gameTitle = gameTitle;
+        this.gameId = gameId;
     }
 
-    //Overloaded Constructor
-    public Game(String title, Double releaseYear, String releaseDate, String publisher, String studio){
-        this.gameTitle = title;
-        this.gameReleaseYear = releaseYear;
-        this.gameReleaseDate = releaseDate;
-        this.gamePublisher = publisher;
-        this.gameStudio = studio;
+    public Game(String gameTitle, String gameId, double gameReleaseYear) {
+        this.gameTitle = gameTitle;
+        this.gameId = gameId;
+        this.gameReleaseYear = gameReleaseYear;
     }
 
-    //Overloaded Constructor
-    public Game(String title, Double releaseYear, String releaseDate, String publisher, String studio, double rating){
-        this.gameTitle = title;
-        this.gameReleaseYear = releaseYear;
-        this.gameReleaseDate = releaseDate;
-        this.gamePublisher = publisher;
-        this.gameStudio = studio;
-        this.gameRating = rating;
+    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate) {
+        this.gameTitle = gameTitle;
+        this.gameId = gameId;
+        this.gameReleaseYear = gameReleaseYear;
+        this.gameReleaseDate = gameReleaseDate;
     }
 
+    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate, String gamePublisher) {
+        this.gameTitle = gameTitle;
+        this.gameId = gameId;
+        this.gameReleaseYear = gameReleaseYear;
+        this.gameReleaseDate = gameReleaseDate;
+        this.gamePublisher = gamePublisher;
+    }
 
+    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate, String gamePublisher, String gameStudio) {
+        this.gameTitle = gameTitle;
+        this.gameId = gameId;
+        this.gameReleaseYear = gameReleaseYear;
+        this.gameReleaseDate = gameReleaseDate;
+        this.gamePublisher = gamePublisher;
+        this.gameStudio = gameStudio;
+    }
+
+    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate, String gamePublisher, String gameStudio, double gameRating) {
+        this.gameTitle = gameTitle;
+        this.gameId = gameId;
+        this.gameReleaseYear = gameReleaseYear;
+        this.gameReleaseDate = gameReleaseDate;
+        this.gamePublisher = gamePublisher;
+        this.gameStudio = gameStudio;
+        this.gameRating = gameRating;
+    }
 
     @Override
     public String toString() {
@@ -68,6 +86,13 @@ public class Game {
 
     public void setTitle(String title) {
         this.gameTitle = title;
+    }
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
     }
 
     public double getReleaseYear() {
@@ -110,4 +135,4 @@ public class Game {
         this.gameRating = rating;
     }
 
-}
+}}
