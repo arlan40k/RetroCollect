@@ -16,7 +16,8 @@ import java.util.List;
 public class WishListActivity extends Activity {
 
     private ListView gamesList;
-    private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate, gameRating;
+    private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate,
+            gameRating;
     private Game temporaryGame;
 
     //Adam Bilby
@@ -93,8 +94,19 @@ public class WishListActivity extends Activity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
                                            long id) {
 
-                //lets finish this bish in the A.M.
-                return false;
+                Bundle bundle = new Bundle();
+                String gameTitleForSearch = gameArray[position].getTitle();
+                gameTitleForSearch = gameTitleForSearch.trim();
+                gameTitleForSearch =  gameTitleForSearch.replaceAll("[^a-zA-Z0-9[\\s]]", "");
+                gameTitleForSearch = gameTitleForSearch.replace(" ", "+");
+                bundle.putString("gameNameForDialog", gameTitleForSearch);
+                CollectionLongClickFragment dialogFragment = new CollectionLongClickFragment();
+                dialogFragment.setArguments(bundle);
+                dialogFragment.show(getFragmentManager(), "test");
+
+
+                return true;
+
 
             }
 

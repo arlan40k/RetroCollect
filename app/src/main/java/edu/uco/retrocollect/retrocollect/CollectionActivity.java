@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +17,8 @@ import java.util.List;
 public class CollectionActivity extends Activity {
 
     private ListView gamesList;
-    private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate, gameRating;
+    private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate,
+            gameRating;
     private Game temporaryGame;
 
 //Adam Bilby
@@ -94,8 +96,9 @@ public class CollectionActivity extends Activity {
                 Bundle bundle = new Bundle();
                 String gameTitleForSearch = gameArray[position].getTitle();
                 gameTitleForSearch = gameTitleForSearch.trim();
-                gameTitleForSearch =  gameTitleForSearch.replaceAll("[^a-zA-Z ]", "");
+                gameTitleForSearch =  gameTitleForSearch.replaceAll("[^a-zA-Z0-9[\\s]]", "");
                 gameTitleForSearch = gameTitleForSearch.replace(" ", "+");
+                Log.d("search", gameTitleForSearch);
                 bundle.putString("gameNameForDialog", gameTitleForSearch);
                 CollectionLongClickFragment dialogFragment = new CollectionLongClickFragment();
                 dialogFragment.setArguments(bundle);

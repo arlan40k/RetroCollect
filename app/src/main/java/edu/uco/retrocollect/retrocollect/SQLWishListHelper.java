@@ -25,7 +25,8 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
     private static final String GAME_PUBLISHER = "game_publisher";
     private static final String GAME_STUDIO= "game_studio";
     private static final String GAME_RATING = "game_rating";
-    private static final String[] COLUMNS = {KEY_ID,KEY_TITLE, GAME_RELEASE_YEAR, GAME_RELEASE_DATE, GAME_PUBLISHER, GAME_STUDIO, GAME_RATING};
+    private static final String[] COLUMNS = {KEY_ID,KEY_TITLE, GAME_RELEASE_YEAR, GAME_RELEASE_DATE,
+            GAME_PUBLISHER, GAME_STUDIO, GAME_RATING};
 
     // Database Version
     private static final int DATABASE_VERSION = 3;
@@ -113,7 +114,8 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
         String gamePublisher = cursor.getString(4);
         String gameStudio = cursor.getString(5);
         double gameRating = Double.parseDouble(cursor.getString(6));
-        Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher, gameStudio, gameRating);
+        Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
+                gameStudio, gameRating);
         //log
         Log.d("getGame("+title+")", game.toString());
 
@@ -149,7 +151,8 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
         String gamePublisher = cursor.getString(4);
         String gameStudio = cursor.getString(5);
         double gameRating = Double.parseDouble(cursor.getString(6));
-        Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher, gameStudio, gameRating);
+        Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate,
+                gamePublisher, gameStudio, gameRating);
 
         //log
         Log.d("getGame("+id+")", game.toString());
@@ -178,7 +181,8 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
                 String gamePublisher = cursor.getString(4);
                 String gameStudio = cursor.getString(5);
                 double gameRating = Double.parseDouble(cursor.getString(6));
-                game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher, gameStudio, gameRating);
+                game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
+                        gameStudio, gameRating);
                 games.add(game);
             } while (cursor.moveToNext());
         }

@@ -8,10 +8,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 
-
-public class CollectionLongClickFragment extends DialogFragment {
+public class WishListLongClickFragment extends DialogFragment {
 
 
     private String [] str = {"Local","Online"};
@@ -29,13 +27,10 @@ public class CollectionLongClickFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-
         search = getArguments().getString("gameNameForDialog");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Choose Merchant");
-        //builder.setView(inflater.inflate(R.layout.fragment_collection_long_click, null));
+        builder.setTitle("Choose");
         builder.setSingleChoiceItems(str, 2, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -77,11 +72,12 @@ public class CollectionLongClickFragment extends DialogFragment {
                     Log.d("local", "hello");
                 }
                 else if(online){
-                    String url = "https://www.amazon.com/s/ref=nb_sb_noss?" +
-                            "url=search-alias%3Dvideogames&field-keywords="+ search
-                            +"&rh=n%3A468642%2Ck%3A"+ search;
+                    String url =
+                            "https://www.amazon.com/s/ref=nb_sb_noss?url=search" +
+                                    "-alias%3Dvideogames&field-keywords="+ search
+                                    +"&rh=n%3A468642%2Ck%3A"+ search;
                     Uri url2 = Uri.parse(url);
-                   Intent browserIntent = new Intent(Intent.ACTION_VIEW, url2);
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, url2);
                     startActivity(browserIntent);
 
                     Log.d("urlIsHere", url);
