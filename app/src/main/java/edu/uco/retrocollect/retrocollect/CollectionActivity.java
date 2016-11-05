@@ -26,23 +26,25 @@ public class CollectionActivity extends Activity {
             "Game1","Game2","Game3","Game4","Game5",
             "Game1","Game2","Game3","Game4","Game5",
             "Game1","Game2","Game3","Game4","Game5",};
-
-    Game[] gameArray = {new Game("Cool game", 1992.0, "April 2"),
-            new Game("Neat Game", 1997.0, "July 4", "YouBeSoft", "YourMomsStudio"),
-            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
-            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
-            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
-            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
-            new Game("Neat Game", 1997.0, "July 4", "sample", "sample"),
-            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
-            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
-            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
-            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
-            new Game("Neat Game", 1997.0, "July 4", "sample", "sample"),
-            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
-            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
-            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
-            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
+//Adam Bilby
+//Static games will now be dynamic with database games
+    Game[] gameArray = {
+//            new Game("Cool game", 1992.0, "April 2"),
+//            new Game("Neat Game", 1997.0, "July 4", "YouBeSoft", "YourMomsStudio"),
+//            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
+//            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
+//            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
+//            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
+//            new Game("Neat Game", 1997.0, "July 4", "sample", "sample"),
+//            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
+//            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
+//            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
+//            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
+//            new Game("Neat Game", 1997.0, "July 4", "sample", "sample"),
+//            new Game("bad Game", 2007.0, "June 4", "sample", "sample"),
+//            new Game("good Game", 1862.0, "July 8", "sample", "sample"),
+//            new Game("ok Game", 9201.0, "August 14", "sample", "sample"),
+//            new Game("awesome Game", 2020.0, "July 4", "sample", "sample"),
     };
 
     @Override
@@ -50,6 +52,15 @@ public class CollectionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
 
+        //Adam Bilby
+        //Sql Datbase initialize
+        SqlGameHelper sqlGameHelper = new SqlGameHelper(this);
+        ArrayList<Game> gameArrayList =  sqlGameHelper.getAllGames();
+
+        //Transform ArrayList into Array
+        gameArray = new Game[gameArrayList.size()];
+        gameArray = gameArrayList.toArray(gameArray);
+        //End of Adam Bilby Block
         gamesList = (ListView) findViewById(R.id.gamesList);
 
         final ArrayList<String> list = new ArrayList<String>();

@@ -27,22 +27,25 @@ public class WishListActivity extends Activity {
             "Game1","Game2","Game3","Game4","Game5",
             "Game1","Game2","Game3","Game4","Game5",};
 
-    Game[] gameArray = {new Game("Cool game", 1992.0, "April 2"),
-            new Game("Neat Game", 1997.0, "July 4", "YouBeSoft", "YourMomsStudio"),
-            new Game("bad Game", 2007.0, "June 4"),
-            new Game("good Game", 1862.0, "July 8"),
-            new Game("ok Game", 9201.0, "August 14"),
-            new Game("awesome Game", 2020.0, "July 4"),
-            new Game("Neat Game", 1997.0, "July 4"),
-            new Game("bad Game", 2007.0, "June 4"),
-            new Game("good Game", 1862.0, "July 8"),
-            new Game("ok Game", 9201.0, "August 14"),
-            new Game("awesome Game", 2020.0, "July 4"),
-            new Game("Neat Game", 1997.0, "July 4"),
-            new Game("bad Game", 2007.0, "June 4"),
-            new Game("good Game", 1862.0, "July 8"),
-            new Game("ok Game", 9201.0, "August 14"),
-            new Game("awesome Game", 2020.0, "July 4"),};
+    Game[] gameArray = {
+
+//            new Game("Cool game", 1992.0, "April 2"),
+//            new Game("Neat Game", 1997.0, "July 4", "YouBeSoft", "YourMomsStudio"),
+//            new Game("bad Game", 2007.0, "June 4"),
+//            new Game("good Game", 1862.0, "July 8"),
+//            new Game("ok Game", 9201.0, "August 14"),
+//            new Game("awesome Game", 2020.0, "July 4"),
+//            new Game("Neat Game", 1997.0, "July 4"),
+//            new Game("bad Game", 2007.0, "June 4"),
+//            new Game("good Game", 1862.0, "July 8"),
+//            new Game("ok Game", 9201.0, "August 14"),
+//            new Game("awesome Game", 2020.0, "July 4"),
+//            new Game("Neat Game", 1997.0, "July 4"),
+//            new Game("bad Game", 2007.0, "June 4"),
+//            new Game("good Game", 1862.0, "July 8"),
+//            new Game("ok Game", 9201.0, "August 14"),
+//            new Game("awesome Game", 2020.0, "July 4"),
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

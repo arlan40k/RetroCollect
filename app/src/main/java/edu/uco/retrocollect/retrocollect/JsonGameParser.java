@@ -41,7 +41,7 @@ public class JsonGameParser {
 
                //Deal with title
                String name = jsonArray.getJSONObject(i).getString("name");
-
+               String id  = jsonArray.getJSONObject(i).getString("id");
                //Deal with Date
              Double release_year = 2005.0;
              String release_date = "7/24/2005";
@@ -78,7 +78,7 @@ public class JsonGameParser {
                 {
                     publisher = "Nintendo";
                 }
-               gameArrayList.add(new Game(name, release_year, release_date, publisher, develeoper, rating));
+               gameArrayList.add(new Game(name, id, release_year, release_date, publisher, develeoper, rating));
            } catch (JSONException e) {
                e.printStackTrace();
            }
