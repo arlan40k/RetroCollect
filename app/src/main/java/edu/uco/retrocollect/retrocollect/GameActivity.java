@@ -1,14 +1,31 @@
 package edu.uco.retrocollect.retrocollect;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+
+import java.util.ArrayList;
 
 public class GameActivity extends Activity {
+    private final static String TAG = "GameActivity";
     Bundle bundle;
     private TextView gameTitleTextView, gamePublisherTextView, gameStudioTextView,
             gameReleaseYearTextView, gameReleaseDateTextView, gameRatingTextView;
+    private ProgressBar ratingProgressBar;
     private final String dataErrorString = "";
+    private double ratingInteger;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +36,7 @@ public class GameActivity extends Activity {
         gameReleaseYearTextView = (TextView) findViewById(R.id.gameReleaseYearTextView);
         gameReleaseDateTextView = (TextView) findViewById(R.id.gameReleaseDateTextView);
         gameRatingTextView = (TextView) findViewById(R.id.gameRatingTextView);
+        ratingProgressBar = (ProgressBar) findViewById(R.id.gameRatingProgressBar);
 
         bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -56,6 +74,10 @@ public class GameActivity extends Activity {
             String rating = bundle.getString("gameRating");
             if (title != null) {
                 gameRatingTextView.setText(rating);
+                ratingInteger = Integer.parseInt(rating);
+//                if (ratingInteger<=100) {
+//                    new LoadGameRatingValueTask().execute(ratingInteger);
+//                }
             } else {
                 gameRatingTextView.setText(dataErrorString);
             }
@@ -63,58 +85,37 @@ public class GameActivity extends Activity {
         }
 
     }
-/*    private class IgdbApiGameInfoTask extends AsyncTask<Object, Void, HttpResponse<JsonNode>> {
+    class LoadGameRatingValueTask extends AsyncTask<Integer, Integer, Void> {
 
-        //Network Activities must be done in  doInBackground
         @Override
-        protected HttpResponse<JsonNode> doInBackground(Object[] objects) {
-            HttpResponse<JsonNode> response = null;
-            try {
-                //Get my string from the objects
-                String game_name = (String) objects[0];
+        protected void onPreExecute() {
+            ratingProgressBar.setVisibility(ProgressBar.VISIBLE);
+        }
 
-                //API Request
-                String searchString = JsonGameParser.parseSearchString(game_name);
-                response = Unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/" +
-                        "?fields=name&limit=30&offset=0&order=release_dates.date%3Adesc&search=" + searchString)
-                        .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7jsnV3lAlo5HH0wK")
-                        .header("Accept", "application/json")
-                        .asJson();
-
-                return response;
-            } catch (UnirestException e) {
-                e.printStackTrace();
+        @Override
+        // parameters are from AsyncTask.execute( ) method call
+        protected Void doInBackground(Integer... resId) {
+            int tmp = resId[0];
+            // simulating long-running operation
+            for (int i = 1; i < tmp; i++) {
+                sleep(); // 0.5 sec
+                publishProgress(i);
             }
-
             return null;
         }
+
         @Override
-        protected void onPostExecute(HttpResponse<JsonNode> response) {
-            if (response == null ) {
-                Toast.makeText(SearchActivity.this,
-                        "Invalid data. Possibly a wrong query",
-                        Toast.LENGTH_SHORT).show();
-                return;
-            }
-            else
-            {
-
-                ArrayList<Game> gameArrayList = JsonGameParser.getGameList(response);
-                String[] rl = new String[gameArrayList.size()];
-                for(int i = 0; i < gameArrayList.size(); i++)
-                {
-                    rl[i] = gameArrayList.get(i).getTitle();
-                }
-//                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-//                        SearchActivity.this, android.R.layout.simple_list_item_1, rl);
-//                lstView.setAdapter(arrayAdapter);
-//                loadedGames = gameArrayList;
-            }
-
-
+        protected void onProgressUpdate(Integer... values) {
+            ratingProgressBar.setProgress(values[0]);
         }
 
 
-
-    }*/
+        private void sleep() {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Log.e(TAG, e.toString());
+            }
+        }
+    }
 }
