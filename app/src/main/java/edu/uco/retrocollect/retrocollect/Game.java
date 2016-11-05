@@ -1,6 +1,7 @@
 package edu.uco.retrocollect.retrocollect;
 
 
+
 public class Game {
     private String gameTitle;
     private String gameId;
@@ -134,4 +135,4 @@ public class Game {
         this.gameRating = rating;
     }
 
-}
+}}
