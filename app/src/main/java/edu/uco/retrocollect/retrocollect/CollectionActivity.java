@@ -85,12 +85,23 @@ public class CollectionActivity extends Activity {
             }
         });
 
+
         gamesList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
                                     long id) {
 
-                //lets finish this bish in the A.M.
+                Bundle bundle = new Bundle();
+                String gameTitleForSearch = gameArray[position].getTitle();
+                gameTitleForSearch = gameTitleForSearch.trim();
+                gameTitleForSearch =  gameTitleForSearch.replaceAll("[^a-zA-Z ]", "");
+                gameTitleForSearch = gameTitleForSearch.replace(" ", "+");
+                bundle.putString("gameNameForDialog", gameTitleForSearch);
+                CollectionLongClickFragment dialogFragment = new CollectionLongClickFragment();
+                dialogFragment.setArguments(bundle);
+                dialogFragment.show(getFragmentManager(), "test");
+
+
                 return false;
 
             }
