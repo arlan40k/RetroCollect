@@ -102,7 +102,7 @@ public class CollectionActivity extends Activity {
                 dialogFragment.show(getFragmentManager(), "test");
 
 
-                return false;
+                return true;
 
             }
 
