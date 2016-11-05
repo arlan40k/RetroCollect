@@ -15,40 +15,33 @@ import java.util.List;
 
 public class WishListActivity extends Activity {
 
-    /*    private Button tempGameButton;*/
     private ListView gamesList;
-    private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate, gameRating;
+    private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate,
+            gameRating;
     private Game temporaryGame;
-    String[] gameSampleArray = {"Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",
-            "Game1","Game2","Game3","Game4","Game5",};
 
-    Game[] gameArray = {new Game("Cool game", 1992.0, "April 2"),
-            new Game("Neat Game", 1997.0, "July 4", "YouBeSoft", "YourMomsStudio"),
-            new Game("bad Game", 2007.0, "June 4"),
-            new Game("good Game", 1862.0, "July 8"),
-            new Game("ok Game", 9201.0, "August 14"),
-            new Game("awesome Game", 2020.0, "July 4"),
-            new Game("Neat Game", 1997.0, "July 4"),
-            new Game("bad Game", 2007.0, "June 4"),
-            new Game("good Game", 1862.0, "July 8"),
-            new Game("ok Game", 9201.0, "August 14"),
-            new Game("awesome Game", 2020.0, "July 4"),
-            new Game("Neat Game", 1997.0, "July 4"),
-            new Game("bad Game", 2007.0, "June 4"),
-            new Game("good Game", 1862.0, "July 8"),
-            new Game("ok Game", 9201.0, "August 14"),
-            new Game("awesome Game", 2020.0, "July 4"),};
+    //Adam Bilby
+//Static games will now be dynamic with database games
+    Game[] gameArray = {
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
 
+        //Adam Bilby
+        //Sql Datbase initialize
+        SqlWishListHelper sqlWishListHelper = new SqlWishListHelper(this);
+        //Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate,
+        // String gamePublisher, String gameStudio, double gameRating) {
+
+        ArrayList<Game> gameArrayList =  sqlWishListHelper.getAllGames();
+
+        //Transform ArrayList into Array
+        gameArray = new Game[gameArrayList.size()];
+        gameArray = gameArrayList.toArray(gameArray);
+        //End of Adam Bilby Block
         gamesList = (ListView) findViewById(R.id.gamesList);
 
         final ArrayList<String> list = new ArrayList<String>();
@@ -56,7 +49,7 @@ public class WishListActivity extends Activity {
             list.add(gameArray[i].getTitle() + "     " + gameArray[i].getReleaseYear());
         }
 
-        final MyArrayAdapter adapter = new MyArrayAdapter(this,
+        final WishListActivity.MyArrayAdapter adapter = new WishListActivity.MyArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);
 
         //ArrayAdapter adapter = new ArrayAdapter<String>
@@ -96,20 +89,28 @@ public class WishListActivity extends Activity {
             }
         });
 
-/*        Button tempGameButton = (Button) findViewById(R.id.tempGameButton);
-
-        tempGameButton.setOnClickListener(new View.OnClickListener(){
+        gamesList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onClick(View view){
-            *//* nic do whatever you gotta do here to get to game activity while testing
-            I'm leaving this here until i can populate the collection properly
-            will be here until stable passing to game from clicking titles
-            *//*
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
+                                           long id) {
+
+                Bundle bundle = new Bundle();
+                String gameTitleForSearch = gameArray[position].getTitle();
+                gameTitleForSearch = gameTitleForSearch.trim();
+                gameTitleForSearch =  gameTitleForSearch.replaceAll("[^a-zA-Z0-9[\\s]]", "");
+                gameTitleForSearch = gameTitleForSearch.replace(" ", "+");
+                bundle.putString("gameNameForDialog", gameTitleForSearch);
+                CollectionLongClickFragment dialogFragment = new CollectionLongClickFragment();
+                dialogFragment.setArguments(bundle);
+                dialogFragment.show(getFragmentManager(), "test");
+
+
+                return true;
 
 
             }
-        });*/
 
+        });
 
 
     }

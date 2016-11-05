@@ -24,12 +24,15 @@ public class SearchActivity extends Activity {
     Bundle bundle;
     ArrayList<Game> loadedGames;
     EditText txtSearch;
-
+    SqlGameHelper sqlGameHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         lstView = (ListView) findViewById(R.id.lstView);
+
+        //Initialize DB
+        sqlGameHelper = new SqlGameHelper(this);
 
         //Bundle from Main Activity
         bundle = getIntent().getExtras();
@@ -42,12 +45,22 @@ public class SearchActivity extends Activity {
         }
 
         txtSearch = (EditText) findViewById(R.id.txtSearch);
+        lstView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                sqlGameHelper.addGame(loadedGames.get(i));
+                return false;
+            }
+        });
+
         lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent gameActivity = new Intent(SearchActivity.this, GameActivity.class);
                 //Changed "game_name" to "gameTitle" so that GameActivity can access it
                 gameActivity.putExtra("gameTitle", loadedGames.get(i).getTitle());
+                gameActivity.putExtra("gameID", loadedGames.get(i).getGameId());
                 gameActivity.putExtra("gameReleaseYear", Double.toString(loadedGames.get(i).getReleaseYear()).substring(0,4));
                 gameActivity.putExtra("gameReleaseDate", loadedGames.get(i).getReleaseDate());
                 gameActivity.putExtra("gameStudio", loadedGames.get(i).getStudio());
@@ -85,6 +98,8 @@ public class SearchActivity extends Activity {
                         .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7jsnV3lAlo5HH0wK")
                         .header("Accept", "application/json")
                         .asJson();
+
+
 
                return response;
             } catch (UnirestException e) {
