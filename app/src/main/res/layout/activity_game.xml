@@ -10,14 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.uco.retrocollect.retrocollect.GameActivity">
 
-
     <TextView
         android:id="@+id/gameTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:textSize="@dimen/largeTextSize" />
-
 
     <TextView
         android:id="@+id/gamePublisherLabel"
@@ -36,7 +35,6 @@
         android:layout_alignParentRight="true"
         android:textSize="@dimen/mediumTextSize"/>
 
-
     <TextView
         android:id="@+id/gameStudioLabel"
         android:layout_width="wrap_content"
@@ -53,7 +51,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:textSize="@dimen/mediumTextSize"/>
-
 
     <TextView
         android:id="@+id/gameReleaseYearLabel"
@@ -88,7 +85,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:textSize="@dimen/mediumTextSize"/>
-
 
     <TextView
         android:id="@+id/gameRatingLabel"

@@ -64,7 +64,9 @@ public class GameActivity extends Activity {
                 gameReleaseDateTextView.setText(dataErrorString);
             }
             String rating = bundle.getString("gameRating");
+            rating = rating.substring(0,4);
             if (title != null) {
+
                 gameRatingTextView.setText(rating);
                 //The string is a decimal so turn it into double
                 Double ratingDouble = Double.parseDouble(rating);
