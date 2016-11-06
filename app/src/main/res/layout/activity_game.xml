@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:paddingBottom="@dimen/mediumBottomPadding"
         android:textSize="@dimen/largeTextSize" />
 
     <TextView
@@ -23,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gameTitleTextView"
+        android:paddingBottom="@dimen/smallBottomPadding"
         android:text="Released: "
         android:textSize="@dimen/mediumTextSize"/>
 
@@ -31,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gameTitleTextView"
+        android:paddingBottom="@dimen/smallBottomPadding"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:textSize="@dimen/mediumTextSize"/>
@@ -39,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gameReleaseYearLabel"
+        android:paddingBottom="@dimen/smallBottomPadding"
         android:text="Rating: "
         android:textSize="@dimen/mediumTextSize"/>
 
@@ -47,6 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gameReleaseYearLabel"
+        android:paddingBottom="@dimen/smallBottomPadding"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:textSize="@dimen/mediumTextSize"/>
@@ -57,6 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/gameRatingLabel"
+        android:paddingBottom="@dimen/smallBottomPadding"
         android:indeterminate="false"
         android:maxHeight="15dip"
         android:minHeight="15dip"
@@ -67,6 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gameRatingProgressBar"
+        android:paddingBottom="@dimen/smallBottomPadding"
         android:text="Publisher: "
         android:textSize="@dimen/smallTextSize"/>
 
@@ -75,6 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gameRatingProgressBar"
+        android:paddingBottom="@dimen/smallBottomPadding"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:textSize="@dimen/smallTextSize"/>
@@ -84,6 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gamePublisherLabel"
+        android:paddingBottom="@dimen/smallBottomPadding"
         android:text="Studio: "
         android:textSize="@dimen/smallTextSize"/>
 
@@ -92,6 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gamePublisherLabel"
+        android:paddingBottom="@dimen/smallBottomPadding"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:textSize="@dimen/smallTextSize"/>
@@ -101,6 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gameStudioLabel"
+        android:paddingBottom="@dimen/smallBottomPadding"
         android:text="Release Date: "
         android:textSize="@dimen/smallTextSize"/>
 
@@ -109,6 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gameStudioLabel"
+        android:paddingBottom="@dimen/smallBottomPadding"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:textSize="@dimen/smallTextSize"/>

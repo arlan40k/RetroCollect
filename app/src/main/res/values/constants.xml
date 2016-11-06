@@ -3,4 +3,6 @@
     <dimen name="largeTextSize">30sp</dimen>
     <dimen name="mediumTextSize">20sp</dimen>
     <dimen name="smallTextSize">16sp</dimen>
+    <dimen name="smallBottomPadding">5dp</dimen>
+    <dimen name="mediumBottomPadding">20dp</dimen>
 </resources>
