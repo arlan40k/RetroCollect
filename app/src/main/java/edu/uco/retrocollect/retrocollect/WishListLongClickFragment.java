@@ -131,10 +131,14 @@ public class WishListLongClickFragment extends DialogFragment {
 
                     Toast.makeText(getActivity(), "Game moved to Collection!", Toast.LENGTH_SHORT);
 
+
+
                     Intent refreshWishListIntent = new Intent(getActivity(),
                             WishListActivity.class);
                     getActivity().finish();
                     startActivity(refreshWishListIntent);
+
+
 
                 }
                 else if(remove){

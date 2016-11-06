@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view){
                 Intent collectionActivity = new Intent(MainActivity.this, CollectionActivity.class);
-                startActivityForResult(collectionActivity, RETURN);
+                startActivity(collectionActivity);
             }
         });
 
@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view){
                 Intent wishListActivity = new Intent(MainActivity.this, WishListActivity.class);
-                startActivityForResult(wishListActivity, RETURN);
+                startActivity(wishListActivity);
             }
         });
 

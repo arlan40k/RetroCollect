@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/sortByGroup">
+        <item android:id="@+id/sortAlpha"
+            android:title="by A-Z"
+            android:onClick="onGroupItemClick"
+            />
+        <item android:id="@+id/sortRating"
+            android:title="by rating"
+            android:onClick="onGroupItemClick"
+            />
+    </group>
+
+</menu>

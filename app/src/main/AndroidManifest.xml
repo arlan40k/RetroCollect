@@ -33,9 +33,13 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".LocalMerchantActivity" />
-        <activity android:name=".CollectionActivity" />
+        <activity android:name=".CollectionActivity"
+            android:label="Collection"
+            >
+        </activity>
         <activity android:name=".SearchActivity" />
-        <activity android:name=".WishListActivity" />
+        <activity android:name=".WishListActivity"
+            android:label="Wish List"></activity>
         <activity android:name=".GameActivity"></activity>
     </application>
 
