@@ -7,6 +7,9 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import static android.graphics.Color.CYAN;
+import static android.graphics.Color.GRAY;
+
 public class GameActivity extends Activity {
     private final static String TAG = "GameActivity";
     Bundle bundle;
@@ -63,13 +66,13 @@ public class GameActivity extends Activity {
             String rating = bundle.getString("gameRating");
             if (title != null) {
                 gameRatingTextView.setText(rating);
-                //The string is a decimal so i trun it into double
+                //The string is a decimal so turn it into double
                 Double ratingDouble = Double.parseDouble(rating);
                 //double has a intValue for conversion to int
                 ratingInteger = ratingDouble.intValue();
-            //    if (ratingInteger<=100) {
-            //        new LoadGameRatingValueTask().execute(ratingInteger);
-//                }
+                if (ratingInteger<=100) {
+                    new LoadGameRatingValueTask().execute(ratingInteger);
+                }
             } else {
                 gameRatingTextView.setText(dataErrorString);
             }
@@ -104,7 +107,7 @@ public class GameActivity extends Activity {
 
         private void sleep() {
             try {
-                Thread.sleep(100);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 Log.e(TAG, e.toString());
             }
