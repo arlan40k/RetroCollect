@@ -1,22 +1,11 @@
 package edu.uco.retrocollect.retrocollect;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-
-import java.util.ArrayList;
 
 public class GameActivity extends Activity {
     private final static String TAG = "GameActivity";
@@ -25,7 +14,7 @@ public class GameActivity extends Activity {
             gameReleaseYearTextView, gameReleaseDateTextView, gameRatingTextView;
     private ProgressBar ratingProgressBar;
     private final String dataErrorString = "";
-    private double ratingInteger;
+    private int ratingInteger;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +63,12 @@ public class GameActivity extends Activity {
             String rating = bundle.getString("gameRating");
             if (title != null) {
                 gameRatingTextView.setText(rating);
-                ratingInteger = Integer.parseInt(rating);
-//                if (ratingInteger<=100) {
-//                    new LoadGameRatingValueTask().execute(ratingInteger);
+                //The string is a decimal so i trun it into double
+                Double ratingDouble = Double.parseDouble(rating);
+                //double has a intValue for conversion to int
+                ratingInteger = ratingDouble.intValue();
+            //    if (ratingInteger<=100) {
+            //        new LoadGameRatingValueTask().execute(ratingInteger);
 //                }
             } else {
                 gameRatingTextView.setText(dataErrorString);
