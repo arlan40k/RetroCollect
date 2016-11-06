@@ -49,8 +49,20 @@ public class SearchActivity extends Activity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                sqlGameHelper.addGame(loadedGames.get(i));
-                return false;
+                // sqlGameHelper.addGame(loadedGames.get(i));
+                Game game = loadedGames.get(i);
+                Bundle bundle = new Bundle();
+                bundle.putString("gameId", game.getGameId());
+                bundle.putString("gameTitle", game.getTitle());
+                bundle.putDouble("gameReleaseYear", game.getReleaseYear());
+                bundle.putString("gameReleaseDate", game.getReleaseDate());
+                bundle.putString("gamePublisher", game.getPublisher());
+                bundle.putString("gameStudio", game.getStudio());
+                bundle.putDouble("gameRating", game.getRating());
+                SearchLongClickFragment searchLongClickFragment = new SearchLongClickFragment();
+                searchLongClickFragment.setArguments(bundle);
+                searchLongClickFragment.show(getFragmentManager(), "test");
+                return true;
             }
         });
 
@@ -67,6 +79,8 @@ public class SearchActivity extends Activity {
                 gameActivity.putExtra("gamePublisher", loadedGames.get(i).getPublisher());
                 gameActivity.putExtra("gameRating", Double.toString(loadedGames.get(i).getRating()).substring(0,5));
                 startActivity(gameActivity);
+
+
             }
         });
 
