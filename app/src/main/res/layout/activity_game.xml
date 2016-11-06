@@ -10,136 +10,112 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.uco.retrocollect.retrocollect.GameActivity">
 
-    <LinearLayout
-        android:id="@+id/gameTitleLayout"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/gameTitleTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/largeTextSize" />
 
-        <TextView
-            android:id="@+id/gameTitleLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Game Title: " />
 
-        <TextView
-            android:id="@+id/gameTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/gamePublisherLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/gamePublisherLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/gameTitleLayout"
-        >
+        android:layout_below="@id/gameTitleTextView"
+        android:text="Publisher: "
+        android:textSize="@dimen/mediumTextSize"/>
 
-        <TextView
-            android:id="@+id/gamePublisherLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Publisher: " />
-
-        <TextView
-            android:id="@+id/gamePublisherTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/gameStudioLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/gamePublisherTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/gamePublisherLayout">
+        android:layout_below="@id/gameTitleTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/mediumTextSize"/>
 
-        <TextView
-            android:id="@+id/gameStudioLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Studio: " />
 
-        <TextView
-            android:id="@+id/gameStudioTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/gameReleaseYearLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/gameStudioLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/gameStudioLayout"
-        >
+        android:layout_below="@id/gamePublisherLabel"
+        android:text="Studio: "
+        android:textSize="@dimen/mediumTextSize"/>
 
-        <TextView
-            android:id="@+id/gameReleaseYearLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Release Year: " />
-
-        <TextView
-            android:id="@+id/gameReleaseYearTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/gameReleaseDateLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/gameStudioTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/gameReleaseYearLayout"
-        >
+        android:layout_below="@id/gamePublisherLabel"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/mediumTextSize"/>
 
-        <TextView
-            android:id="@+id/gameReleaseDateLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Release Date: " />
 
-        <TextView
-            android:id="@+id/gameReleaseDateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/gameRatingLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/gameReleaseYearLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/gameReleaseDateLayout"
-        >
+        android:layout_below="@id/gameStudioLabel"
+        android:text="Release Year: "
+        android:textSize="@dimen/mediumTextSize"/>
 
-        <TextView
-            android:id="@+id/gameRatingLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rating: " />
+    <TextView
+        android:id="@+id/gameReleaseYearTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gameStudioLabel"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/mediumTextSize"/>
 
-        <TextView
-            android:id="@+id/gameRatingTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/gameReleaseDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gameReleaseYearLabel"
+        android:text="Release Date: "
+        android:textSize="@dimen/mediumTextSize"/>
+
+    <TextView
+        android:id="@+id/gameReleaseDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gameReleaseYearLabel"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/mediumTextSize"/>
+
+
+    <TextView
+        android:id="@+id/gameRatingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gameReleaseDateLabel"
+        android:text="Rating: "
+        android:textSize="@dimen/mediumTextSize"/>
+
+    <TextView
+        android:id="@+id/gameRatingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gameReleaseDateLabel"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/mediumTextSize"/>
 
     <ProgressBar
         android:id="@+id/gameRatingProgressBar"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/gameRatingLayout"
+        android:layout_below="@id/gameRatingLabel"
+        android:indeterminate="false"
         android:maxHeight="15dip"
         android:minHeight="15dip"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
+
 </RelativeLayout>
