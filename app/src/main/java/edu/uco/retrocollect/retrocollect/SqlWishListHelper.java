@@ -228,8 +228,8 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
 
         // 2. delete
         db.delete(TABLE_WISHLIST, //table name
-                KEY_ID+" = ?",  // selections
-                new String[] { String.valueOf(game.getGameId() )}); //selections args
+                KEY_TITLE+" = ?",  // selections
+                new String[] { String.valueOf(game.toString() )});
 
         // 3. close
         db.close();

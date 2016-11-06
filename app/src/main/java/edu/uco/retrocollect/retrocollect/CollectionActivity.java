@@ -93,15 +93,30 @@ public class CollectionActivity extends Activity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
                                     long id) {
 
+
+                Game game = gameArray[position];
                 Bundle bundle = new Bundle();
+                bundle.putString("gameId", game.getGameId());
+                bundle.putString("gameTitle", game.getTitle());
+                bundle.putDouble("gameReleaseYear", game.getReleaseYear());
+                bundle.putString("gameReleaseDate", game.getReleaseDate());
+                bundle.putString("gamePublisher", game.getPublisher());
+                bundle.putString("gameStudio", game.getStudio());
+                bundle.putDouble("gameRating", game.getRating());
+
                 String gameTitleForSearch = gameArray[position].getTitle();
+
+
                 gameTitleForSearch = gameTitleForSearch.trim();
                 gameTitleForSearch =  gameTitleForSearch.replaceAll("[^a-zA-Z0-9[\\s]]", "");
                 gameTitleForSearch = gameTitleForSearch.replace(" ", "+");
+
                 Log.d("search", gameTitleForSearch);
+
                 bundle.putString("gameNameForDialog", gameTitleForSearch);
                 CollectionLongClickFragment dialogFragment = new CollectionLongClickFragment();
                 dialogFragment.setArguments(bundle);
+
                 dialogFragment.show(getFragmentManager(), "test");
 
 
