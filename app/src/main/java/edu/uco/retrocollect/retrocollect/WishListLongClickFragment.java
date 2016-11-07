@@ -25,7 +25,8 @@ public class WishListLongClickFragment extends DialogFragment {
 
     SqlWishListHelper sqlWishListHelper;
 
-    private String gameId, gameTitle,  gameReleaseDate, gamePublisher,
+    private String gameId;
+    private String  gameTitle,  gameReleaseDate, gamePublisher,
             gameStudio = "";
     private Double gameReleaseYear, gameRating = 0.0;
 

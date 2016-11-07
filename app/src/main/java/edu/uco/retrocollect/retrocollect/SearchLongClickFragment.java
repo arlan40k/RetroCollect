@@ -29,6 +29,7 @@ public class SearchLongClickFragment extends DialogFragment {
 
        String title = getArguments().getString("gameTitle");
        String id = getArguments().getString("gameId");
+
        double releaseYear = getArguments().getDouble("gameReleaseYear");
         String releaseDate = getArguments().getString("gameReleaseDate");
         String publisher = getArguments().getString("gamePublisher");

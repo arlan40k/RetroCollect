@@ -71,7 +71,6 @@ public class SqlGameHelper extends SQLiteOpenHelper {
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, game.getGameId());
         values.put(KEY_TITLE, game.getTitle()); // get title
         values.put(GAME_RELEASE_YEAR, game.getReleaseYear()); // get release year
         values.put(GAME_RELEASE_DATE, game.getReleaseDate()); // get release date
@@ -226,15 +225,17 @@ public class SqlGameHelper extends SQLiteOpenHelper {
 
         // 2. delete
         db.delete(TABLE_GAMES, //table name
-                KEY_TITLE+" = ?",  // selections
-                new String[] { String.valueOf(game.toString() )}); //selections args
+                KEY_TITLE +" = ?",  // selections
+                new String[] { game.getTitle() });
+
 
         // 3. close
         db.close();
 
+        //String id111 = game.getGameId() +" ";
+
         //log
-        Log.d("deleteBook", game.toString());
-//        Log.d("deleteBook", game.getGameId());
+        // Log.d("deleteBook", id111);
 
     }
 /*

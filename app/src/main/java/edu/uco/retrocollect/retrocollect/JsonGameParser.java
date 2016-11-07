@@ -23,7 +23,8 @@ public class JsonGameParser {
     {
 
         String myString = search.trim();
-        String another =  myString.replaceAll("[^a-zA-Z ]", "");
+        //Chnaged the regex to not remove numbers and spaces
+        String another =  myString.replaceAll("[^a-zA-Z0-9[\\s]]", "");
         String newString = another.replace(" ", "+");
 
         return newString;
@@ -41,7 +42,9 @@ public class JsonGameParser {
 
                //Deal with title
                String name = jsonArray.getJSONObject(i).getString("name");
-               String id  = jsonArray.getJSONObject(i).getString("id");
+               //Id must be brought in as int then converted -HASEEB
+               int id  = jsonArray.getJSONObject(i).getInt("id");
+               String idString = Integer.toString(id);
                //Deal with Date
              Double release_year = 2005.0;
              String release_date = "7/24/2005";
@@ -78,7 +81,8 @@ public class JsonGameParser {
                 {
                     publisher = "Nintendo";
                 }
-               gameArrayList.add(new Game(name, id, release_year, release_date, publisher, develeoper, rating));
+               //put idString in the constructor instead of id -HASEEB
+               gameArrayList.add(new Game(name, idString, release_year, release_date, publisher, develeoper, rating));
            } catch (JSONException e) {
                e.printStackTrace();
            }

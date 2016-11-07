@@ -111,6 +111,7 @@ public class WishListActivity extends Activity {
                 Game game = gameArray[position];
                 Bundle bundle = new Bundle();
                 bundle.putString("gameId", game.getGameId());
+               // Log.d("delete2", game.getGameId());
                 bundle.putString("gameTitle", game.getTitle());
                 bundle.putDouble("gameReleaseYear", game.getReleaseYear());
                 bundle.putString("gameReleaseDate", game.getReleaseDate());

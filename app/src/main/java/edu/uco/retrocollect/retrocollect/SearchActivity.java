@@ -73,6 +73,7 @@ public class SearchActivity extends Activity {
                 //Changed "game_name" to "gameTitle" so that GameActivity can access it
                 gameActivity.putExtra("gameTitle", loadedGames.get(i).getTitle());
                 gameActivity.putExtra("gameID", loadedGames.get(i).getGameId());
+
                 gameActivity.putExtra("gameReleaseYear", Double.toString(loadedGames.get(i).getReleaseYear()).substring(0,4));
                 gameActivity.putExtra("gameReleaseDate", loadedGames.get(i).getReleaseDate());
                 gameActivity.putExtra("gameStudio", loadedGames.get(i).getStudio());
@@ -107,8 +108,9 @@ public class SearchActivity extends Activity {
 
                 //API Request
                 String searchString = JsonGameParser.parseSearchString(game_name);
+                //Changed order to relevance rather than date released
                  response = Unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/" +
-                         "?fields=*&limit=30&offset=0&order=release_dates.date%3Adesc&search=" + searchString)
+                         "?fields=*&limit=30&offset=0&search=" + searchString)
                         .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7jsnV3lAlo5HH0wK")
                         .header("Accept", "application/json")
                         .asJson();
