@@ -11,21 +11,27 @@
     tools:context="edu.uco.retrocollect.retrocollect.CollectionActivity"
     android:orientation="horizontal">
 
-    <ListView
+    <GridView
         android:id="@+id/gamesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/tempGameButton"
-        >
+        android:gravity="center"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="24dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="spacingWidthUniform"
 
-    </ListView>
 
-
-    <!--<Button
-        android:id="@+id/tempGameButton"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
+        > </GridView>
+    <ImageView
+        android:id="@+id/imageTest"
+        android:layout_below="@+id/gamesList"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="temp button to access game activity"/>-->
+        android:src="@drawable/cast_album_art_placeholder"/>
+
+
+
 
 </RelativeLayout>

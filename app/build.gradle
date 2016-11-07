@@ -28,5 +28,6 @@ dependencies {
     compile files('libs/unirest-java-1.4.10-SNAPSHOT-withDependency-ShadedForAndroid.jar')
     compile 'com.google.android.gms:play-services:9.6.1'
     compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
     testCompile 'junit:junit:4.12'
 }

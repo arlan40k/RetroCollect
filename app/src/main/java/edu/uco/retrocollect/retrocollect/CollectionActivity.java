@@ -11,7 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.GridView;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +24,8 @@ import java.util.List;
 
 public class CollectionActivity extends Activity {
 
-    private ListView gamesList;
+    private GridView gamesList;
+    private ImageView testImage;
     private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate,
             gameRating, gameCoverHash;
     private Game temporaryGame;
@@ -53,7 +57,12 @@ public class CollectionActivity extends Activity {
         gameArray = new Game[gameArrayList.size()];
         gameArray = gameArrayList.toArray(gameArray);
         //End of Adam Bilby Block
-        gamesList = (ListView) findViewById(R.id.gamesList);
+        gamesList = (GridView) findViewById(R.id.gamesList);
+        testImage = (ImageView) findViewById(R.id.imageTest);
+
+        Picasso.with(getApplicationContext()).load("https://lh4.goo" +
+                "gleusercontent.com/-NnUDSkolO6M/AAAAAAAAAAI/AAAAAAAAAPg/Rp2eTavq49w/s" +
+                "0-c-k-no-ns/photo.jpg").resize(500,500).into(testImage);
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < gameArray.length; ++i) {

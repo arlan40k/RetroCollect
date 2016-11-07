@@ -38,7 +38,7 @@ public class WishListActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collection);
+        setContentView(R.layout.activity_wish_list);
 
 
         //Adam Bilby
