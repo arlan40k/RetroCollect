@@ -23,7 +23,7 @@ public class CollectionActivity extends Activity {
 
     private ListView gamesList;
     private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate,
-            gameRating;
+            gameRating, gameCoverHash;
     private Game temporaryGame;
 
 
@@ -96,6 +96,12 @@ public class CollectionActivity extends Activity {
                 gameRating = String.valueOf(temporaryGame.getRating());
                 intent.putExtra("gameRating", gameRating);
 
+                gameCoverHash = temporaryGame.getCoverHash();
+                intent.putExtra("coverHash", gameCoverHash);
+
+                String sup = gameCoverHash +" ";
+                Log.d("Cover:", sup);
+
                 startActivity(intent);
             }
         });
@@ -116,6 +122,7 @@ public class CollectionActivity extends Activity {
                 bundle.putString("gamePublisher", game.getPublisher());
                 bundle.putString("gameStudio", game.getStudio());
                 bundle.putDouble("gameRating", game.getRating());
+                bundle.putString("coverHash", game.getCoverHash());
 
                 String gameTitleForSearch = gameArray[position].getTitle();
 

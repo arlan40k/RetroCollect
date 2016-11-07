@@ -9,6 +9,7 @@ public class Game {
     private String gamePublisher;
     private String gameStudio;
     private double gameRating;
+    private String coverHash; //cover hash added -HASEEB
 
     //Added by Adam Bilby
     //Static Enumerations of Various API Features
@@ -65,6 +66,18 @@ public class Game {
     }
 
     public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate, String gamePublisher, String gameStudio, double gameRating) {
+        this.gameTitle = gameTitle;
+        this.gameId = gameId;
+        this.gameReleaseYear = gameReleaseYear;
+        this.gameReleaseDate = gameReleaseDate;
+        this.gamePublisher = gamePublisher;
+        this.gameStudio = gameStudio;
+        this.gameRating = gameRating;
+        this.coverHash = coverHash;
+    }
+
+    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate,
+                String gamePublisher, String gameStudio, double gameRating, String coverHash) {
         this.gameTitle = gameTitle;
         this.gameId = gameId;
         this.gameReleaseYear = gameReleaseYear;
@@ -133,5 +146,9 @@ public class Game {
     public void setRating(double rating) {
         this.gameRating = rating;
     }
+
+    public String getCoverHash() {return coverHash;} //added method - HASEEB
+
+    public void setCoverHash(String coverHash) {this.coverHash = coverHash;}
 
 }

@@ -3,12 +3,14 @@ package edu.uco.retrocollect.retrocollect;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.TimeZone;
 import android.os.Build;
+import android.util.Log;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,6 +51,11 @@ public class JsonGameParser {
              Double release_year = 2005.0;
              String release_date = "7/24/2005";
 
+               JSONObject cover = jsonArray.getJSONObject(i).getJSONObject("cover");
+               String coverHash = cover.getString("cloudinary_id");
+                //Got the cover hash - HASEEB
+               //Log.d("cover", coverHash);
+
 
              long unixSeconds = jsonArray.getJSONObject(i).getLong("first_release_date");
                if(unixSeconds > 0)
@@ -82,7 +89,17 @@ public class JsonGameParser {
                     publisher = "Nintendo";
                 }
                //put idString in the constructor instead of id -HASEEB
-               gameArrayList.add(new Game(name, idString, release_year, release_date, publisher, develeoper, rating));
+               //Log.d("jsonHash", coverHash);
+
+               /*public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate,
+                       String gamePublisher, String gameStudio, double gameRating, String coverHash) { */
+                Log.d("preArray", coverHash +" ");
+               Log.d("preArrayId", idString+ " ");
+               gameArrayList.add(new Game(name, idString, release_year, release_date, publisher, develeoper, rating, coverHash));
+               String hash = gameArrayList.get(0).getCoverHash();
+               String idTest = gameArrayList.get(0).getGameId();
+               Log.d("postArrayId", idTest+ " ");
+               Log.d("postArray", hash + " ");
            } catch (JSONException e) {
                e.printStackTrace();
            }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -59,6 +60,8 @@ public class SearchActivity extends Activity {
                 bundle.putString("gamePublisher", game.getPublisher());
                 bundle.putString("gameStudio", game.getStudio());
                 bundle.putDouble("gameRating", game.getRating());
+                bundle.putString("coverHash", game.getCoverHash()); // - HASEEB
+                Log.d("sendHash", game.getCoverHash() + " "); // -haseeb debugging
                 SearchLongClickFragment searchLongClickFragment = new SearchLongClickFragment();
                 searchLongClickFragment.setArguments(bundle);
                 searchLongClickFragment.show(getFragmentManager(), "test");
@@ -79,6 +82,7 @@ public class SearchActivity extends Activity {
                 gameActivity.putExtra("gameStudio", loadedGames.get(i).getStudio());
                 gameActivity.putExtra("gamePublisher", loadedGames.get(i).getPublisher());
                 gameActivity.putExtra("gameRating", Double.toString(loadedGames.get(i).getRating()).substring(0,5));
+                gameActivity.putExtra("coverHash", loadedGames.get(i).getCoverHash()); // -HASEEB
                 startActivity(gameActivity);
 
 
@@ -108,7 +112,7 @@ public class SearchActivity extends Activity {
 
                 //API Request
                 String searchString = JsonGameParser.parseSearchString(game_name);
-                //Changed order to relevance rather than date released
+                //Changed order to relevance rather than date released -HASEEB
                  response = Unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/" +
                          "?fields=*&limit=30&offset=0&search=" + searchString)
                         .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7jsnV3lAlo5HH0wK")
@@ -136,6 +140,7 @@ public class SearchActivity extends Activity {
             {
 
                 ArrayList<Game> gameArrayList = JsonGameParser.getGameList(response);
+                String hash = gameArrayList.get(0).getCoverHash() + " ";
                 String[] rl = new String[gameArrayList.size()];
                 for(int i = 0; i < gameArrayList.size(); i++)
                 {
@@ -144,6 +149,8 @@ public class SearchActivity extends Activity {
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                         SearchActivity.this, android.R.layout.simple_list_item_1, rl);
                 lstView.setAdapter(arrayAdapter);
+               // String hash = gameArrayList.get(0).getCoverHash() + " ";
+                Log.d("arrayListHash", hash);
                 loadedGames = gameArrayList;
             }
 

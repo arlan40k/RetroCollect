@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 
 
@@ -35,7 +36,9 @@ public class SearchLongClickFragment extends DialogFragment {
         String publisher = getArguments().getString("gamePublisher");
         String studio = getArguments().getString("gameStudio");
         Double gameRating = getArguments().getDouble("gameRating");
-        addGame = new Game(title, id, releaseYear, releaseDate, publisher, studio, gameRating);
+        String coverHash = getArguments().getString("coverHash");//_HASEEB
+        Log.d("searchHash", coverHash+ " ");
+        addGame = new Game(title, id, releaseYear, releaseDate, publisher, studio, gameRating, coverHash);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Add to Wishlist or Collection?");
         //builder.setView(inflater.inflate(R.layout.fragment_collection_long_click, null));

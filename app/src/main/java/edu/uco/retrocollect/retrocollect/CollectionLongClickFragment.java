@@ -28,7 +28,7 @@ public class CollectionLongClickFragment extends DialogFragment {
     private String gameId;
 
     private String  gameTitle,  gameReleaseDate, gamePublisher,
-            gameStudio = "";
+            gameStudio = "", gameCoverHash;
     private Double gameReleaseYear, gameRating = 0.0;
 
     private Game selectedGame;
@@ -60,9 +60,10 @@ public class CollectionLongClickFragment extends DialogFragment {
         gamePublisher = getArguments().getString("gamePublisher");
         gameStudio = getArguments().getString("gameStudio");
         gameRating = getArguments().getDouble("gameRating");
+        gameCoverHash = getArguments().getString("coverHash");
 
         selectedGame = new Game(gameTitle,gameId,gameReleaseYear,
-                gameReleaseDate,gamePublisher,gameStudio,gameRating);
+                gameReleaseDate,gamePublisher,gameStudio,gameRating, gameCoverHash);
 
 
 

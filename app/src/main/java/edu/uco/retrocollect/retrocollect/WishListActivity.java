@@ -23,7 +23,7 @@ public class WishListActivity extends Activity {
 
     private ListView gamesList;
     private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate,
-            gameRating;
+            gameRating, coverHash;
     private Game temporaryGame;
 
 
@@ -99,6 +99,9 @@ public class WishListActivity extends Activity {
                 gameRating = String.valueOf(temporaryGame.getRating());
                 intent.putExtra("gameRating", gameRating);
 
+                coverHash = temporaryGame.getCoverHash();
+                intent.putExtra("coverHash", coverHash);
+
                 startActivity(intent);
             }
         });
@@ -118,6 +121,7 @@ public class WishListActivity extends Activity {
                 bundle.putString("gamePublisher", game.getPublisher());
                 bundle.putString("gameStudio", game.getStudio());
                 bundle.putDouble("gameRating", game.getRating());
+                bundle.putString("coverHash", game.getCoverHash());
 
                 String gameTitleForSearch = gameArray[position].getTitle();
 

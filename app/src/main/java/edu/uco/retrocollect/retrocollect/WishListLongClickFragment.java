@@ -27,7 +27,7 @@ public class WishListLongClickFragment extends DialogFragment {
 
     private String gameId;
     private String  gameTitle,  gameReleaseDate, gamePublisher,
-            gameStudio = "";
+            gameStudio = "", coverHash;
     private Double gameReleaseYear, gameRating = 0.0;
 
     private Game selectedGame;
@@ -48,9 +48,10 @@ public class WishListLongClickFragment extends DialogFragment {
         gamePublisher = getArguments().getString("gamePublisher");
         gameStudio = getArguments().getString("gameStudio");
         gameRating = getArguments().getDouble("gameRating");
+        coverHash = getArguments().getString("coverHash");
 
         selectedGame = new Game(gameTitle,gameId,gameReleaseYear,
-                gameReleaseDate,gamePublisher,gameStudio,gameRating);
+                gameReleaseDate,gamePublisher,gameStudio,gameRating, coverHash);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose");
