@@ -149,7 +149,7 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         // 3. if we got results get the first one
         if (cursor != null)
             cursor.moveToFirst();
-
+//aa
         // 4. build book object
 
         String gameId = cursor.getString(0);
