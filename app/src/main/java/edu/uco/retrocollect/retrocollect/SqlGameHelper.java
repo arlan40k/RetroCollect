@@ -74,6 +74,7 @@ public class SqlGameHelper extends SQLiteOpenHelper {
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+        values.put(KEY_ID, game.getGameId());
         values.put(KEY_TITLE, game.getTitle()); // get title
         Log.d("putTitle", game.getTitle());
         values.put(GAME_RELEASE_YEAR, game.getReleaseYear()); // get release year
@@ -182,6 +183,7 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 String gameId = cursor.getString(0);
+                Log.d("IDTest", gameId+" ");
                 String gameTitle = cursor.getString(1);
                 double gameReleaseYear = Double.parseDouble(cursor.getString(2));
                 String gameReleaseDate = cursor.getString(3);
