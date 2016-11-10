@@ -95,7 +95,7 @@ public class JsonGameParser {
                        String gamePublisher, String gameStudio, double gameRating, String coverHash) { */
                 Log.d("preArray", coverHash +" ");
                Log.d("preArrayId", idString+ " ");
-               gameArrayList.add(new Game(name, idString, release_year, release_date, publisher, develeoper, rating, coverHash));
+               gameArrayList.add(new Game(name, idString, release_year, release_date, publisher, develeoper, rating, "id7oqxsma8y2lcazszzk"));
                String hash = gameArrayList.get(0).getCoverHash();
                String idTest = gameArrayList.get(0).getGameId();
                Log.d("postArrayId", idTest+ " ");

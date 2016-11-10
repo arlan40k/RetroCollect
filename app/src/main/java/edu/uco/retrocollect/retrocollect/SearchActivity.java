@@ -140,7 +140,15 @@ public class SearchActivity extends Activity {
             {
 
                 ArrayList<Game> gameArrayList = JsonGameParser.getGameList(response);
-                String hash = gameArrayList.get(0).getCoverHash() + " ";
+                String hash;
+                if(gameArrayList.size() > 0)
+                {
+                     hash = gameArrayList.get(0).getCoverHash() + " ";
+                }
+                else
+                {
+                     hash = "";
+                }
                 String[] rl = new String[gameArrayList.size()];
                 for(int i = 0; i < gameArrayList.size(); i++)
                 {
