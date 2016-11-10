@@ -86,5 +86,4 @@ public class MainActivity extends Activity {
 
     }
 }
-/*Test commit and push - Nicholas*/
 
