@@ -102,9 +102,8 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
                 .build();
 
         locationRequest = LocationRequest.create()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
-                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+                .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
+                .setInterval(25 * 1000);        // 10 seconds, in milliseconds
 
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
@@ -201,7 +200,7 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
     @Override
     protected void onResume() {
         super.onResume();
-        //setUpMapIfNeeded();
+        initMove = true;
         apiClient.connect();
     }
 
