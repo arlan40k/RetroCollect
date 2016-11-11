@@ -6,17 +6,22 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -118,6 +123,7 @@ public class SearchActivity extends Activity {
                         .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7jsnV3lAlo5HH0wK")
                         .header("Accept", "application/json")
                         .asJson();
+                // These code snippets use an open-source library. http://unirest.io/java
 
 
 
@@ -150,15 +156,21 @@ public class SearchActivity extends Activity {
                      hash = "";
                 }
                 String[] rl = new String[gameArrayList.size()];
+                String[] h1 = new String[gameArrayList.size()];
+
                 for(int i = 0; i < gameArrayList.size(); i++)
                 {
+
                     rl[i] = gameArrayList.get(i).getTitle();
+
+                    h1[i] = gameArrayList.get(i).getCoverHash();
                 }
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                        SearchActivity.this, android.R.layout.simple_list_item_1, rl);
-                lstView.setAdapter(arrayAdapter);
-               // String hash = gameArrayList.get(0).getCoverHash() + " ";
-                Log.d("arrayListHash", hash);
+
+                GameListAdapter gameListAdapter = new GameListAdapter(
+                        SearchActivity.this, rl, h1);
+                lstView.setAdapter(gameListAdapter);
+
+
                 loadedGames = gameArrayList;
             }
 
@@ -169,6 +181,35 @@ public class SearchActivity extends Activity {
 
     }
 
+    public class GameListAdapter extends ArrayAdapter<String>{
+
+        private final Activity context;
+        private final String[] game;
+        private final String[] hashes;
+        public GameListAdapter(Activity context,
+                          String[] game, String[] hashes) {
+            super(context, R.layout.list_game_item, game);
+            this.context = context;
+            this.game = game;
+            this.hashes= hashes;
+
+        }
+        @Override
+        public View getView(int position, View view, ViewGroup parent) {
+            LayoutInflater inflater = context.getLayoutInflater();
+            View rowView= inflater.inflate(R.layout.list_game_item, null, true);
+            TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
+            ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
+
+            Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_small/"
+                    +  hashes[position] +  ".jpg").into(imageView);
+
+            txtTitle.setText(game[position]);
+
+
+            return rowView;
+        }
+    }
 
 }
 

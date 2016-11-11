@@ -73,7 +73,7 @@ public class Game {
         this.gamePublisher = gamePublisher;
         this.gameStudio = gameStudio;
         this.gameRating = gameRating;
-        this.coverHash = coverHash;
+
     }
 
     public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate,
@@ -85,6 +85,7 @@ public class Game {
         this.gamePublisher = gamePublisher;
         this.gameStudio = gameStudio;
         this.gameRating = gameRating;
+        this.coverHash = coverHash;
     }
 
     @Override
