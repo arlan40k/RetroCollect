@@ -125,4 +125,12 @@
         android:layout_alignParentRight="true"
         android:textSize="@dimen/smallTextSize"/>
 
+    <ImageView
+        android:id="@+id/gameCoverImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gameReleaseDateLabel"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true" />
+
 </RelativeLayout>
