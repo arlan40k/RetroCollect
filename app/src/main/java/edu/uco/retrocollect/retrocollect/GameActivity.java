@@ -103,7 +103,7 @@ public class GameActivity extends Activity {
             }
 
         }
-
+    //Changes to the thing.
     }
     class LoadGameRatingValueTask extends AsyncTask<Integer, Integer, Void> {
 
