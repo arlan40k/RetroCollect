@@ -97,7 +97,7 @@ public class GameActivity extends Activity {
 /*                Picasso.with(getApplicationContext()).load("https://lh4.goo" +
                         "gleusercontent.com/-NnUDSkolO6M/AAAAAAAAAAI/AAAAAAAAAPg/Rp2eTavq49w/s" +
                         "0-c-k-no-ns/photo.jpg").resize(500,500).into(gameCoverImageView);*/
-                Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_small/"
+                Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_big/"
                         + cover + ".jpg").into(gameCoverImageView);
                 Log.d(TAG, cover);
             }
