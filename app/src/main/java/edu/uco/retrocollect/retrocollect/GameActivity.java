@@ -90,20 +90,25 @@ public class GameActivity extends Activity {
             } else {
                 gameRatingTextView.setText(dataErrorString);
             }
+            //Added by Nicholas Clemmons
+            //Get coverHash to identify image.
             String cover = bundle.getString("coverHash");
-
             if (cover != null) {
-                gameCoverImageView.bringToFront();
-/*                Picasso.with(getApplicationContext()).load("https://lh4.goo" +
-                        "gleusercontent.com/-NnUDSkolO6M/AAAAAAAAAAI/AAAAAAAAAPg/Rp2eTavq49w/s" +
-                        "0-c-k-no-ns/photo.jpg").resize(500,500).into(gameCoverImageView);*/
-                Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_big/"
+                // Picasso used for image downloading
+                //See for details: "http://square.github.io/picasso/"
+
+                // "t_cover_big" to get 227 x 320 cover image.
+                // "_2x" to get retina (DPR 2.0) sizes.
+                // See for details: "https://market.mashape.com/igdbcom/internet-game-database/overview#wiki-images"
+
+                Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_big_2x/"
                         + cover + ".jpg").into(gameCoverImageView);
-                Log.d(TAG, cover);
+
+                //Log.d(TAG, cover);
+
             }
 
         }
-    //Changes to the thing.
     }
     class LoadGameRatingValueTask extends AsyncTask<Integer, Integer, Void> {
 
