@@ -49,7 +49,7 @@ public class JsonGameParser {
                String idString = Integer.toString(id);
                //Deal with Date
              Double release_year = 2005.0;
-             String release_date = "7/24/2005";
+             String release_date = "2005/07/24";
 
                JSONObject cover = jsonArray.getJSONObject(i).getJSONObject("cover");
                String coverHash = cover.getString("cloudinary_id");
