@@ -26,6 +26,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class SearchActivity extends Activity {
+    public boolean byDate;
+    public boolean byRelevance;
     ListView lstView;
     Bundle bundle;
     ArrayList<Game> loadedGames;
@@ -36,7 +38,8 @@ public class SearchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         lstView = (ListView) findViewById(R.id.lstView);
-
+        byDate = false;
+        byRelevance = true;
         //Initialize DB
         sqlGameHelper = new SqlGameHelper(this);
 
@@ -51,6 +54,17 @@ public class SearchActivity extends Activity {
         }
 
         txtSearch = (EditText) findViewById(R.id.txtSearch);
+
+        txtSearch.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                SearchLongClickOptionsFragment searchLongClickOptionsFragment = new SearchLongClickOptionsFragment();
+                searchLongClickOptionsFragment.show(getFragmentManager(), "test");
+                new IgdbApiTask().execute(txtSearch.getText().toString());
+                return true;
+            }
+        });
+
         lstView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -118,11 +132,21 @@ public class SearchActivity extends Activity {
                 //API Request
                 String searchString = JsonGameParser.parseSearchString(game_name);
                 //Changed order to relevance rather than date released -HASEEB
-                 response = Unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/" +
-                         "?fields=*&limit=30&offset=0&search=" + searchString)
-                        .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7jsnV3lAlo5HH0wK")
-                        .header("Accept", "application/json")
-                        .asJson();
+                if (byRelevance) {
+                    response = Unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/" +
+                            "?fields=*&limit=30&offset=0&search=" + searchString)
+                            .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7jsnV3lAlo5HH0wK")
+                            .header("Accept", "application/json")
+                            .asJson();
+                }
+                if (byDate)
+                {
+                    response = Unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/" +
+                            "?fields=*&limit=10&offset=0&order=release_dates.date%3Adesc&search=" + searchString)
+                            .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7jsnV3lAlo5HH0wK")
+                            .header("Accept", "application/json")
+                            .asJson();
+                }
                 // These code snippets use an open-source library. http://unirest.io/java
 
 
