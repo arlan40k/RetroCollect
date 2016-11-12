@@ -47,17 +47,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:layout_below="@id/localMerchantsButton"
-        android:text="Coordinates NewCastle"
-        android:id="@+id/tmpNewCastle"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content" />
-    <Button
-        android:layout_below="@id/tmpNewCastle"
-        android:text="Coordinates Edmond"
-        android:id="@+id/tmpEdmond"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content" />
 
 </RelativeLayout>

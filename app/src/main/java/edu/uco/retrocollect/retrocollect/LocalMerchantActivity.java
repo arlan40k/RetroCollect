@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.ActionMode;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -48,6 +49,7 @@ import static edu.uco.retrocollect.retrocollect.R.id.map;
 public class LocalMerchantActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
+    public static ActionMode actionMode;
     private GoogleMap mMap;
     private GoogleApiClient apiClient;
     private LocationRequest locationRequest;
@@ -69,7 +71,7 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
         //Check get status of gps location
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
         boolean gpsStatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        final FragmentActivity tmp = this;
+
         if(gpsStatus == false) {
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                 @Override
@@ -238,15 +240,7 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
         }
         LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, locationRequest, this);
         Location location = LocationServices.FusedLocationApi.getLastLocation(apiClient);
-/*
-        //LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, locationRequest, this);
-        if (location == null) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, locationRequest, this);
-        }
-        else {
-            handleNewLocation(location);
 
-        };*/
     }
 
     @Override
@@ -448,4 +442,43 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
 
     }
 
+/*    private void displayLocationSettingsRequest(Context context) {
+        GoogleApiClient googleApiClient = new GoogleApiClient.Builder(context)
+                .addApi(LocationServices.API).build();
+        googleApiClient.connect();
+    LocationRequest locationRequest = LocationRequest.create();
+    locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    locationRequest.setInterval(10000);
+    locationRequest.setFastestInterval(10000 / 2);
+
+    LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+    builder.setAlwaysShow(true);
+
+    PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build());
+    result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+        @Override
+        public void onResult(LocationSettingsResult result) {
+            final Status status = result.getStatus();
+            switch (status.getStatusCode()) {
+                case LocationSettingsStatusCodes.SUCCESS:
+                    Log.i(TAG, "All location settings are satisfied.");
+                    break;
+                case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                    Log.i(TAG, "Location settings are not satisfied. Show the user a dialog to upgrade location settings ");
+
+                    try {
+                        // Show the dialog by calling startResolutionForResult(), and check the result
+                        // in onActivityResult().
+                        status.startResolutionForResult(getParent(), REQUEST_CHECK_SETTINGS);
+                    } catch (IntentSender.SendIntentException e) {
+                        Log.i(TAG, "PendingIntent unable to execute request.");
+                    }
+                    break;
+                case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                    Log.i(TAG, "Location settings are inadequate, and cannot be fixed here. Dialog not created.");
+                    break;
+            }
+        }
+    });
+}*/
 }

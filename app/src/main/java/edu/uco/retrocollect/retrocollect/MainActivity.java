@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -29,8 +28,6 @@ public class MainActivity extends Activity {
         Button collectionButton = (Button) findViewById(R.id.collectionButton);
         Button wishListButton = (Button) findViewById(R.id.wishListButton);
         Button localMerchantButton = (Button) findViewById(R.id.localMerchantsButton);
-        Button tempNewCastleButton = (Button) findViewById(R.id.tmpNewCastle);
-        Button tempEdmondButton = (Button) findViewById(R.id.tmpEdmond);
         searchButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -65,25 +62,7 @@ public class MainActivity extends Activity {
                 startActivity(localMerchantIntent);
             }
         });
-
-        tempEdmondButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lat = "35.638033";
-                lng  = "-97.485540";
-                Toast.makeText(MainActivity.this, "LAT:  35.638033 \nLNG: -97.485540", Toast.LENGTH_SHORT).show();
-            }
-        });
-        tempNewCastleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lat = "35.290691";
-                lng  = "-97.606410";
-                Toast.makeText(MainActivity.this, "LAT:  35.290691 \nLNG: -97.606410", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
     }
+
 }
 

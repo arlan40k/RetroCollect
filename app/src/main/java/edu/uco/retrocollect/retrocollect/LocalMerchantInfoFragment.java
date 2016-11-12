@@ -42,6 +42,7 @@ public class LocalMerchantInfoFragment extends DialogFragment  {
 
         View v = inflater.inflate(R.layout.fragment_local_merchant_info, null);
         listview = (ListView) v.findViewById(R.id.listView);
+
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, localInfo);
         listview.setAdapter(adapter);
 
@@ -51,6 +52,7 @@ public class LocalMerchantInfoFragment extends DialogFragment  {
 
                 // Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(deptList[i].getUrl()));
                 // intent = PendingIntent.getActivity(getActivity(), 0, browserIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
                if(((TextView) view).getText().toString().equals("Website"))
                {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(data.get(i)));
