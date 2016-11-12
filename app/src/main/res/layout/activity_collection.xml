@@ -11,6 +11,16 @@
     tools:context="edu.uco.retrocollect.retrocollect.CollectionActivity"
     android:orientation="horizontal">
 
+
+    <ListView
+        android:id="@+id/gamesList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    </ListView>
+
+    <!--
     <GridView
         android:id="@+id/gamesList"
         android:layout_width="match_parent"
@@ -31,7 +41,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/cast_album_art_placeholder"/>
 
-
+-->
 
 
 </RelativeLayout>

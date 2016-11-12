@@ -49,6 +49,14 @@ public class WishListActivity extends Activity {
 
         gameArrayList =  sqlWishListHelper.getAllGames();
 
+        Collections.sort(gameArrayList, new Comparator<Game>() {
+
+            public int compare(Game o1, Game o2) {
+                return o1.getTitle().compareTo(o2.getTitle());
+            }
+
+        });
+
         //Transform ArrayList into Array
         gameArray = new Game[gameArrayList.size()];
         gameArray = gameArrayList.toArray(gameArray);
