@@ -11,10 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,8 +21,8 @@ import java.util.List;
 
 public class CollectionActivity extends Activity {
 
-    private GridView gamesList;
-    private ImageView testImage;
+    private ListView gamesList;
+    //private ImageView testImage;
     private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate,
             gameRating, gameCoverHash;
     private Game temporaryGame;
@@ -51,18 +48,24 @@ public class CollectionActivity extends Activity {
         SqlGameHelper sqlGameHelper = new SqlGameHelper(this);
         gameArrayList =  sqlGameHelper.getAllGames();
 
+        Collections.sort(gameArrayList, new Comparator<Game>() {
 
+            public int compare(Game o1, Game o2) {
+                return o1.getTitle().compareTo(o2.getTitle());
+            }
+
+        });
 
         //Transform ArrayList into Array
         gameArray = new Game[gameArrayList.size()];
         gameArray = gameArrayList.toArray(gameArray);
         //End of Adam Bilby Block
-        gamesList = (GridView) findViewById(R.id.gamesList);
-        testImage = (ImageView) findViewById(R.id.imageTest);
 
-        Picasso.with(getApplicationContext()).load("https://lh4.goo" +
-                "gleusercontent.com/-NnUDSkolO6M/AAAAAAAAAAI/AAAAAAAAAPg/Rp2eTavq49w/s" +
-                "0-c-k-no-ns/photo.jpg").resize(500,500).into(testImage);
+
+
+        gamesList = (ListView) findViewById(R.id.gamesList);
+
+
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < gameArray.length; ++i) {
