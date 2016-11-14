@@ -7,17 +7,21 @@
     >
 
 
+
     <ImageView
         android:id="@+id/imageview_cover_art"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"/>
+        android:layout_width="50dp"
+        android:layout_height="75dp"
+        android:scaleType="fitCenter"/>
+
+
+
 
     <TextView
         android:id="@+id/textview_game_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="10sp"
         tools:text="Are You My Mother"
         android:textColor="@color/primary_text"
         android:textStyle="bold"
@@ -25,6 +29,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:gravity="center_horizontal"/>
+
 
 
 

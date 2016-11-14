@@ -278,6 +278,7 @@ public class WishListActivity extends Activity {
             return 0;
         }
 
+
         @Override
         public Object getItem(int position){
             return null;
