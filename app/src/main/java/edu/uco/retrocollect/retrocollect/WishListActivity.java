@@ -5,13 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +28,7 @@ import java.util.List;
 
 public class WishListActivity extends Activity {
 
-    private ListView gamesList;
+    private GridView gamesList;
     private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate,
             gameRating, coverHash;
     private Game temporaryGame;
@@ -64,15 +71,18 @@ public class WishListActivity extends Activity {
 
 
 
-        gamesList = (ListView) findViewById(R.id.gamesList);
+        gamesList = (GridView) findViewById(R.id.gamesList);
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < gameArray.length; ++i) {
             list.add(gameArray[i].getTitle());
         }
 
-        final WishListActivity.MyArrayAdapter adapter = new WishListActivity.MyArrayAdapter(this,
-                android.R.layout.simple_list_item_1, list);
+        //final WishListActivity.MyArrayAdapter adapter = new WishListActivity.MyArrayAdapter(this,
+          //      android.R.layout.simple_list_item_1, list);
+
+        final CollectionAdapter adapter = new CollectionAdapter(getApplicationContext(), gameArrayList);
+
 
         //ArrayAdapter adapter = new ArrayAdapter<String>
         //      (this, R.layout.activity_collection, gameSampleArray);
@@ -190,8 +200,11 @@ public class WishListActivity extends Activity {
                     list.add(gameArray[i].getTitle());
                 }
 
-                final WishListActivity.MyArrayAdapter adapter = new WishListActivity.MyArrayAdapter(this,
-                        android.R.layout.simple_list_item_1, list);
+                //final WishListActivity.MyArrayAdapter adapter = new WishListActivity.MyArrayAdapter(this,
+                  //      android.R.layout.simple_list_item_1, list);
+
+                final CollectionAdapter adapter = new CollectionAdapter(getApplicationContext(), gameArrayList);
+
 
                 gamesList.setAdapter(adapter);
 
@@ -218,8 +231,11 @@ public class WishListActivity extends Activity {
                     list.add(gameArray[i].getTitle());
                 }
 
-                final WishListActivity.MyArrayAdapter adapter = new WishListActivity.MyArrayAdapter(this,
-                        android.R.layout.simple_list_item_1, list);
+               // final WishListActivity.MyArrayAdapter adapter = new WishListActivity.MyArrayAdapter(this,
+                 //       android.R.layout.simple_list_item_1, list);
+
+                final CollectionAdapter adapter = new CollectionAdapter(getApplicationContext(), gameArrayList);
+
 
                 gamesList.setAdapter(adapter);
 
@@ -239,6 +255,59 @@ public class WishListActivity extends Activity {
                 mIdMap.put(objects.get(i), i);
             }
         }
+    }
+
+    private class CollectionAdapter extends BaseAdapter {
+
+        private Context mContext;
+        //private Game[] gamesArray;
+        private List<Game> gamesArray;
+
+        public CollectionAdapter(Context context, List<Game> gamesArray){
+            this.mContext = context;
+            this.gamesArray = gamesArray;
+        }
+
+        @Override
+        public int getCount(){
+            return gamesArray.size();
+        }
+
+        @Override
+        public long getItemId(int position){
+            return 0;
+        }
+
+        @Override
+        public Object getItem(int position){
+            return null;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent){
+            // 1
+            final Game game = gameArray[position];
+
+            // 2
+            if (convertView == null) {
+                final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+                convertView = layoutInflater.inflate(R.layout.linearlayout_game, null);
+            }
+
+            // 3
+            final ImageView imageView = (ImageView)convertView.findViewById(R.id.imageview_cover_art);
+            final TextView nameTextView = (TextView)convertView.findViewById(R.id.textview_game_name);
+
+            // 4
+            Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_small_2x/"
+                    +  game.getCoverHash() +  ".jpg").into(imageView);
+
+            nameTextView.setText(game.getTitle());
+
+
+            return convertView;
+        }
+
     }
 
 }

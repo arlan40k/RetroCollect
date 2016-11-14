@@ -11,20 +11,20 @@
     tools:context="edu.uco.retrocollect.retrocollect.CollectionActivity"
     android:orientation="horizontal">
 
-
+<!--
     <ListView
         android:id="@+id/gamesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
-    </ListView>
+    </ListView> -->
 
-    <!--
+
     <GridView
         android:id="@+id/gamesList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:columnWidth="100dp"
         android:numColumns="auto_fit"
@@ -34,6 +34,7 @@
 
 
         > </GridView>
+    <!--
     <ImageView
         android:id="@+id/imageTest"
         android:layout_below="@+id/gamesList"

@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import br.com.bloder.magic.view.MagicButton;
+
 public class MainActivity extends Activity {
 
     private Button searchButton;
@@ -25,9 +27,9 @@ public class MainActivity extends Activity {
         searchEditText = (EditText) findViewById(R.id.searchBar);
 
         Button searchButton = (Button) findViewById(R.id.searchButton);
-        Button collectionButton = (Button) findViewById(R.id.collectionButton);
-        Button wishListButton = (Button) findViewById(R.id.wishListButton);
-        Button localMerchantButton = (Button) findViewById(R.id.localMerchantsButton);
+        MagicButton collectionButton = (MagicButton) findViewById(R.id.collectionButton);
+        MagicButton wishListButton = (MagicButton) findViewById(R.id.wishListButton);
+        MagicButton localMerchantButton = (MagicButton) findViewById(R.id.localMerchantsButton);
         searchButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -36,7 +38,7 @@ public class MainActivity extends Activity {
                 startActivity(searchActivity);
             }
         });
-
+/*
         collectionButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -44,7 +46,15 @@ public class MainActivity extends Activity {
                 startActivity(collectionActivity);
             }
         });
-
+*/
+        collectionButton.setMagicButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent collectionActivity = new Intent(MainActivity.this, CollectionActivity.class);
+                startActivity(collectionActivity);
+            }
+        });
+/*
         wishListButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -52,8 +62,26 @@ public class MainActivity extends Activity {
                 startActivity(wishListActivity);
             }
         });
-
+*/
+        wishListButton.setMagicButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent wishListActivity = new Intent(MainActivity.this, WishListActivity.class);
+                startActivity(wishListActivity);
+            }
+        });
+/*
         localMerchantButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent localMerchantIntent = new Intent(MainActivity.this, LocalMerchantActivity.class);
+                localMerchantIntent.putExtra("LAT", lat);
+                localMerchantIntent.putExtra("LNG", lng);
+                startActivity(localMerchantIntent);
+            }
+        });
+*/
+        localMerchantButton.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent localMerchantIntent = new Intent(MainActivity.this, LocalMerchantActivity.class);

@@ -11,13 +11,29 @@
     android:orientation="horizontal"
     tools:context="edu.uco.retrocollect.retrocollect.WishListActivity">
 
+
+    <!--
     <ListView
         android:id="@+id/gamesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
-    </ListView>
+    </ListView> -->
+
+    <GridView
+        android:id="@+id/gamesList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="24dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="spacingWidthUniform"
+
+
+        > </GridView>
 
 
   <!--  <Button

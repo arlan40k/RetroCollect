@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -11,20 +12,18 @@
     android:gravity="center"
     tools:context="edu.uco.retrocollect.retrocollect.MainActivity">
 
-    <EditText
-        android:id="@+id/searchBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Search!"
-        style="@android:style/Widget.AutoCompleteTextView"
-        android:inputType="textAutoComplete" />
-
     <Button
-        android:layout_below="@id/searchBar"
-        android:text="@string/search"
+
+        android:layout_toRightOf="@+id/searchBar"
+        android:drawableBottom="@mipmap/ic_search"
         android:id="@+id/searchButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:background="@color/primary"
+        android:textColor="@color/primary_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"/>
+
+    <!--
 
     <Button
         android:layout_below="@id/searchButton"
@@ -33,19 +32,89 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:layout_below="@id/collectionButton"
-        android:text="@string/wishList"
+        -->
+
+    <br.com.bloder.magic.view.MagicButton
         android:id="@+id/wishListButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:magic_button_size="75dp"
+        app:button_icon="@mipmap/ic_favorite"
+        app:button_icon_width="40dp"
+        app:button_icon_height="40dp"
+        app:hide_text="Wish List"
+        app:hide_text_size="10sp"
+        app:hide_text_color="@color/primary_text"
+        app:icon_button_color="@color/primary"
+        app:expandable_area_color="@color/primary_dark"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/collectionButton"
+        android:layout_alignStart="@+id/collectionButton" />
 
-    <Button
-        android:layout_below="@id/wishListButton"
-        android:text="Local Merchants"
+    <br.com.bloder.magic.view.MagicButton
         android:id="@+id/localMerchantsButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:magic_button_size="75dp"
+        app:button_icon="@mipmap/ic_map"
+        app:button_icon_width="40dp"
+        app:button_icon_height="40dp"
+        app:hide_text="  Local Merchants"
+        app:hide_text_size="10sp"
+        app:hide_text_color="@color/primary_text"
+        app:icon_button_color="@color/primary"
+        app:expandable_area_color="@color/primary_dark"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/wishListButton"
+        android:layout_alignStart="@+id/wishListButton" />
 
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_light"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/accent"
+        android:textSize="30sp"
+        android:hint="Enter Search!"
+        style="@android:style/Widget.AutoCompleteTextView"
+        android:inputType="textAutoComplete"
+        android:layout_above="@+id/collectionButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="28dp"
+        android:layout_alignTop="@+id/searchButton" />
+
+    <br.com.bloder.magic.view.MagicButton
+        android:id="@+id/collectionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:magic_button_size="75dp"
+        app:button_icon="@mipmap/ic_collection"
+        app:button_icon_width="40dp"
+        app:button_icon_height="40dp"
+        app:hide_text="  Collection"
+        app:hide_text_size="10sp"
+        app:hide_text_color="@color/primary_text"
+        app:icon_button_color="@color/primary"
+        app:expandable_area_color="@color/primary_dark"
+        android:layout_below="@+id/searchButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="14dp" />
+
+    <!--
+        <Button
+            android:layout_below="@id/collectionButton"
+            android:text="@string/wishList"
+            android:id="@+id/wishListButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_below="@id/wishListButton"
+            android:text="Local Merchants"
+            android:id="@+id/localMerchantsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    -->
 
 </RelativeLayout>
