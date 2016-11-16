@@ -7,8 +7,15 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 
 public class GameActivity extends Activity {
 
@@ -26,6 +33,7 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_game);
+
 
         gameTitleTextView = (TextView) findViewById(R.id.gameTitleTextView);
         gamePublisherTextView = (TextView) findViewById(R.id.gamePublisherTextView);
@@ -49,7 +57,8 @@ public class GameActivity extends Activity {
             }
             String publisher = bundle.getString("gamePublisher");
             if (publisher != null) {
-                gamePublisherTextView.setText(publisher);
+                // gamePublisherTextView.setText(publisher);
+                new IgdbApiTask().execute(publisher);
             } else {
                 gamePublisherTextView.setText(dataErrorString);
             }
@@ -73,7 +82,7 @@ public class GameActivity extends Activity {
             }
             String rating = bundle.getString("gameRating");
             if (rating != null) {
-            rating = rating.substring(0,4);
+                rating = rating.substring(0,4);
 
                 gameRatingTextView.setText(rating);
 
@@ -99,9 +108,11 @@ public class GameActivity extends Activity {
 
                 // "t_cover_big" to get 227 x 320 cover image.
                 // "_2x" to get retina (DPR 2.0) sizes.
-                // See for details: "https://market.mashape.com/igdbcom/internet-game-database/overview#wiki-images"
+                // See for details: "https://market.mashape.com/igdbcom/internet-game-database/
+                // overview#wiki-images"
 
-                Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_big_2x/"
+                Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/imag" +
+                        "e/upload/t_cover_big_2x/"
                         + cover + ".jpg").into(gameCoverImageView);
 
                 //Log.d(TAG, cover);
@@ -142,5 +153,92 @@ public class GameActivity extends Activity {
                 Log.e(TAG, e.toString());
             }
         }
+    }
+
+    private class IgdbApiTask extends AsyncTask <Object, Void, HttpResponse<JsonNode>> {
+
+        //Network Activities must be done in  doInBackground
+        @Override
+        protected HttpResponse<JsonNode> doInBackground(Object[] objects) {
+            HttpResponse<JsonNode> response = null;
+            try {
+                //Get my string from the objects
+                String game_name = (String) objects[0];
+                Log.d("nametime3", "sup");
+
+                //API Request
+                String searchString = JsonCompanyParser.parseSearchString(game_name);
+                //Changed order to relevance rather than date released -HASEEB
+
+                response = Unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/" +
+                        "companies/"+ searchString + "?fields=name&limit=10&offset=0")
+                        .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7jsnV3lAlo5HH0wK")
+                        .header("Accept", "application/json")
+                        .asJson();
+
+                // These code snippets use an open-source library. http://unirest.io/java
+
+
+
+                return response;
+            } catch (UnirestException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(HttpResponse<JsonNode> response) {
+            if (response == null ) {
+                Toast.makeText(GameActivity.this,
+                        "Invalid data. Possibly a wrong query",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+            else
+            {
+
+                ArrayList<String> gameArrayList = JsonCompanyParser.getGameList(response);
+
+                /*
+                String hash;
+                if(gameArrayList.size() > 0)
+                {
+                    hash = gameArrayList.get(0).getCoverHash() + " ";
+                }
+                else
+                {
+                    hash = "";
+                }
+                String[] rl = new String[gameArrayList.size()];
+                String[] h1 = new String[gameArrayList.size()];
+                */
+                String pubName = " ";
+
+
+                for(int i = 0; i < gameArrayList.size(); i++) {
+                    if(i>0){
+                        pubName = pubName +", "+ gameArrayList.get(i);
+                    }
+                    else{
+                        pubName = gameArrayList.get(i);
+                    }
+                }
+
+                gamePublisherTextView.setText(pubName);
+
+                if(pubName.equals(" ")){
+                    Log.d("Nametime2", "heyo");
+                }
+
+
+
+            }
+
+
+        }
+
+
+
     }
 }
