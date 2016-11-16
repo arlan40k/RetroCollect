@@ -58,12 +58,18 @@ public class JsonGameParser {
 
 
              long unixSeconds = jsonArray.getJSONObject(i).getLong("first_release_date");
+
+               //Log.d("date1", Long.toString(unixSeconds));
                if(unixSeconds > 0)
                {
-                   Date date = new Date( ((int) unixSeconds)); // *1000 is to convert seconds to milliseconds
+                   /*Converting Long to Int was causing overflow, which is why  we had
+                    weird dates -HASEEB */
+
+                   Date date = new Date( (unixSeconds)); // *1000 is to convert seconds to milliseconds
                    SimpleDateFormat sdf = null; // the format of your date
                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                       sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                       sdf = new SimpleDateFormat("yyyy-MM-dd");
+                       //formattedDate1 = sdf.format(date);
                    }
                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                        sdf.setTimeZone(TimeZone.getTimeZone("GMT-6")); // give a timezone reference for formating (see comment at the bottom
@@ -75,6 +81,9 @@ public class JsonGameParser {
 
                    }
                }
+
+
+               //Log.d("date", formattedDate1 + " ");
 
                 String publisher = jsonArray.getJSONObject(i).getString("developers");
                 String develeoper = jsonArray.getJSONObject(i).getString("publishers");
