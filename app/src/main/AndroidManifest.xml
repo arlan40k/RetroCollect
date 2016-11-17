@@ -3,9 +3,9 @@
     package="edu.uco.retrocollect.retrocollect">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -15,7 +15,6 @@
 
     <application
         android:allowBackup="true"
-
         android:icon="@mipmap/ic_retrocollectrefined"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -41,16 +40,20 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
 
         <activity android:name=".LocalMerchantActivity" />
-        <activity android:name=".CollectionActivity"
-            android:label="Collection"
-            >
-        </activity>
+        <activity
+            android:name=".CollectionActivity"
+            android:label="Collection"></activity>
         <activity android:name=".SearchActivity" />
-        <activity android:name=".WishListActivity"
-            android:label="Wish List"></activity>
-        <activity android:name=".GameActivity"></activity>
+        <activity
+            android:name=".WishListActivity"
+            android:label="Wish List" />
+        <activity android:name=".GameActivity" />
+        <activity android:name=".BarcodeActivity"></activity>
     </application>
 
 </manifest>

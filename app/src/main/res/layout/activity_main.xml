@@ -101,6 +101,12 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="14dp" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/barcodeButton"
+        android:layout_below="@+id/localMerchantsButton"/>
+
     <!--
         <Button
             android:layout_below="@id/collectionButton"
