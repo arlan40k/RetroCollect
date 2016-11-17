@@ -10,36 +10,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.uco.retrocollect.retrocollect.BarcodeActivity">
 
-<!--
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <TextView android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtContent"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Process"
-            android:id="@+id/button"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imgview"/>
-    </LinearLayout>
--->
+
+
     <SurfaceView
         android:layout_width="320dp"
         android:layout_height="240dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
         android:id="@+id/camera_view"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,8 +29,25 @@
         android:textSize="20sp"
         android:layout_marginStart="16dp"
         android:text="Nothing to read."
-        android:layout_alignParentTop="true"
-        />
 
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/findBarcodeButton"
+        android:layout_below="@+id/code_info"
+        android:text="Confrim Barcode"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchField"
+        android:layout_below="@+id/findBarcodeButton"
+        android:text=" "/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchButton"
+        android:text="Search for game"
+        android:layout_below="@+id/searchField"/>
 
 </RelativeLayout>

@@ -2,7 +2,9 @@ package edu.uco.retrocollect.retrocollect;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -10,23 +12,38 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import static edu.uco.retrocollect.retrocollect.R.id.gamePublisherTextView;
+import static edu.uco.retrocollect.retrocollect.R.id.lstView;
 
 
 public class BarcodeActivity extends Activity {
 
     SurfaceView cameraView;
     TextView barcodeView;
+    TextView searchField;
+    Button findBarcodeButton;
+    Button searchButton;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
 
-    private boolean permCheck;
+    //private boolean permCheck = false;
+    private String barcode = " ";
 
 
     @Override
@@ -35,6 +52,12 @@ public class BarcodeActivity extends Activity {
         setContentView(R.layout.activity_barcode);
 
         cameraView = (SurfaceView) findViewById(R.id.camera_view);
+        searchField = (TextView) findViewById(R.id.searchField);
+        findBarcodeButton = (Button) findViewById(R.id.findBarcodeButton);
+        searchButton = (Button) findViewById(R.id.searchButton);
+
+        searchButton.setEnabled(false);
+
         //SurfaceView cameraView = (SurfaceView) findViewById(R.id.camera_view);
 
         barcodeView = (TextView) findViewById(R.id.code_info);
@@ -43,10 +66,9 @@ public class BarcodeActivity extends Activity {
                 new BarcodeDetector.Builder(this)
                         .build();
 
-        final CameraSource cameraSource = new CameraSource
+         final CameraSource cameraSource = new CameraSource
                 .Builder(getApplicationContext(), barcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedPreviewSize(320, 240)
                 .setRequestedFps(15.0f)
                 .setAutoFocusEnabled(true)
                 .build();
@@ -79,24 +101,27 @@ public class BarcodeActivity extends Activity {
             }
         }
 
+
         //final CameraSource cameraSource = cameraSourceBuilder;
 
         cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                try {
-                    //cameraSource.start(cameraView.getHolder());
-                    //cameraSource.start();
 
 
 
-                            cameraSource.start(cameraView.getHolder());
+                    try {
+                        //cameraSource.start(cameraView.getHolder());
+                        //cameraSource.start();
+
+                        cameraSource.start(cameraView.getHolder());
 
 
-                } catch (IOException ie) {
-                    Log.e("CAMERA SOURCE", ie.getMessage());
-                }
+                    } catch (IOException ie) {
+                        Log.e("CAMERA SOURCE", ie.getMessage());
+                    }
+
 
             }
 
@@ -136,6 +161,26 @@ public class BarcodeActivity extends Activity {
         });
 
 
+        findBarcodeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                barcode = barcodeView.getText().toString();
+               // searchField.setText(barcode);
+                new BarcodeApiTask().execute(barcode);
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                String searchString = searchField.getText().toString();
+
+                Intent searchActivity = new Intent(BarcodeActivity.this, SearchActivity.class);
+                searchActivity.putExtra("game", searchString);
+                startActivity(searchActivity);
+            }
+        });
+
 
 
 
@@ -158,5 +203,73 @@ public class BarcodeActivity extends Activity {
                 // Permission was denied. Display an error message.
             }
         }
+    }
+
+    private class BarcodeApiTask extends AsyncTask<Object, Void, HttpResponse<JsonNode>> {
+
+        //Network Activities must be done in  doInBackground
+        @Override
+        protected HttpResponse<JsonNode> doInBackground(Object[] objects) {
+            HttpResponse<JsonNode> response = null;
+            try {
+                //Get my string from the objects
+                String barcode = (String) objects[0];
+
+                //API Request
+                //String searchString = JsonGameParser.parseSearchString(barcode);
+                //Changed order to relevance rather than date released -HASEEB
+
+                    response = Unirest.get("https://goodfoods-search-grocery-product-" +
+                            "reviews-by-barcode-v1.p.mashape.com/search?barcode="+ barcode)
+                                    .header("X-Mashape-Key", "4KjzzTanigmshoC1cuOPyXU16sUvp1xp5m7j" +
+                                            "snV3lAlo5HH0wK")
+                                    .header("Accept", "application/json")
+                                    .asJson();
+
+
+
+
+
+                return response;
+            } catch (UnirestException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(HttpResponse<JsonNode> response) {
+            if (response == null ) {
+                Toast.makeText(BarcodeActivity.this,
+                        "Invalid data. Possibly a wrong query",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+            else
+            {
+
+                ArrayList<String> gameArrayList = JsonBarcodeParser.getGameList(response);
+
+                String pubName = " ";
+
+
+                for(int i = 0; i < gameArrayList.size(); i++) {
+
+                        pubName = gameArrayList.get(i);
+
+                }
+
+                searchField.setText(pubName);
+
+                if(!pubName.equals(" ")){
+                    searchButton.setEnabled(true);
+                }
+            }
+
+
+        }
+
+
+
     }
 }

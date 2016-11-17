@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
         searchEditText = (EditText) findViewById(R.id.searchBar);
 
         Button searchButton = (Button) findViewById(R.id.searchButton);
-        Button barcodeButton = (Button) findViewById(R.id.barcodeButton);
+        MagicButton barcodeButton = (MagicButton) findViewById(R.id.barcodeButton);
         MagicButton collectionButton = (MagicButton) findViewById(R.id.collectionButton);
         MagicButton wishListButton = (MagicButton) findViewById(R.id.wishListButton);
         MagicButton localMerchantButton = (MagicButton) findViewById(R.id.localMerchantsButton);
@@ -92,7 +92,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        barcodeButton.setOnClickListener(new View.OnClickListener(){
+        barcodeButton.setMagicButtonClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent wishListActivity = new Intent(MainActivity.this, BarcodeActivity.class);
