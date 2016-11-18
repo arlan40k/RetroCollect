@@ -1,12 +1,11 @@
 package edu.uco.retrocollect.retrocollect;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.SparseArray;
@@ -28,9 +27,6 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static edu.uco.retrocollect.retrocollect.R.id.gamePublisherTextView;
-import static edu.uco.retrocollect.retrocollect.R.id.lstView;
 
 
 public class BarcodeActivity extends Activity {
@@ -73,15 +69,15 @@ public class BarcodeActivity extends Activity {
                 .setAutoFocusEnabled(true)
                 .build();
 
-
+/*
         if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA)
+                android.Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
 
 
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.CAMERA)) {
+                    android.Manifest.permission.CAMERA)) {
 
                 // Show an expanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
@@ -92,7 +88,7 @@ public class BarcodeActivity extends Activity {
                 // No explanation needed, we can request the permission.
 
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.CAMERA},
+                        new String[]{android.Manifest.permission.CAMERA},
                         MY_PERMISSIONS_REQUEST_LOCATION);
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
@@ -100,6 +96,8 @@ public class BarcodeActivity extends Activity {
                 // result of the request.
             }
         }
+*/
+
 
 
         //final CameraSource cameraSource = cameraSourceBuilder;
@@ -109,6 +107,14 @@ public class BarcodeActivity extends Activity {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
 
+
+
+                if ( Build.VERSION.SDK_INT >= 23 &&
+                        ContextCompat.checkSelfPermission( getApplicationContext(),
+                                android.Manifest.permission.CAMERA )
+                                != PackageManager.PERMISSION_GRANTED ){
+                    return  ;
+                }
 
 
                     try {
@@ -121,6 +127,8 @@ public class BarcodeActivity extends Activity {
                     } catch (IOException ie) {
                         Log.e("CAMERA SOURCE", ie.getMessage());
                     }
+
+
 
 
             }
@@ -166,7 +174,12 @@ public class BarcodeActivity extends Activity {
             public void onClick(View view){
                 barcode = barcodeView.getText().toString();
                // searchField.setText(barcode);
-                new BarcodeApiTask().execute(barcode);
+                if(!barcode.equalsIgnoreCase("Nothing to read.")) {
+                    new BarcodeApiTask().execute(barcode);
+                }
+                else if(barcode.equalsIgnoreCase("Nothing to read.")){
+                    Toast.makeText(BarcodeActivity.this, "No barcode scanned! try again!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -188,7 +201,7 @@ public class BarcodeActivity extends Activity {
 
     }
 
-
+/*
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
@@ -204,7 +217,7 @@ public class BarcodeActivity extends Activity {
             }
         }
     }
-
+*/
     private class BarcodeApiTask extends AsyncTask<Object, Void, HttpResponse<JsonNode>> {
 
         //Network Activities must be done in  doInBackground
