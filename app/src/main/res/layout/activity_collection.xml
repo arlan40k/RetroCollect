@@ -21,6 +21,7 @@
     </ListView> -->
 
 
+
     <GridView
         android:id="@+id/gamesList"
         android:layout_width="match_parent"
@@ -30,10 +31,12 @@
         android:numColumns="auto_fit"
         android:verticalSpacing="24dp"
         android:horizontalSpacing="10dp"
-        android:stretchMode="spacingWidthUniform"
+        android:stretchMode="columnWidth"
 
 
         > </GridView>
+
+
     <!--
     <ImageView
         android:id="@+id/imageTest"

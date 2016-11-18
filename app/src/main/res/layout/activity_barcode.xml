@@ -14,33 +14,28 @@
 
 
     <SurfaceView
-        android:layout_width="320dp"
-        android:layout_height="240dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
         android:id="@+id/camera_view"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="11dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/code_info"
-        android:layout_below="@+id/camera_view"
-        android:textSize="20sp"
-        android:layout_marginStart="16dp"
-        android:text="Nothing to read."
-
-        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/findBarcodeButton"
         android:layout_below="@+id/code_info"
-        android:text="Confrim Barcode"/>
+        android:background="@color/primary"
+        android:text="Confirm Barcode"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchField"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/primary_text"
         android:layout_below="@+id/findBarcodeButton"
         android:text=" "/>
     <Button
@@ -48,6 +43,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/searchButton"
         android:text="Search for game"
+        android:background="@color/primary"
         android:layout_below="@+id/searchField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/code_info"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="Nothing to read."
+        android:textColor="@color/secondary_text"
+        android:layout_below="@+id/camera_view"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

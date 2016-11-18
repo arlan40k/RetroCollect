@@ -36,9 +36,7 @@ public class BarcodeActivity extends Activity {
     TextView searchField;
     Button findBarcodeButton;
     Button searchButton;
-    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
 
-    //private boolean permCheck = false;
     private String barcode = " ";
 
 
@@ -54,8 +52,6 @@ public class BarcodeActivity extends Activity {
 
         searchButton.setEnabled(false);
 
-        //SurfaceView cameraView = (SurfaceView) findViewById(R.id.camera_view);
-
         barcodeView = (TextView) findViewById(R.id.code_info);
 
         BarcodeDetector barcodeDetector =
@@ -69,38 +65,6 @@ public class BarcodeActivity extends Activity {
                 .setAutoFocusEnabled(true)
                 .build();
 
-/*
-        if (ContextCompat.checkSelfPermission(this,
-                android.Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    android.Manifest.permission.CAMERA)) {
-
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed, we can request the permission.
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{android.Manifest.permission.CAMERA},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        }
-*/
-
-
-
-        //final CameraSource cameraSource = cameraSourceBuilder;
 
         cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
 
@@ -118,8 +82,6 @@ public class BarcodeActivity extends Activity {
 
 
                     try {
-                        //cameraSource.start(cameraView.getHolder());
-                        //cameraSource.start();
 
                         cameraSource.start(cameraView.getHolder());
 
@@ -201,23 +163,7 @@ public class BarcodeActivity extends Activity {
 
     }
 
-/*
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
-            if (permissions.length == 1 &&
-                    permissions[0] == Manifest.permission.CAMERA &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
 
-            } else {
-                // Permission was denied. Display an error message.
-            }
-        }
-    }
-*/
     private class BarcodeApiTask extends AsyncTask<Object, Void, HttpResponse<JsonNode>> {
 
         //Network Activities must be done in  doInBackground
@@ -229,7 +175,7 @@ public class BarcodeActivity extends Activity {
                 String barcode = (String) objects[0];
 
                 //API Request
-                //String searchString = JsonGameParser.parseSearchString(barcode);
+
                 //Changed order to relevance rather than date released -HASEEB
 
                     response = Unirest.get("https://goodfoods-search-grocery-product-" +
@@ -272,9 +218,16 @@ public class BarcodeActivity extends Activity {
 
                 }
 
-                searchField.setText(pubName);
+                if (pubName.matches("[\\d\\D]*\\D+[\\d\\D]*")){
+                    searchField.setText(pubName);
+                }
+                else{
+                    searchField.setText("Barcode Not Found");
+                    searchButton.setEnabled(false);
+                }
 
-                if(!pubName.equals(" ")){
+
+                if(!pubName.equals(" ") &&pubName.matches("[\\d\\D]*\\D+[\\d\\D]*") ){
                     searchButton.setEnabled(true);
                 }
             }
