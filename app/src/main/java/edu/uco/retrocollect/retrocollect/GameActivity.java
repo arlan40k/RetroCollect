@@ -23,7 +23,7 @@ public class GameActivity extends Activity {
     Bundle bundle;
     private TextView gameTitleTextView, gamePublisherTextView, gameStudioTextView,
             gameReleaseYearTextView, gameReleaseDateTextView, gameRatingTextView;
-    private ImageView gameCoverImageView;
+    private ImageView gameCoverBackgroundImageView, gameCoverImageView;
     private ProgressBar ratingProgressBar;
     private final String dataErrorString = "";
     private int ratingInteger;
@@ -44,7 +44,8 @@ public class GameActivity extends Activity {
 
         ratingProgressBar = (ProgressBar) findViewById(R.id.gameRatingProgressBar);
 
-        gameCoverImageView = (ImageView) findViewById(R.id.gameCoverImageView);
+        //gameCoverImageView = (ImageView) findViewById(R.id.gameCoverImageView);
+        gameCoverBackgroundImageView = (ImageView) findViewById(R.id.gameCoverBackgroundImageView);
 
         bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -85,7 +86,7 @@ public class GameActivity extends Activity {
             if (rating != null) {
                 rating = rating.substring(0,4);
 
-                gameRatingTextView.setText(rating);
+                gameRatingTextView.setText(rating + "/100");
 
                 //The string is a decimal so turn it into double
                 Double ratingDouble = Double.parseDouble(rating);
@@ -112,9 +113,13 @@ public class GameActivity extends Activity {
                 // See for details: "https://market.mashape.com/igdbcom/internet-game-database/
                 // overview#wiki-images"
 
+                /*Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/imag" +
+                        "e/upload/t_cover_big_2x/"
+                        + cover + ".jpg").into(gameCoverImageView);*/
+
                 Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/imag" +
                         "e/upload/t_cover_big_2x/"
-                        + cover + ".jpg").into(gameCoverImageView);
+                        + cover + ".jpg").into(gameCoverBackgroundImageView);
 
                 //Log.d(TAG, cover);
 
