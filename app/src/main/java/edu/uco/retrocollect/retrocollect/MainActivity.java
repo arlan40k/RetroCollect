@@ -3,8 +3,10 @@ package edu.uco.retrocollect.retrocollect;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -25,6 +27,8 @@ public class MainActivity extends Activity {
     private int RETURN = 1;
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
+    //Used for bubble functionality
+    public static final int OVERLAY_PERMISSION_REQ_CODE = 1234;
 
 
     @Override
@@ -39,6 +43,8 @@ public class MainActivity extends Activity {
         MagicButton collectionButton = (MagicButton) findViewById(R.id.collectionButton);
         MagicButton wishListButton = (MagicButton) findViewById(R.id.wishListButton);
         MagicButton localMerchantButton = (MagicButton) findViewById(R.id.localMerchantsButton);
+        Button launchWidget = (Button) findViewById(R.id.launchWidget);
+
         searchButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -133,24 +139,50 @@ public class MainActivity extends Activity {
                     }
                 }
 
-
-                if ( Build.VERSION.SDK_INT >= 23 &&
-                        ContextCompat.checkSelfPermission( getApplicationContext(),
-                                android.Manifest.permission.CAMERA )
-                                != PackageManager.PERMISSION_GRANTED ){
-
-                    Toast.makeText(MainActivity.this, "Permission was denied, go to settings " +
-                            "to enable camera", Toast.LENGTH_SHORT).show();
-                    return  ;
-                }
-
-
                 Intent barcodeActivity = new Intent(MainActivity.this, BarcodeActivity.class);
                 startActivity(barcodeActivity);
 
             }
         });
+
+        launchWidget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestOverlays();
+                //Checks to see if we can use a bubble.
+                if(checkOverlaysPermission())
+                {
+                    Intent intent = new Intent(MainActivity.this, BubbleWidgetService.class);
+                    startService(intent);
+                }
+            }
+        });
+
+
+        if ( Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission( getApplicationContext(),
+                        android.Manifest.permission.CAMERA )
+                        != PackageManager.PERMISSION_GRANTED ){
+
+            Toast.makeText(MainActivity.this, "Permission was denied, go to settings " +
+                    "to enable camera", Toast.LENGTH_SHORT).show();
+            return  ;
+        }
+
     }
+
+    //Note the following three methods will only be applicable to build versions >= 23
+    //Check permissions
+    public boolean checkOverlaysPermission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(Settings.canDrawOverlays(this))
+                return true;
+            else
+                return  false;
+        }
+        return false;
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -173,12 +205,33 @@ public class MainActivity extends Activity {
                     // functionality that depends on this permission.
                 }
                 return;
+
             }
 
-            // other 'case' lines to check for other
-            // permissions this app might request
         }
     }
+    //Request permissions required for bubble functionality.
+    public void requestOverlays() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (!Settings.canDrawOverlays(this)) {
+                    // SYSTEM_ALERT_WINDOW permission not granted...
+                }
+            }
+        }
+    }
+
 
 }
 

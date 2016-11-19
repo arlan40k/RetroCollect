@@ -18,8 +18,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.ActionMode;
-import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -62,6 +60,7 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
     public static boolean isInit = true;
     public boolean initMove = true;
     public boolean mReady = false;
+    public static boolean wait = false;
     private LatLng loc;
 
     @Override
@@ -73,6 +72,7 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
         boolean gpsStatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         if(gpsStatus == false) {
+            wait = true;
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -81,9 +81,11 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
                             Intent gpsOptionsIntent = new Intent(
                                     android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             startActivity(gpsOptionsIntent);
+                            wait = false;
                             break;
 
                         case DialogInterface.BUTTON_NEGATIVE:
+                            wait = false;
                             onBackPressed();
                             break;
                     }
@@ -312,7 +314,7 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
                     String data = readStream(input);
                     results = JsonMerchantDataParser.getData(data);
                 } else {
-                    while (cLoc == null){}
+                    while (cLoc == null && wait == true){}
                     Uri builtUri = Uri.parse(LocalPlace_URL).buildUpon()
                             .appendQueryParameter("location", Double.toString(cLoc.latitude) + "," + Double.toString(cLoc.longitude))
                             .appendQueryParameter("radius", "8046.72")
@@ -346,7 +348,9 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
         @Override
         protected void onPostExecute(ArrayList<String> results) {
             if (results == null || results.size() == 0) {
-                Toast.makeText(LocalMerchantActivity.this, "Search Failed", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LocalMerchantActivity.this, "Search Failed", Toast.LENGTH_SHORT).show();
+                isInit = true;
+                new HttpGet().execute();
                 return;
             }
 
@@ -441,44 +445,4 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
 
 
     }
-
-/*    private void displayLocationSettingsRequest(Context context) {
-        GoogleApiClient googleApiClient = new GoogleApiClient.Builder(context)
-                .addApi(LocationServices.API).build();
-        googleApiClient.connect();
-    LocationRequest locationRequest = LocationRequest.create();
-    locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    locationRequest.setInterval(10000);
-    locationRequest.setFastestInterval(10000 / 2);
-
-    LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
-    builder.setAlwaysShow(true);
-
-    PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build());
-    result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
-        @Override
-        public void onResult(LocationSettingsResult result) {
-            final Status status = result.getStatus();
-            switch (status.getStatusCode()) {
-                case LocationSettingsStatusCodes.SUCCESS:
-                    Log.i(TAG, "All location settings are satisfied.");
-                    break;
-                case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                    Log.i(TAG, "Location settings are not satisfied. Show the user a dialog to upgrade location settings ");
-
-                    try {
-                        // Show the dialog by calling startResolutionForResult(), and check the result
-                        // in onActivityResult().
-                        status.startResolutionForResult(getParent(), REQUEST_CHECK_SETTINGS);
-                    } catch (IntentSender.SendIntentException e) {
-                        Log.i(TAG, "PendingIntent unable to execute request.");
-                    }
-                    break;
-                case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                    Log.i(TAG, "Location settings are inadequate, and cannot be fixed here. Dialog not created.");
-                    break;
-            }
-        }
-    });
-}*/
 }
