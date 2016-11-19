@@ -86,6 +86,7 @@
         android:layout_alignStart="@+id/barcodeButton" />
 -->
 
+    <!--
     <Button
         android:id="@+id/launchWidget"
         android:layout_width="match_parent"
@@ -93,6 +94,8 @@
         android:layout_marginTop="11dp"
         android:layout_below="@+id/barcodeButton"
         android:layout_alignStart="@+id/barcodeButton" />
+
+    -->
 
     <EditText
         android:id="@+id/searchBar"
@@ -141,6 +144,23 @@
         app:icon_button_color="@color/primary"
         app:expandable_area_color="@color/primary_dark"
         android:layout_below="@+id/localMerchantsButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="14dp" />
+
+    <br.com.bloder.magic.view.MagicButton
+        android:id="@+id/launchWidget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:magic_button_size="75dp"
+        app:button_icon="@mipmap/ic_widget"
+        app:button_icon_width="40dp"
+        app:button_icon_height="40dp"
+        app:hide_text="  Widget"
+        app:hide_text_size="10sp"
+        app:hide_text_color="@color/primary_text"
+        app:icon_button_color="@color/primary"
+        app:expandable_area_color="@color/primary_dark"
+        android:layout_below="@+id/barcodeButton"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="14dp" />
     <!--

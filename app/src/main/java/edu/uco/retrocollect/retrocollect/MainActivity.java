@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
         MagicButton collectionButton = (MagicButton) findViewById(R.id.collectionButton);
         MagicButton wishListButton = (MagicButton) findViewById(R.id.wishListButton);
         MagicButton localMerchantButton = (MagicButton) findViewById(R.id.localMerchantsButton);
-        Button launchWidget = (Button) findViewById(R.id.launchWidget);
+        MagicButton launchWidget = (MagicButton) findViewById(R.id.launchWidget);
 
         searchButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -145,7 +145,24 @@ public class MainActivity extends Activity {
             }
         });
 
+        /*
+
         launchWidget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestOverlays();
+                //Checks to see if we can use a bubble.
+                if(checkOverlaysPermission())
+                {
+                    Intent intent = new Intent(MainActivity.this, BubbleWidgetService.class);
+                    startService(intent);
+                }
+            }
+        });
+
+        */
+
+        launchWidget.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 requestOverlays();
