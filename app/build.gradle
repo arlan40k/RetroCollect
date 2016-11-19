@@ -30,6 +30,7 @@ dependencies {
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.bloder:magic:1.1'
+    compile 'com.github.florent37:diagonallayout:1.0.3'
     compile 'com.google.android.gms:play-services:9.6.1'
     //compile 'com.google.android.gms:play-services:7.8+'
     testCompile 'junit:junit:4.12'

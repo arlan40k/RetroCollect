@@ -49,13 +49,13 @@
         <activity android:name=".LocalMerchantActivity" />
         <activity
             android:name=".CollectionActivity"
-            android:label="Collection"></activity>
+            android:label="Collection"/>
         <activity android:name=".SearchActivity" />
         <activity
             android:name=".WishListActivity"
             android:label="Wish List" />
         <activity android:name=".GameActivity" />
-        <activity android:name=".BarcodeActivity"></activity>
+        <activity android:name=".BarcodeActivity"/>
         <service android:name=".BubbleWidgetService" />
     </application>
 
