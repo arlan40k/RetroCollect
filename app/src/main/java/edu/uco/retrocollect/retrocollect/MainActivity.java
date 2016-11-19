@@ -18,13 +18,9 @@ import br.com.bloder.magic.view.MagicButton;
 
 public class MainActivity extends Activity {
 
-    private Button searchButton;
-    private Button collectionButton;
-    private Button wishListButton;
     private EditText searchEditText;
     private String lat = "";
     private String lng = "";
-    private int RETURN = 1;
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
     //Used for bubble functionality
@@ -53,15 +49,7 @@ public class MainActivity extends Activity {
                 startActivity(searchActivity);
             }
         });
-/*
-        collectionButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent collectionActivity = new Intent(MainActivity.this, CollectionActivity.class);
-                startActivity(collectionActivity);
-            }
-        });
-*/
+
         collectionButton.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,15 +57,7 @@ public class MainActivity extends Activity {
                 startActivity(collectionActivity);
             }
         });
-/*
-        wishListButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent wishListActivity = new Intent(MainActivity.this, WishListActivity.class);
-                startActivity(wishListActivity);
-            }
-        });
-*/
+
         wishListButton.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,17 +65,7 @@ public class MainActivity extends Activity {
                 startActivity(wishListActivity);
             }
         });
-/*
-        localMerchantButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent localMerchantIntent = new Intent(MainActivity.this, LocalMerchantActivity.class);
-                localMerchantIntent.putExtra("LAT", lat);
-                localMerchantIntent.putExtra("LNG", lng);
-                startActivity(localMerchantIntent);
-            }
-        });
-*/
+
         localMerchantButton.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,28 +109,23 @@ public class MainActivity extends Activity {
                     }
                 }
 
+                if ( Build.VERSION.SDK_INT >= 23 &&
+                        ContextCompat.checkSelfPermission( getApplicationContext(),
+                                android.Manifest.permission.CAMERA )
+                                != PackageManager.PERMISSION_GRANTED ){
+
+                    Toast.makeText(MainActivity.this, "Permission was denied, go: Settings->Apps->" +
+                            "RetroCollect->Permissions and enable " +
+                            "'Camera' for this feature ", Toast.LENGTH_LONG).show();
+                    return  ;
+                }
+
                 Intent barcodeActivity = new Intent(MainActivity.this, BarcodeActivity.class);
                 startActivity(barcodeActivity);
 
             }
         });
 
-        /*
-
-        launchWidget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestOverlays();
-                //Checks to see if we can use a bubble.
-                if(checkOverlaysPermission())
-                {
-                    Intent intent = new Intent(MainActivity.this, BubbleWidgetService.class);
-                    startService(intent);
-                }
-            }
-        });
-
-        */
 
         launchWidget.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
@@ -175,16 +140,6 @@ public class MainActivity extends Activity {
             }
         });
 
-
-        if ( Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission( getApplicationContext(),
-                        android.Manifest.permission.CAMERA )
-                        != PackageManager.PERMISSION_GRANTED ){
-
-            Toast.makeText(MainActivity.this, "Permission was denied, go to settings " +
-                    "to enable camera", Toast.LENGTH_SHORT).show();
-            return  ;
-        }
 
     }
 
