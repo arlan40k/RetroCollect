@@ -3,6 +3,7 @@ package edu.uco.retrocollect.retrocollect;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class BarcodeActivity extends Activity {
     Button searchButton;
 
     private String barcode = " ";
+    private String eUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 
 
     @Override
@@ -135,12 +137,20 @@ public class BarcodeActivity extends Activity {
             @Override
             public void onClick(View view){
                 barcode = barcodeView.getText().toString();
-               // searchField.setText(barcode);
-                if(!barcode.equalsIgnoreCase("Nothing to read.")) {
-                    new BarcodeApiTask().execute(barcode);
-                }
-                else if(barcode.equalsIgnoreCase("Nothing to read.")){
-                    Toast.makeText(BarcodeActivity.this, "No barcode scanned! try again!", Toast.LENGTH_SHORT).show();
+
+
+
+                if(barcode.equals("Congrats!!! You found Haseeb's easter egg!!!")){
+                    Uri url2 = Uri.parse(eUrl);
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, url2);
+                    startActivity(browserIntent);
+                } else {
+                    // searchField.setText(barcode);
+                    if (!barcode.equalsIgnoreCase("Nothing to read.")) {
+                        new BarcodeApiTask().execute(barcode);
+                    } else if (barcode.equalsIgnoreCase("Nothing to read.")) {
+                        Toast.makeText(BarcodeActivity.this, "No barcode scanned! try again!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -173,6 +183,8 @@ public class BarcodeActivity extends Activity {
             try {
                 //Get my string from the objects
                 String barcode = (String) objects[0];
+                barcode = barcode.replaceAll("[\\s]","+");
+                barcode=barcode.trim();
 
                 //API Request
 
