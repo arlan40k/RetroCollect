@@ -17,6 +17,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static edu.uco.retrocollect.retrocollect.R.id.gameValueTextView;
+
 public class GameActivity extends Activity {
 
     private final static String TAG = "GameActivity";
@@ -41,7 +43,8 @@ public class GameActivity extends Activity {
         gameReleaseYearTextView = (TextView) findViewById(R.id.gameReleaseYearTextView);
         gameReleaseDateTextView = (TextView) findViewById(R.id.gameReleaseDateTextView);
         gameRatingTextView = (TextView) findViewById(R.id.gameRatingTextView);
-
+        //Adam Bilby
+        TextView gameValueTextView = (TextView) findViewById(R.id.gameValueTextView);
         ratingProgressBar = (ProgressBar) findViewById(R.id.gameRatingProgressBar);
 
         //gameCoverImageView = (ImageView) findViewById(R.id.gameCoverImageView);
@@ -50,6 +53,12 @@ public class GameActivity extends Activity {
         bundle = getIntent().getExtras();
         if (bundle != null) {
 
+            //Adam Bilby
+            String gameValue = bundle.getString("gameValue");
+            if(gameValue != null)
+            {
+                gameValueTextView.setText(gameValue);
+            }
             String title = bundle.getString("gameTitle");
             if (title != null) {
                 gameTitleTextView.setText(title);
@@ -82,6 +91,7 @@ public class GameActivity extends Activity {
             } else {
                 gameReleaseDateTextView.setText(dataErrorString);
             }
+
             String rating = bundle.getString("gameRating");
             if (rating != null) {
                 rating = rating.substring(0,4);
