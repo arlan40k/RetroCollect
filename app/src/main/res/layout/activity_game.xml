@@ -186,16 +186,6 @@
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/smallTextSize"
                 android:textColor="@color/primary_text"/>
-            <TextView
-                android:id="@+id/gameValueTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/gameReleaseDateTextView"
-                android:paddingBottom="@dimen/smallBottomPadding"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:textSize="@dimen/smallTextSize"
-                android:textColor="@color/primary_text"/>
             <!--<ImageView
                 android:id="@+id/gameCoverImageView"
                 android:layout_width="wrap_content"
