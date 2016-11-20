@@ -1,177 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- -->
-<com.github.florent37.diagonallayout.DiagonalLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:diagonal="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
 
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    diagonal:diagonal_angle="5"
-    diagonal:diagonal_gravity="right|bottom"
-    android:elevation="10dp">
-    <ImageView
-        android:id="@+id/gameCoverBackgroundImageView"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <com.github.florent37.diagonallayout.DiagonalLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:diagonal="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true" />
-
-    <!-- YOUR CONTENT -->
-    <!-- For DiagonalLayout android:layout_height="match_parent" -->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_game"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="250dp"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="edu.uco.retrocollect.retrocollect.GameActivity">
+        diagonal:diagonal_angle="0"
+        diagonal:diagonal_gravity="right|bottom"
+        android:elevation="10dp">
 
-        <TextView
-            android:id="@+id/gameTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:paddingBottom="@dimen/mediumBottomPadding"
-            android:textSize="@dimen/largeTextSize"
-            android:textColor="@color/primary_text"/>
 
-        <TextView
-            android:id="@+id/gameReleaseYearLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gameTitleTextView"
-            android:paddingBottom="@dimen/smallBottomPadding"
-            android:text="Released: "
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/mediumTextSize"/>
-
-        <TextView
-            android:id="@+id/gameReleaseYearTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gameTitleTextView"
-            android:paddingBottom="@dimen/smallBottomPadding"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/mediumTextSize"
-            android:textColor="@color/primary_text"/>
-
-        <TextView
-            android:id="@+id/gameRatingLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gameReleaseYearLabel"
-            android:paddingBottom="@dimen/smallBottomPadding"
-            android:text="Rating: "
-            android:textSize="@dimen/mediumTextSize"
-            android:textColor="@color/primary_text"/>
-
-        <TextView
-            android:id="@+id/gameRatingTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gameReleaseYearLabel"
-            android:paddingBottom="@dimen/smallBottomPadding"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/mediumTextSize"
-            android:textColor="@color/primary_text"/>
-
-        <ProgressBar
-            android:id="@+id/gameRatingProgressBar"
-            style="@android:style/Widget.ProgressBar.Horizontal"
+        <!-- YOUR CONTENT -->
+        <!-- For DiagonalLayout android:layout_height="match_parent" -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/activity_game"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gameRatingLabel"
-            android:paddingBottom="@dimen/smallBottomPadding"
-            android:indeterminate="false"
-            android:maxHeight="15dip"
-            android:minHeight="15dip"
-            android:visibility="invisible" />
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context="edu.uco.retrocollect.retrocollect.GameActivity">
+            <ImageView
+                android:id="@+id/gameCoverBackgroundImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
 
-        <TextView
-            android:id="@+id/gamePublisherLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gameRatingProgressBar"
-            android:paddingBottom="@dimen/smallBottomPadding"
-            android:text="Publisher: "
-            android:textSize="@dimen/smallTextSize"
-            android:textColor="@color/primary_text"/>
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true" />
+            <TextView
 
-        <TextView
-            android:id="@+id/gamePublisherTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gameRatingProgressBar"
-            android:paddingBottom="@dimen/smallBottomPadding"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/smallTextSize"
-            android:textColor="@color/primary_text"/>
+                android:id="@+id/gameTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gameCoverBackgroundImageView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingBottom="@dimen/mediumBottomPadding"
+                android:textSize="@dimen/largeTextSize"
+                android:textColor="@color/primary_text"/>
 
-        <TextView
-            android:id="@+id/gameStudioLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gamePublisherLabel"
-            android:paddingBottom="@dimen/smallBottomPadding"
-            android:text="Studio: "
-            android:textSize="@dimen/smallTextSize"
-            android:textColor="@color/primary_text"/>
+            <TextView
+                android:id="@+id/gameReleaseYearLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameTitleTextView"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:text="Released: "
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/mediumTextSize"/>
 
-        <TextView
-            android:id="@+id/gameStudioTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gamePublisherLabel"
-            android:paddingBottom="@dimen/smallBottomPadding"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/smallTextSize"
-            android:textColor="@color/primary_text"/>
+            <TextView
+                android:id="@+id/gameReleaseYearTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameTitleTextView"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/mediumTextSize"
+                android:textColor="@color/primary_text"/>
 
-        <TextView
-            android:id="@+id/gameReleaseDateLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gameStudioLabel"
-            android:paddingBottom="@dimen/smallBottomPadding"
-            android:text="Release Date: "
-            android:textSize="@dimen/smallTextSize"
-            android:textColor="@color/primary_text"/>
+            <TextView
+                android:id="@+id/gameRatingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameReleaseYearLabel"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:text="Rating: "
+                android:textSize="@dimen/mediumTextSize"
+                android:textColor="@color/primary_text"/>
 
-        <TextView
-            android:id="@+id/gameReleaseDateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gameStudioLabel"
-            android:paddingBottom="@dimen/smallBottomPadding"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/smallTextSize"
-            android:textColor="@color/primary_text"/>
-        <!--<ImageView
-            android:id="@+id/gameCoverImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gameReleaseDateLabel"
-            android:paddingTop="@dimen/mediumBottomPadding"
-            android:layout_centerHorizontal="true"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true" />-->
+            <TextView
+                android:id="@+id/gameRatingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameReleaseYearLabel"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/mediumTextSize"
+                android:textColor="@color/primary_text"/>
+
+            <ProgressBar
+                android:id="@+id/gameRatingProgressBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameRatingLabel"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:indeterminate="false"
+                android:maxHeight="15dip"
+                android:minHeight="15dip"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/gamePublisherLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameRatingProgressBar"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:text="Publisher: "
+                android:textSize="@dimen/smallTextSize"
+                android:textColor="@color/primary_text"/>
+
+            <TextView
+                android:id="@+id/gamePublisherTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameRatingProgressBar"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/smallTextSize"
+                android:textColor="@color/primary_text"/>
+
+            <TextView
+                android:id="@+id/gameStudioLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gamePublisherLabel"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:text="Studio: "
+                android:textSize="@dimen/smallTextSize"
+                android:textColor="@color/primary_text"/>
+
+            <TextView
+                android:id="@+id/gameStudioTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gamePublisherLabel"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/smallTextSize"
+                android:textColor="@color/primary_text"/>
+
+            <TextView
+                android:id="@+id/gameReleaseDateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameStudioLabel"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:text="Release Date: "
+                android:textSize="@dimen/smallTextSize"
+                android:textColor="@color/primary_text"/>
+
+            <TextView
+                android:id="@+id/gameReleaseDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameStudioLabel"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/smallTextSize"
+                android:textColor="@color/primary_text"/>
+            <!--<ImageView
+                android:id="@+id/gameCoverImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameReleaseDateLabel"
+                android:paddingTop="@dimen/mediumBottomPadding"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true" />-->
 
 
-    </RelativeLayout>
-</com.github.florent37.diagonallayout.DiagonalLayout>
+        </RelativeLayout>
+    </com.github.florent37.diagonallayout.DiagonalLayout>
 
+
+
+</ScrollView>
