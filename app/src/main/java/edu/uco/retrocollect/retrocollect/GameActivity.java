@@ -79,17 +79,20 @@ public class GameActivity extends Activity {
             } else {
                 gameStudioTextView.setText(dataErrorString);
             }
-            String year = Double.toString(bundle.getDouble("gameReleaseYear"));
-            if (year != null) {
-                gameReleaseYearTextView.setText(year);
-            } else {
-                gameReleaseYearTextView.setText(dataErrorString);
-            }
+
+//            String year = Double.toString(bundle.getDouble("gameReleaseYear"));
+//            if (year != null) {
+//                gameReleaseYearTextView.setText(year);
+//            } else {
+//                gameReleaseYearTextView.setText(dataErrorString);
+//            }
             String date = bundle.getString("gameReleaseDate");
             if (date != null) {
                 gameReleaseDateTextView.setText(date);
+                gameReleaseYearTextView.setText(date.substring(0,4));
             } else {
                 gameReleaseDateTextView.setText(dataErrorString);
+                gameReleaseYearTextView.setText(dataErrorString);
             }
 
             String rating = bundle.getString("gameRating");
