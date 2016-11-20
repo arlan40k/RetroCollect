@@ -50,12 +50,31 @@
                 android:paddingBottom="@dimen/mediumBottomPadding"
                 android:textSize="@dimen/largeTextSize"
                 android:textColor="@color/primary_text"/>
+            <TextView
+                android:id="@+id/gameValueLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameTitleTextView"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:text="Value: "
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/mediumTextSize"/>
 
+            <TextView
+                android:id="@+id/gameValueTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameTitleTextView"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/mediumTextSize"
+                android:textColor="@color/primary_text"/>
             <TextView
                 android:id="@+id/gameReleaseYearLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/gameTitleTextView"
+                android:layout_below="@id/gameValueLabel"
                 android:paddingBottom="@dimen/smallBottomPadding"
                 android:text="Released: "
                 android:textColor="@color/primary_text"
@@ -65,7 +84,7 @@
                 android:id="@+id/gameReleaseYearTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/gameTitleTextView"
+                android:layout_below="@id/gameValueLabel"
                 android:paddingBottom="@dimen/smallBottomPadding"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
