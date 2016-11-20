@@ -298,12 +298,13 @@ public class WishListActivity extends Activity {
             // 3
             final ImageView imageView = (ImageView)convertView.findViewById(R.id.imageview_cover_art);
             final TextView nameTextView = (TextView)convertView.findViewById(R.id.textview_game_name);
-
+            final TextView priceTextView = (TextView)convertView.findViewById(R.id.textview_game_value);
             // 4
             Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_small_2x/"
                     +  game.getCoverHash() +  ".jpg").into(imageView);
 
             nameTextView.setText(game.getTitle());
+            priceTextView.setText(game.getGameValue());
 
 
             return convertView;

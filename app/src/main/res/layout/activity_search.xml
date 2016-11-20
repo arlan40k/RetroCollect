@@ -16,11 +16,20 @@
         android:id="@+id/lstView"
         android:layout_below="@+id/txtSearch" />
 
+    <Button
+        android:text="Refresh Prices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/btnPrices"
+        android:layout_above="@+id/lstView" />
+
     <AutoCompleteTextView
         android:hint="Enter Another Search Here..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtSearch"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toEndOf="@+id/btnPrices"
+        android:layout_marginStart="12dp" />
 </RelativeLayout>

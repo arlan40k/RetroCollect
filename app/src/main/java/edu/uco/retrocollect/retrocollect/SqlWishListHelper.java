@@ -27,11 +27,12 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
     private static final String GAME_STUDIO= "game_studio";
     private static final String GAME_RATING = "game_rating";
     private static final String COVER_HASH = "cover_hash";
+    private static final String GAME_VALUE = "game_value";
     private static final String[] COLUMNS = {KEY_ID,KEY_TITLE, GAME_RELEASE_YEAR, GAME_RELEASE_DATE,
-            GAME_PUBLISHER, GAME_STUDIO, GAME_RATING, COVER_HASH};
+            GAME_PUBLISHER, GAME_STUDIO, GAME_RATING, COVER_HASH, GAME_VALUE};
 
     // Database Version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 63;
     // Database Name
     private static final String DATABASE_NAME = "WishListDB";
 
@@ -49,7 +50,8 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
                 "game_publisher    TEXT," +
                 "game_studio       TEXT," +
                 "game_rating       TEXT," +
-                "cover_hash        TEXT )";
+                "cover_hash        TEXT, " +
+                "game_value        TEXT)";
 
         //Create Database
         db.execSQL(CREATE_WISHLIST_TABLE);
@@ -82,6 +84,7 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
         values.put(GAME_STUDIO, game.getStudio()); // get publisher
         values.put(GAME_RATING, game.getRating()); // get publisher
         values.put(COVER_HASH, game.getCoverHash()); //-HASEEB
+        values.put(GAME_VALUE, game.getGameValue());
         // 3. insert
         db.insert(TABLE_WISHLIST, // table
                 null, //nullColumnHack
@@ -121,8 +124,17 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
         String gameStudio = cursor.getString(5);
         double gameRating = Double.parseDouble(cursor.getString(6));
         String coverHash = cursor.getString(7);
+        String gameValue = cursor.getString(8);
         Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
                 gameStudio, gameRating, coverHash);
+        if(gameValue != null)
+        {
+            game.setGameValue(gameValue);
+        }
+        else
+        {
+            game.setGameValue("N/A");
+        }
         //log
         Log.d("getGame("+title+")", game.toString());
 
@@ -159,10 +171,17 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
         String gameStudio = cursor.getString(5);
         double gameRating = Double.parseDouble(cursor.getString(6));
         String coverHash = cursor.getString(7); // -HASEEB
-
+        String gameValue = cursor.getString(8);
         Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate,
                 gamePublisher, gameStudio, gameRating, coverHash);
-
+        if(gameValue != null)
+        {
+            game.setGameValue(gameValue);
+        }
+        else
+        {
+            game.setGameValue("N/A");
+        }
         //log
         Log.d("getGame("+id+")", game.toString());
         // 5. return book
@@ -194,9 +213,19 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
                 String gameStudio = cursor.getString(5);
                 double gameRating = Double.parseDouble(cursor.getString(6));
                 String coverHash = cursor.getString(7);
+                String gameValue = cursor.getString(8);
                 game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
                         gameStudio, gameRating, coverHash);
+                if(gameValue != null)
+                {
+                    game.setGameValue(gameValue);
+                }
+                else
+                {
+                    game.setGameValue("N/A");
+                }
                 games.add(game);
+
             } while (cursor.moveToNext());
         }
 
@@ -221,7 +250,7 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
         values.put(GAME_STUDIO, game.getStudio()); // get publisher
         values.put(GAME_RATING, game.getRating()); // get publisher
         values.put(COVER_HASH, game.getCoverHash());
-
+        values.put(GAME_VALUE, game.getCoverHash());
         // 3. updating row
         int i = db.update(TABLE_WISHLIST, //table
                 values, // column/value

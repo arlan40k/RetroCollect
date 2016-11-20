@@ -6,7 +6,6 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 
 
@@ -38,8 +37,12 @@ public class SearchLongClickFragment extends DialogFragment {
         String studio = getArguments().getString("gameStudio");
         Double gameRating = getArguments().getDouble("gameRating");
         String coverHash = getArguments().getString("coverHash");//_HASEEB
-        Log.d("searchHash", coverHash+ " ");
+        String gameValue = getArguments().getString("gameValue");
         addGame = new Game(title, id, releaseYear, releaseDate, publisher, studio, gameRating, coverHash);
+        if(gameValue.isEmpty() == false)
+        {
+            addGame.setGameValue(gameValue);
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Chose Action");
 

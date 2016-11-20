@@ -10,7 +10,7 @@ public class Game {
     private String gameStudio;
     private double gameRating;
     private String coverHash; //cover hash added -HASEEB
-
+    private String gameValue;
     //Added by Adam Bilby
     //Static Enumerations of Various API Features
     static enum ESRBRatings
@@ -152,4 +152,14 @@ public class Game {
 
     public void setCoverHash(String coverHash) {this.coverHash = coverHash;}
 
+    //Adam Bilby
+    //Getter and Setter for gameValue
+    public String getGameValue()
+    {
+        return this.gameValue;
+    }
+    public void setGameValue(String gameValue)
+    {
+        this.gameValue = gameValue;
+    }
 }

@@ -29,7 +29,19 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:gravity="center_horizontal"/>
-
+    <TextView
+        android:id="@+id/textview_game_value"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="10sp"
+        tools:text="Are You My Mother"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold"
+        android:paddingTop="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:gravity="center_horizontal"
+    />
 
 
 
