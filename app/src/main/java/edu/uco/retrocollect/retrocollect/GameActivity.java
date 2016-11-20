@@ -17,8 +17,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import static edu.uco.retrocollect.retrocollect.R.id.gameValueTextView;
-
 public class GameActivity extends Activity {
 
     private final static String TAG = "GameActivity";
