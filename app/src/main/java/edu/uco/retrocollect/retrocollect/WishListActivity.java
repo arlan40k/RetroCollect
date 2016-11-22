@@ -84,7 +84,8 @@ public class WishListActivity extends Activity {
             actualPrice += Double.parseDouble(gameArrayList.get(i).getGameValue());
 
         }
-        totalPrice = Double.toString(actualPrice);
+        //totalPrice = Double.toString(actualPrice);
+        totalPrice = String.format("%.2f", actualPrice);
         tickerView.setText("Collection Value: " + totalPrice);
 
         gamesList = (GridView) findViewById(R.id.gamesList);
