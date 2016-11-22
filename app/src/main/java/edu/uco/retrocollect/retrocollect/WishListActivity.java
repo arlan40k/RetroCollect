@@ -18,6 +18,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.robinhood.ticker.TickerUtils;
+import com.robinhood.ticker.TickerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -53,8 +55,13 @@ public class WishListActivity extends Activity {
         SqlWishListHelper sqlWishListHelper = new SqlWishListHelper(this);
         //Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate,
         // String gamePublisher, String gameStudio, double gameRating) {
-
+        //Adam Bilby
+        //Ticker Solution
+        final TickerView tickerView = (TickerView) findViewById(R.id.tickerView);
+        tickerView.setCharacterList(TickerUtils.getDefaultNumberList());
         gameArrayList =  sqlWishListHelper.getAllGames();
+
+
 
         Collections.sort(gameArrayList, new Comparator<Game>() {
 
@@ -69,7 +76,16 @@ public class WishListActivity extends Activity {
         gameArray = gameArrayList.toArray(gameArray);
         //End of Adam Bilby Block
 
+        //Get Ticker Price
+        String totalPrice;
+        Double actualPrice  = 0.00;
+        for(int i = 0; i < gameArrayList.size(); i++)
+        {
+            actualPrice += Double.parseDouble(gameArrayList.get(i).getGameValue());
 
+        }
+        totalPrice = Double.toString(actualPrice);
+        tickerView.setText("Collection Value: " + totalPrice);
 
         gamesList = (GridView) findViewById(R.id.gamesList);
 
@@ -120,6 +136,10 @@ public class WishListActivity extends Activity {
                 coverHash = temporaryGame.getCoverHash();
                 intent.putExtra("coverHash", coverHash);
 
+                //Adam Bilby
+                String gameValue = String.valueOf(temporaryGame.getGameValue());
+
+                intent.putExtra("gameValue", gameValue);
                 startActivity(intent);
             }
         });

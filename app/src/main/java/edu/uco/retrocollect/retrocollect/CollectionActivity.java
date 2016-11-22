@@ -18,6 +18,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.robinhood.ticker.TickerUtils;
+import com.robinhood.ticker.TickerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -48,7 +50,10 @@ public class CollectionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
 
-
+        //Adam Bilby
+        //Ticker Solution
+        final TickerView tickerView = (TickerView) findViewById(R.id.tickerView);
+        tickerView.setCharacterList(TickerUtils.getDefaultNumberList());
 
         //Adam Bilby
         //Sql Datbase initialize
@@ -68,7 +73,16 @@ public class CollectionActivity extends Activity {
         gameArray = gameArrayList.toArray(gameArray);
         //End of Adam Bilby Block
 
+        //Get Ticker Price
+        String totalPrice;
+        Double actualPrice  = 0.00;
+        for(int i = 0; i < gameArrayList.size(); i++)
+        {
+            actualPrice += Double.parseDouble(gameArrayList.get(i).getGameValue());
 
+        }
+        totalPrice = Double.toString(actualPrice);
+        tickerView.setText("Collection Value: " + totalPrice);
 
         gamesList = (GridView) findViewById(R.id.gamesList);
 
@@ -81,6 +95,8 @@ public class CollectionActivity extends Activity {
 
         //final CollectionAdapter adapter = new CollectionAdapter(this,
           //      android.R.layout.simple_list_item_1, list);
+
+
 
         final CollectionAdapter adapter = new CollectionAdapter(getApplicationContext(), gameArrayList);
 
@@ -122,6 +138,11 @@ public class CollectionActivity extends Activity {
 
                 String sup = gameCoverHash +" ";
                 Log.d("Cover:", sup);
+
+                //Adam Bilby
+                String gameValue = String.valueOf(temporaryGame.getGameValue());
+
+                intent.putExtra("gameValue", gameValue);
 
                 startActivity(intent);
             }

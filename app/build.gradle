@@ -26,7 +26,7 @@ dependencies {
     })
 
     compile files('libs/unirest-java-1.4.10-SNAPSHOT-withDependency-ShadedForAndroid.jar')
-
+    compile 'com.robinhood.ticker:ticker:1.1.1'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.bloder:magic:1.1'
