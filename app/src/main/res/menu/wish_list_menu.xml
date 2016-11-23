@@ -9,6 +9,21 @@
             android:title="by rating"
             android:onClick="onGroupItemClick"
             />
+        <item android:id="@+id/subMenu"
+            android:title="View type">
+            <menu>
+                <group>
+                    <item android:id="@+id/menuList"
+                        android:title="List View"
+                        android:onClick="onGroupItemClick"/>
+                    <item android:id="@+id/menuGrid"
+                        android:title="Grid View"
+                        android:onClick="onGroupItemClick"/>
+                </group>
+            </menu>
+
+        </item>
     </group>
+
 
 </menu>

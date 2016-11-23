@@ -25,6 +25,8 @@ public class CollectionLongClickFragment extends DialogFragment {
   //  private String gameIdToRemove;
     SqlGameHelper sqlGameHelper;
 
+    private boolean gridBool = true;
+
     private String gameId;
 
     private String  gameTitle,  gameReleaseDate, gamePublisher,
@@ -62,6 +64,7 @@ public class CollectionLongClickFragment extends DialogFragment {
         gameRating = getArguments().getDouble("gameRating");
         gameCoverHash = getArguments().getString("coverHash");
         gameValue = getArguments().getString("gameValue");
+        gridBool = getArguments().getBoolean("gridBool");
 
 
         selectedGame = new Game(gameTitle,gameId,gameReleaseYear,
@@ -114,9 +117,11 @@ public class CollectionLongClickFragment extends DialogFragment {
                     //String id1 = gameId;
                     //Log.d("ig", "hello");
 
+
                     Intent refreshCollectionIntent = new Intent(getActivity(),
                             CollectionActivity.class);
                     getActivity().finish();
+                    refreshCollectionIntent.putExtra("gridBool", gridBool);
                     startActivity(refreshCollectionIntent);
 
                 }
