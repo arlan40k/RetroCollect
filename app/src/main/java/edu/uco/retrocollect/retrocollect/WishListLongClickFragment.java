@@ -27,7 +27,7 @@ public class WishListLongClickFragment extends DialogFragment {
 
     private String gameId;
     private String  gameTitle,  gameReleaseDate, gamePublisher,
-            gameStudio = "", coverHash;
+            gameStudio = "", coverHash, gameValue;
     private Double gameReleaseYear, gameRating = 0.0;
 
     private Game selectedGame;
@@ -49,9 +49,13 @@ public class WishListLongClickFragment extends DialogFragment {
         gameStudio = getArguments().getString("gameStudio");
         gameRating = getArguments().getDouble("gameRating");
         coverHash = getArguments().getString("coverHash");
+        gameValue = getArguments().getString("gameValue");
+
 
         selectedGame = new Game(gameTitle,gameId,gameReleaseYear,
                 gameReleaseDate,gamePublisher,gameStudio,gameRating, coverHash);
+
+        selectedGame.setGameValue(gameValue);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose");
@@ -131,7 +135,7 @@ public class WishListLongClickFragment extends DialogFragment {
 
                     sqlWishListHelper.deleteGame(selectedGame);
 
-                    Toast.makeText(getActivity(), "Game moved to Collection!", Toast.LENGTH_SHORT);
+                    Toast.makeText(getActivity(), "Game moved to Collection!", Toast.LENGTH_SHORT).show();
 
 
 

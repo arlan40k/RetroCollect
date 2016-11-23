@@ -78,15 +78,19 @@ public class CollectionActivity extends Activity {
         Double actualPrice  = 0.00;
         for(int i = 0; i < gameArrayList.size(); i++)
         {
-            actualPrice += Double.parseDouble(gameArrayList.get(i).getGameValue());
-
+            if(!gameArrayList.get(i).getGameValue().equals("N/A")) {
+                actualPrice += Double.parseDouble(gameArrayList.get(i).getGameValue());
+            }
         }
 
 
         //totalPrice = Double.toString(actualPrice);
-        totalPrice = String.format("%.2f", actualPrice);
-        tickerView.setText("Collection Value: " + totalPrice);
-
+        if(!actualPrice.equals("N/A")) {
+            totalPrice = String.format("%.2f", actualPrice);
+            tickerView.setText("Collection Value: " + totalPrice);
+        }else{
+            tickerView.setText("Collection Value: " + actualPrice);
+        }
         gamesList = (GridView) findViewById(R.id.gamesList);
 
 
@@ -168,6 +172,8 @@ public class CollectionActivity extends Activity {
                 bundle.putString("gameStudio", game.getStudio());
                 bundle.putDouble("gameRating", game.getRating());
                 bundle.putString("coverHash", game.getCoverHash());
+                bundle.putString("gameValue", game.getGameValue());
+
 
                 String gameTitleForSearch = gameArray[position].getTitle();
 
