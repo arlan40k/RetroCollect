@@ -39,6 +39,10 @@ public class WishListActivity extends Activity {
 
     ArrayList<Game> gameArrayList;
 
+    private boolean gridBool = true;
+
+    Bundle bundle;
+
     //Adam Bilby
 //Static games will now be dynamic with database games
     Game[] gameArray = {
@@ -104,14 +108,23 @@ public class WishListActivity extends Activity {
         //final WishListActivity.MyArrayAdapter adapter = new WishListActivity.MyArrayAdapter(this,
           //      android.R.layout.simple_list_item_1, list);
 
-        final CollectionAdapter adapter = new CollectionAdapter(getApplicationContext(), gameArrayList);
+        bundle = getIntent().getExtras();
+        if(bundle!=null){
+            gridBool = bundle.getBoolean("gridBool");
+        }
 
-
-        //ArrayAdapter adapter = new ArrayAdapter<String>
-        //      (this, R.layout.activity_collection, gameSampleArray);
-
-
-        gamesList.setAdapter(adapter);
+        if(!gridBool){
+            gamesList.setNumColumns(1);
+            final SecondCollectionAdapter adapter2 = new SecondCollectionAdapter(
+                    getApplicationContext(), gameArrayList);
+            gamesList.setAdapter(adapter2);
+        }
+        else{
+            gamesList.setNumColumns(3);
+            final CollectionAdapter adapter = new CollectionAdapter(
+                    getApplicationContext(), gameArrayList);
+            gamesList.setAdapter(adapter);
+        }
 
 
         gamesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -168,6 +181,7 @@ public class WishListActivity extends Activity {
                 bundle.putDouble("gameRating", game.getRating());
                 bundle.putString("coverHash", game.getCoverHash());
                 bundle.putString("gameValue", game.getGameValue());
+                bundle.putBoolean("gridBool", gridBool);
 
 
                 String gameTitleForSearch = gameArray[position].getTitle();
@@ -232,13 +246,21 @@ public class WishListActivity extends Activity {
                 //final WishListActivity.MyArrayAdapter adapter = new WishListActivity.MyArrayAdapter(this,
                   //      android.R.layout.simple_list_item_1, list);
 
-                final CollectionAdapter adapter = new CollectionAdapter(getApplicationContext(), gameArrayList);
-
-
-                gamesList.setAdapter(adapter);
+                if(!gridBool){
+                    gamesList.setNumColumns(1);
+                    final SecondCollectionAdapter adapter2 = new SecondCollectionAdapter(
+                            getApplicationContext(), gameArrayList);
+                    gamesList.setAdapter(adapter2);
+                }
+                else{
+                    gamesList.setNumColumns(3);
+                    final CollectionAdapter adapter = new CollectionAdapter(
+                            getApplicationContext(), gameArrayList);
+                    gamesList.setAdapter(adapter);
+                }
 
             }
-        else {
+        else if (item.getTitle().equals("by rating")){
 
 
                 Collections.sort(gameArrayList, new Comparator<Game>() {
@@ -263,10 +285,34 @@ public class WishListActivity extends Activity {
                // final WishListActivity.MyArrayAdapter adapter = new WishListActivity.MyArrayAdapter(this,
                  //       android.R.layout.simple_list_item_1, list);
 
+                if (!gridBool){
+                    gamesList.setNumColumns(1);
+                    final SecondCollectionAdapter adapter2 = new SecondCollectionAdapter(
+                            getApplicationContext(), gameArrayList);
+                    gamesList.setAdapter(adapter2);
+                }
+                else{
+                    gamesList.setNumColumns(3);
+                    final CollectionAdapter adapter = new CollectionAdapter(getApplicationContext(), gameArrayList);
+                    gamesList.setAdapter(adapter);
+                }
+
+            }
+            else if(item.getTitle().equals("List View")){
+                gamesList.setNumColumns(1);
+                final SecondCollectionAdapter adapter2 = new SecondCollectionAdapter(
+                        getApplicationContext(), gameArrayList);
+                gamesList.setAdapter(adapter2);
+
+                gridBool = false;
+
+            }
+            else if(item.getTitle().equals("Grid View")){
+                gamesList.setNumColumns(3);
                 final CollectionAdapter adapter = new CollectionAdapter(getApplicationContext(), gameArrayList);
-
-
                 gamesList.setAdapter(adapter);
+
+                gridBool = true;
 
             }
 
@@ -335,6 +381,68 @@ public class WishListActivity extends Activity {
             nameTextView.setText(game.getTitle());
             priceTextView.setText(game.getGameValue());
 
+
+            return convertView;
+        }
+
+    }
+
+    private class SecondCollectionAdapter extends BaseAdapter {
+
+        private Context mContext;
+        //private Game[] gamesArray;
+        private List<Game> gamesArray;
+
+        public SecondCollectionAdapter(Context context, List<Game> gamesArray){
+            this.mContext = context;
+            this.gamesArray = gamesArray;
+        }
+
+        @Override
+        public int getCount(){
+            return gamesArray.size();
+        }
+
+        @Override
+        public long getItemId(int position){
+            return 0;
+        }
+
+        @Override
+        public Object getItem(int position){
+            return null;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent){
+            // 1
+            final Game game = gameArray[position];
+
+            // 2
+            if (convertView == null) {
+                final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+                convertView = layoutInflater.inflate(R.layout.linearlayout_game2, null);
+            }
+
+            // 3
+            final ImageView imageView = (ImageView)convertView.findViewById(R.id.imageview_cover_art);
+            final TextView nameTextView = (TextView)convertView.findViewById(R.id.textview_game_name);
+            //Adam Bilby
+            final TextView priceTextView = (TextView)convertView.findViewById(R.id.textview_game_value);
+            // 4
+            Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_small_2x/"
+                    +  game.getCoverHash() +  ".jpg").into(imageView);
+
+            nameTextView.setText(game.getTitle());
+
+            if(game.getGameValue() != null)
+            {
+                priceTextView.setText(game.getGameValue());
+            }
+            else
+            {
+                priceTextView.setText("N/A");
+            }
 
             return convertView;
         }

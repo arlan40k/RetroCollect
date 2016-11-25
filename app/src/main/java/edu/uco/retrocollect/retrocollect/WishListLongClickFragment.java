@@ -25,6 +25,9 @@ public class WishListLongClickFragment extends DialogFragment {
 
     SqlWishListHelper sqlWishListHelper;
 
+    private boolean gridBool = true;
+
+
     private String gameId;
     private String  gameTitle,  gameReleaseDate, gamePublisher,
             gameStudio = "", coverHash, gameValue;
@@ -50,6 +53,8 @@ public class WishListLongClickFragment extends DialogFragment {
         gameRating = getArguments().getDouble("gameRating");
         coverHash = getArguments().getString("coverHash");
         gameValue = getArguments().getString("gameValue");
+        gridBool = getArguments().getBoolean("gridBool");
+
 
 
         selectedGame = new Game(gameTitle,gameId,gameReleaseYear,
@@ -142,6 +147,7 @@ public class WishListLongClickFragment extends DialogFragment {
                     Intent refreshWishListIntent = new Intent(getActivity(),
                             WishListActivity.class);
                     getActivity().finish();
+                    refreshWishListIntent.putExtra("gridBool", gridBool);
                     startActivity(refreshWishListIntent);
 
 
