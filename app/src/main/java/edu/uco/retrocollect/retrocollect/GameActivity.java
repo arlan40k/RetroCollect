@@ -1,9 +1,12 @@
 package edu.uco.retrocollect.retrocollect;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,6 +30,7 @@ public class GameActivity extends Activity {
             gameReleaseYearTextView, gameReleaseDateTextView, gameRatingTextView, gameValueTextView;
     private ImageView gameCoverBackgroundImageView, gameCoverImageView;
     private ProgressBar ratingProgressBar;
+    private Button merchantButton;
     private final String dataErrorString = "";
     private final String gameValueErrorString = "N/A";
     private int ratingInteger;
@@ -46,7 +50,14 @@ public class GameActivity extends Activity {
         gameRatingTextView = (TextView) findViewById(R.id.gameRatingTextView);
         gameValueTextView = (TextView) findViewById(R.id.gameValueTextView);
         ratingProgressBar = (ProgressBar) findViewById(R.id.gameRatingProgressBar);
-
+        merchantButton = (Button) findViewById(R.id.merchantButton);
+        merchantButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GameActivity.this, LocalMerchantActivity.class);
+                startActivity(intent);
+            }
+        });
         //gameCoverImageView = (ImageView) findViewById(R.id.gameCoverImageView);
         gameCoverBackgroundImageView = (ImageView) findViewById(R.id.gameCoverBackgroundImageView);
 
