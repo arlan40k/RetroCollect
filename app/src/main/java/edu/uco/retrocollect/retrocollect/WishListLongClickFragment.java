@@ -14,9 +14,9 @@ public class WishListLongClickFragment extends DialogFragment {
 
 
     private String [] str = {"Local Merchant","Online Merchant", "Move to Collection",
-            "Remove from Wish List"};
+            "Remove from Wish List", "share"};
     private boolean local, collection, remove;
-    private boolean online;
+    private boolean online, share;
 
     private String lat = "35.638033";
     private String lng  = "-97.485540";
@@ -64,7 +64,7 @@ public class WishListLongClickFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose");
-        builder.setSingleChoiceItems(str, 4, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(str, 5, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch(which)
@@ -100,6 +100,14 @@ public class WishListLongClickFragment extends DialogFragment {
                         collection = false;
                         local = false;
                         online = false;
+                        break;
+
+                    case 4:
+                        remove = false;
+                        collection = false;
+                        local = false;
+                        online = false;
+                        share =true;
                         break;
 
                     default:

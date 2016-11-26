@@ -14,9 +14,10 @@ import android.view.LayoutInflater;
 public class CollectionLongClickFragment extends DialogFragment {
 
 
-    private String [] str = {"Remove from Collection","Walkthroughs"};
+    private String [] str = {"Remove from Collection","Walkthroughs", "share"};
     private boolean local;
     private boolean online;
+    private boolean share;
 
     private String lat = "35.638033";
     private String lng  = "-97.485540";
@@ -77,7 +78,7 @@ public class CollectionLongClickFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Select Option");
         //builder.setView(inflater.inflate(R.layout.fragment_collection_long_click, null));
-        builder.setSingleChoiceItems(str, 2, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(str, 3, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch(which)
@@ -86,6 +87,7 @@ public class CollectionLongClickFragment extends DialogFragment {
                     case 0:
                         local = true;
                         online = false;
+                        share = false;
                         //Log.d("", "hello");
 
 
@@ -94,6 +96,14 @@ public class CollectionLongClickFragment extends DialogFragment {
                     case 1:
                         online = true;
                         local = false;
+                        share = false;
+
+                        break;
+
+                    case 2:
+                        online = false;
+                        local = false;
+                        share = true;
 
                         break;
 
@@ -132,6 +142,15 @@ public class CollectionLongClickFragment extends DialogFragment {
                     startActivity(browserIntent);
 
                     Log.d("urlIsHere", url);
+
+                }
+                else if (share){
+                    String msg = "Check out this game: " + selectedGame.getTitle();
+                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Check it out");
+                    sharingIntent.putExtra(Intent.EXTRA_TEXT, msg);
+                    startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
                 }
 
