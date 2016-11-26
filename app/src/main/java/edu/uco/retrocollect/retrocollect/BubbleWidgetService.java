@@ -8,13 +8,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.ImageView;
@@ -31,23 +32,40 @@ public class BubbleWidgetService extends Service {
     private static final String TAG = LocalMerchantActivity.class.getSimpleName();
     public static Thread myService;
     public  boolean keepListening = true;
+    private int screenWidth;
+    private int screenHeight;
+    private long pressedTime;
+    private final static long REMOVE_TIME = 3000;
     ActivityManager am;
     ComponentName cn;
     public void onCreate(){
         super.onCreate();
         bubbleImage = new ImageView(this);
 
+        bubbleImage.setVisibility(View.INVISIBLE);
+        bubbleImage.setAlpha((float) .4);
         //Sets our desired bubble image.
         bubbleImage.setImageResource(R.mipmap.ic_launcher);
 
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
 
+        //Get screen dimensions
+        Display display =  wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screenWidth = size.x;
+        screenHeight = size.y;
+
+
         bubbleImage.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                wm.removeView(bubbleImage);
-                keepListening = false;
-                stopSelf();
+
+                    wm.removeView(bubbleImage);
+                    keepListening = false;
+                    stopSelf();
+
+
                 return true;
             }
         });
@@ -55,9 +73,11 @@ public class BubbleWidgetService extends Service {
         bubbleImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), MainActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
+
+
+                    Intent i = new Intent(getBaseContext(), MainActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
             }
         });
 
@@ -69,9 +89,8 @@ public class BubbleWidgetService extends Service {
                 LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
 
-        params.gravity = Gravity.TOP | Gravity.LEFT;
-        params.x = 0;
-        params.y = 100;
+        params.gravity = Gravity.LEFT;
+
 
         //Adds our new icon to the wm
         wm.addView(bubbleImage, params);
@@ -87,18 +106,15 @@ public class BubbleWidgetService extends Service {
 
                @Override
                public boolean onTouch(View v, MotionEvent event) {
-
                    //Removes the bubble image on a long press.
-                   if(System.currentTimeMillis() - touchStartTime > ViewConfiguration.getLongPressTimeout() && initTouchX == event.getX())
-                   {
-                       wm.removeView(bubbleImage);
-                       stopSelf();
-                       return false;
-                   }
+                   pressedTime = System.currentTimeMillis();
 
                    switch(event.getAction())
                    {
                        case MotionEvent.ACTION_DOWN:
+                           pressedTime = (int) System.currentTimeMillis();
+                           bubbleImage.setAlpha((float) 1);
+
                            touchStartTime = System.currentTimeMillis();
                            initX = params.x;
                            initY = params.y;
@@ -106,8 +122,28 @@ public class BubbleWidgetService extends Service {
                            initTouchY = event.getRawY();
                            break;
                        case MotionEvent.ACTION_UP:
+                           event.getRawX();
+                           long cTime = System.currentTimeMillis() - pressedTime;
+                           if(System.currentTimeMillis() - pressedTime > REMOVE_TIME && initX == params.x)
+                           {
+                               wm.removeView(bubbleImage);
+                               stopSelf();
+                               return false;
+                           }
+                           bubbleImage.setAlpha((float) 0.4);
+
+                       //   params.gravity = Gravity.TOP | Gravity.LEFT;
+                       //    params.x = 0;
+
+                           if(params.x <= screenWidth/2)
+                               params.x = -40;
+                           else
+                                params.x = screenWidth - 40;
+                           wm.updateViewLayout(v, params);
+
                            break;
                        case MotionEvent.ACTION_MOVE:
+                           touchStartTime = System.currentTimeMillis();
                            params.x = initX + (int) (event.getRawX() - initTouchX);
                            params.y = initY + (int) (event.getRawY() - initTouchY);
                            wm.updateViewLayout(v, params);
@@ -167,7 +203,7 @@ public class BubbleWidgetService extends Service {
         public void run() {
             while(keepListening){
                 try {
-                    Thread.sleep(4000);
+                    Thread.sleep(1000);
                     cn = am.getRunningTasks(1).get(0).topActivity;
                     Log.d("Current_Activity",  cn.getPackageName());
                     Log.d("Current_Activity",  cn.getClassName());
