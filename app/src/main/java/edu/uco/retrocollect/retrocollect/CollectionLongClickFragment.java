@@ -14,7 +14,7 @@ import android.view.LayoutInflater;
 public class CollectionLongClickFragment extends DialogFragment {
 
 
-    private String [] str = {"Remove from Collection","Walkthroughs", "share"};
+    private String [] str = {"Remove from Collection","Walkthroughs", "Share"};
     private boolean local;
     private boolean online;
     private boolean share;

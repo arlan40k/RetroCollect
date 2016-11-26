@@ -14,7 +14,7 @@ public class WishListLongClickFragment extends DialogFragment {
 
 
     private String [] str = {"Local Merchant","Online Merchant", "Move to Collection",
-            "Remove from Wish List", "share"};
+            "Remove from Wish List", "Ask friend to buy"};
     private boolean local, collection, remove;
     private boolean online, share;
 
@@ -85,6 +85,7 @@ public class WishListLongClickFragment extends DialogFragment {
                         local = false;
                         collection = false;
                         remove = false;
+                        share = false;
 
                         break;
                     case 2:
@@ -92,6 +93,7 @@ public class WishListLongClickFragment extends DialogFragment {
                         local = false;
                         remove = false;
                         online = false;
+                        share = false;
 
                         break;
 
@@ -100,6 +102,7 @@ public class WishListLongClickFragment extends DialogFragment {
                         collection = false;
                         local = false;
                         online = false;
+                        share = false;
                         break;
 
                     case 4:
@@ -168,6 +171,14 @@ public class WishListLongClickFragment extends DialogFragment {
                             WishListActivity.class);
                     getActivity().finish();
                     startActivity(refreshWishListIntent);
+                }
+                else if(share){
+                    String msg = "You wanna be a pal and buy me  " + selectedGame.getTitle() + "?";
+                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Check it out");
+                    sharingIntent.putExtra(Intent.EXTRA_TEXT, msg);
+                    startActivity(Intent.createChooser(sharingIntent, "Share via"));
                 }
 
             }
