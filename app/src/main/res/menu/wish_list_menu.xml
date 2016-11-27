@@ -9,6 +9,10 @@
             android:title="by rating"
             android:onClick="onGroupItemClick"
             />
+        <item android:id="@+id/sortValue"
+            android:title="by Value"
+            android:onClick="onGroupItemClick"
+            />
         <item android:id="@+id/subMenu"
             android:title="View type">
             <menu>
