@@ -36,7 +36,6 @@
                 android:scaleType="centerCrop" />
 
             <TextView
-
                 android:id="@+id/gameTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,19 +44,31 @@
                 android:paddingBottom="@dimen/mediumBottomPadding"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/largeTextSize" />
-            <RatingBar
-                android:id="@+id/gameUserRating"
+
+            <TextView
+                android:id="@+id/gameUserRatingLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/gameTitleTextView"
+                android:paddingBottom="@dimen/smallBottomPadding"
+                android:text="Your Rating: "
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/mediumTextSize" />
+
+            <RatingBar
+                android:id="@+id/gameUserRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameUserRatingLabel"
                 android:numStars="5"
                 android:stepSize="0.5"
-                android:rating="2.0" />
+                android:rating="2.5" />
+
             <TextView
                 android:id="@+id/gameValueLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/gameUserRating"
+                android:layout_below="@id/gameUserRatingBar"
                 android:paddingBottom="@dimen/smallBottomPadding"
                 android:text="Value: "
                 android:textColor="@color/primary_text"
@@ -68,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@id/gameUserRating"
+                android:layout_below="@id/gameUserRatingBar"
                 android:paddingBottom="@dimen/smallBottomPadding"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/mediumTextSize" />

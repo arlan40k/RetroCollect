@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class GameActivity extends Activity {
             gameReleaseYearTextView, gameReleaseDateTextView, gameRatingTextView, gameValueTextView;
     private ImageView gameCoverBackgroundImageView, gameCoverImageView;
     private ProgressBar ratingProgressBar;
+    private RatingBar gameUserRatingBar;
     private Button merchantsButton, gamefaqsButton;
     private String title;
     private final String dataErrorString = "";
@@ -43,7 +45,6 @@ public class GameActivity extends Activity {
 
         setContentView(R.layout.activity_game);
 
-
         gameTitleTextView = (TextView) findViewById(R.id.gameTitleTextView);
         gamePublisherTextView = (TextView) findViewById(R.id.gamePublisherTextView);
         gameStudioTextView = (TextView) findViewById(R.id.gameStudioTextView);
@@ -52,6 +53,12 @@ public class GameActivity extends Activity {
         gameRatingTextView = (TextView) findViewById(R.id.gameRatingTextView);
         gameValueTextView = (TextView) findViewById(R.id.gameValueTextView);
         ratingProgressBar = (ProgressBar) findViewById(R.id.gameRatingProgressBar);
+        gameUserRatingBar = (RatingBar) findViewById(R.id.gameUserRatingBar);
+//        double minRating=0.5;
+//        double maxRating=5.0;
+//        double randRating;
+//        randRating = minRating + (Math.random() * ((maxRating - minRating) + 1));
+//        gameUserRatingBar.setRating((float)randRating);
         merchantsButton = (Button) findViewById(R.id.merchantsButton);
         merchantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
