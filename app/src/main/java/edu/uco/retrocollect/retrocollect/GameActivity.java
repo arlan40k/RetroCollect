@@ -2,6 +2,7 @@ package edu.uco.retrocollect.retrocollect;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +31,8 @@ public class GameActivity extends Activity {
             gameReleaseYearTextView, gameReleaseDateTextView, gameRatingTextView, gameValueTextView;
     private ImageView gameCoverBackgroundImageView, gameCoverImageView;
     private ProgressBar ratingProgressBar;
-    private Button merchantButton;
+    private Button merchantsButton, gamefaqsButton;
+    private String title;
     private final String dataErrorString = "";
     private final String gameValueErrorString = "N/A";
     private int ratingInteger;
@@ -50,23 +52,35 @@ public class GameActivity extends Activity {
         gameRatingTextView = (TextView) findViewById(R.id.gameRatingTextView);
         gameValueTextView = (TextView) findViewById(R.id.gameValueTextView);
         ratingProgressBar = (ProgressBar) findViewById(R.id.gameRatingProgressBar);
-        merchantButton = (Button) findViewById(R.id.merchantButton);
-        merchantButton.setOnClickListener(new View.OnClickListener() {
+        merchantsButton = (Button) findViewById(R.id.merchantsButton);
+        merchantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GameActivity.this, LocalMerchantActivity.class);
                 startActivity(intent);
             }
         });
+        gamefaqsButton = (Button) findViewById(R.id.gamefaqsButton);
+
         //gameCoverImageView = (ImageView) findViewById(R.id.gameCoverImageView);
         gameCoverBackgroundImageView = (ImageView) findViewById(R.id.gameCoverBackgroundImageView);
 
         bundle = getIntent().getExtras();
         if (bundle != null) {
 
-            String title = bundle.getString("gameTitle");
+            title = bundle.getString("gameTitle");
+
             if (title != null) {
                 gameTitleTextView.setText(title);
+                gamefaqsButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String url = "http://www.gamefaqs.com/search?game="+ title;
+                        Uri url2 = Uri.parse(url);
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, url2);
+                        startActivity(browserIntent);
+                    }
+                });
             } else {
                 gameTitleTextView.setText(dataErrorString);
             }
@@ -248,7 +262,7 @@ public class GameActivity extends Activity {
 
                 for(int i = 0; i < gameArrayList.size(); i++) {
                     if(i>0){
-                        pubName = pubName +", "+ gameArrayList.get(i);
+                        pubName = pubName +", \n"+ gameArrayList.get(i);
                     }
                     else{
                         pubName = gameArrayList.get(i);
@@ -337,7 +351,7 @@ public class GameActivity extends Activity {
 
                 for(int i = 0; i < gameArrayList.size(); i++) {
                     if(i>0){
-                        pubName = pubName +", "+ gameArrayList.get(i);
+                        pubName = pubName + ", \n" + gameArrayList.get(i);
                     }
                     else{
                         pubName = gameArrayList.get(i);

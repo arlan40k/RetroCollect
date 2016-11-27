@@ -16,9 +16,6 @@
         diagonal:diagonal_angle="0"
         diagonal:diagonal_gravity="right|bottom">
 
-
-        <!-- YOUR CONTENT -->
-        <!-- For DiagonalLayout android:layout_height="match_parent" -->
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/activity_game"
@@ -35,7 +32,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
-
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop" />
 
@@ -44,7 +40,6 @@
                 android:id="@+id/gameTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/gameCoverBackgroundImageView"
                 android:paddingBottom="@dimen/mediumBottomPadding"
@@ -66,7 +61,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/gameTitleTextView"
                 android:paddingBottom="@dimen/smallBottomPadding"
                 android:textColor="@color/primary_text"
@@ -87,7 +81,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/gameValueLabel"
                 android:paddingBottom="@dimen/smallBottomPadding"
                 android:textColor="@color/primary_text"
@@ -108,7 +101,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/gameReleaseYearLabel"
                 android:paddingBottom="@dimen/smallBottomPadding"
                 android:textColor="@color/primary_text"
@@ -136,43 +128,57 @@
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/smallTextSize" />
 
-            <TextView
-                android:id="@+id/gamePublisherTextView"
+            <ScrollView
+                android:id="@+id/gamePublisherScrollView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/gameRatingProgressBar"
-                android:paddingBottom="@dimen/smallBottomPadding"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/smallTextSize" />
+                android:layout_below="@id/gameRatingProgressBar">
+
+                <TextView
+                    android:id="@+id/gamePublisherTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/smallBottomPadding"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/smallTextSize" />
+            </ScrollView>
+
 
             <TextView
                 android:id="@+id/gameStudioLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/gamePublisherLabel"
+                android:layout_below="@id/gamePublisherScrollView"
                 android:paddingBottom="@dimen/smallBottomPadding"
                 android:text="Studio: "
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/smallTextSize" />
 
-            <TextView
-                android:id="@+id/gameStudioTextView"
+            <ScrollView
+                android:id="@+id/gameStudioScrollView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/gamePublisherLabel"
-                android:paddingBottom="@dimen/smallBottomPadding"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/smallTextSize" />
+                android:layout_below="@id/gamePublisherScrollView"
+                android:layout_centerHorizontal="true"
+                >
+
+                <TextView
+                    android:id="@+id/gameStudioTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/smallBottomPadding"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/smallTextSize" />
+
+            </ScrollView>
 
             <TextView
                 android:id="@+id/gameReleaseDateLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/gameStudioLabel"
+                android:layout_below="@id/gameStudioScrollView"
                 android:paddingBottom="@dimen/smallBottomPadding"
                 android:text="Release Date: "
                 android:textColor="@color/primary_text"
@@ -183,11 +189,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/gameStudioLabel"
+                android:layout_below="@id/gameStudioScrollView"
                 android:paddingBottom="@dimen/smallBottomPadding"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/smallTextSize" />
+
             <!--<ImageView
                 android:id="@+id/gameCoverImageView"
                 android:layout_width="wrap_content"
@@ -197,14 +203,26 @@
                 android:layout_centerHorizontal="true"
                 android:scaleType="fitXY"
                 android:adjustViewBounds="true" />-->
-            <Button
-                android:id="@+id/merchantButton"
-                android:layout_below="@id/gameReleaseDateLabel"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Merchants"/>
+                android:layout_height="match_parent"
+                android:layout_below="@id/gameReleaseDateTextView"
+                android:layout_centerHorizontal="true">
 
+                <Button
+                    android:id="@+id/merchantsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Merchants" />
+
+                <Button
+                    android:id="@+id/gamefaqsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/merchantsButton"
+                    android:text="gamefaqs" />
+
+            </RelativeLayout>
         </RelativeLayout>
     </com.github.florent37.diagonallayout.DiagonalLayout>
-
 </ScrollView>
