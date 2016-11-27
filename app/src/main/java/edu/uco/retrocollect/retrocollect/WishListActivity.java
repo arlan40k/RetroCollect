@@ -260,7 +260,7 @@ public class WishListActivity extends Activity {
                 }
 
             }
-        else if (item.getTitle().equals("by rating")){
+            else if (item.getTitle().equals("by rating")){
 
 
                 Collections.sort(gameArrayList, new Comparator<Game>() {
@@ -272,6 +272,7 @@ public class WishListActivity extends Activity {
                     }
 
                 });
+
                 Collections.reverse(gameArrayList);
 
                 gameArray = new Game[gameArrayList.size()];
@@ -298,6 +299,46 @@ public class WishListActivity extends Activity {
                 }
 
             }
+            else if (item.getTitle().equals("by Value")){
+
+
+                Collections.sort(gameArrayList, new Comparator<Game>() {
+
+                    public int compare(Game o1, Game o2) {
+                        Double o1Rate = Double.parseDouble(o1.getGameValue());
+                        Double o2Rate = Double.parseDouble(o2.getGameValue());
+                        return o1Rate.compareTo(o2Rate);
+                    }
+
+                });
+
+                Collections.reverse(gameArrayList);
+
+                gameArray = new Game[gameArrayList.size()];
+                gameArray = gameArrayList.toArray(gameArray);
+
+                final ArrayList<String> list = new ArrayList<String>();
+                for (int i = 0; i < gameArray.length; ++i) {
+                    list.add(gameArray[i].getTitle());
+                }
+
+                // final WishListActivity.MyArrayAdapter adapter = new WishListActivity.MyArrayAdapter(this,
+                //       android.R.layout.simple_list_item_1, list);
+
+                if (!gridBool){
+                    gamesList.setNumColumns(1);
+                    final SecondCollectionAdapter adapter2 = new SecondCollectionAdapter(
+                            getApplicationContext(), gameArrayList);
+                    gamesList.setAdapter(adapter2);
+                }
+                else{
+                    gamesList.setNumColumns(3);
+                    final CollectionAdapter adapter = new CollectionAdapter(getApplicationContext(), gameArrayList);
+                    gamesList.setAdapter(adapter);
+                }
+
+            }
+
             else if(item.getTitle().equals("List View")){
                 gamesList.setNumColumns(1);
                 final SecondCollectionAdapter adapter2 = new SecondCollectionAdapter(
