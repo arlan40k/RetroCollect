@@ -1,7 +1,10 @@
 package edu.uco.retrocollect.retrocollect;
 
 
-public class Game {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Game implements Parcelable{
     private String gameTitle;
     private String gameId;
     private double gameReleaseYear;
@@ -11,6 +14,60 @@ public class Game {
     private double gameRating;
     private String coverHash; //cover hash added -HASEEB
     private String gameValue;
+    private float gameUserRating;
+
+    protected Game(Parcel in) {
+        gameTitle = in.readString();
+        gameId = in.readString();
+        gameReleaseYear = in.readDouble();
+        gameReleaseDate = in.readString();
+        gamePublisher = in.readString();
+        gameStudio = in.readString();
+        gameRating = in.readDouble();
+        coverHash = in.readString();
+        gameValue = in.readString();
+        gameUserRating = in.readFloat();
+    }
+
+    public static final Creator<Game> CREATOR = new Creator<Game>() {
+        @Override
+        public Game createFromParcel(Parcel in) {
+            return new Game(in);
+        }
+
+        @Override
+        public Game[] newArray(int size) {
+            return new Game[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(gameTitle);
+        dest.writeString(gameId);
+        dest.writeDouble(gameReleaseYear);
+        dest.writeString(gameReleaseDate);
+        dest.writeString(gamePublisher);
+        dest.writeString(gameStudio);
+        dest.writeDouble(gameRating);
+        dest.writeString(coverHash);
+        dest.writeString(gameValue);
+        dest.writeFloat(gameUserRating);
+    }
+
+    public float getGameUserRating() {
+        return gameUserRating;
+    }
+
+    public void setGameUserRating(float gameUserRating) {
+        this.gameUserRating = gameUserRating;
+    }
+
     //Added by Adam Bilby
     //Static Enumerations of Various API Features
     static enum ESRBRatings

@@ -28,6 +28,7 @@ public class GameActivity extends Activity {
 
     private final static String TAG = "GameActivity";
     Bundle bundle;
+    Game myGame;
     private TextView gameTitleTextView, gamePublisherTextView, gameStudioTextView,
             gameReleaseYearTextView, gameReleaseDateTextView, gameRatingTextView, gameValueTextView;
     private ImageView gameCoverBackgroundImageView, gameCoverImageView;
@@ -35,6 +36,7 @@ public class GameActivity extends Activity {
     private RatingBar gameUserRatingBar;
     private Button merchantsButton, gamefaqsButton;
     private String title;
+    private float gameUserRating;
     private final String dataErrorString = "";
     private final String gameValueErrorString = "N/A";
     private int ratingInteger;
@@ -54,11 +56,7 @@ public class GameActivity extends Activity {
         gameValueTextView = (TextView) findViewById(R.id.gameValueTextView);
         ratingProgressBar = (ProgressBar) findViewById(R.id.gameRatingProgressBar);
         gameUserRatingBar = (RatingBar) findViewById(R.id.gameUserRatingBar);
-//        double minRating=0.5;
-//        double maxRating=5.0;
-//        double randRating;
-//        randRating = minRating + (Math.random() * ((maxRating - minRating) + 1));
-//        gameUserRatingBar.setRating((float)randRating);
+
         merchantsButton = (Button) findViewById(R.id.merchantsButton);
         merchantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +74,16 @@ public class GameActivity extends Activity {
         if (bundle != null) {
 
             title = bundle.getString("gameTitle");
-
+            myGame = bundle.getParcelable("temporaryGame");
+            gameUserRating = myGame.getGameUserRating();
+            Log.d("gameUserRating", Float.toString(gameUserRating));
+            gameUserRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    myGame.setGameUserRating(rating);
+                }
+            });
+            gameUserRatingBar.setRating(gameUserRating);
             if (title != null) {
                 gameTitleTextView.setText(title);
                 gamefaqsButton.setOnClickListener(new View.OnClickListener() {

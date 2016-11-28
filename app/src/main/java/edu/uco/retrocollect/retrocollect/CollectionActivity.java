@@ -133,7 +133,9 @@ public class CollectionActivity extends Activity {
                                     long id) {
 
                 Intent intent = new Intent(CollectionActivity.this, GameActivity.class);
+
                 temporaryGame = gameArray[position];
+                intent.putExtra("temporaryGame", temporaryGame);
 
                 gameTitle = temporaryGame.getTitle();
                 intent.putExtra("gameTitle", gameTitle);
