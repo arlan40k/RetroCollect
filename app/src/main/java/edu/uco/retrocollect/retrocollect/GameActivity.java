@@ -21,8 +21,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import static edu.uco.retrocollect.retrocollect.R.id.gameValueTextView;
-
 public class GameActivity extends Activity {
 
     private final static String TAG = "GameActivity";
@@ -265,7 +263,7 @@ public class GameActivity extends Activity {
                         pubName = pubName +", \n"+ gameArrayList.get(i);
                     }
                     else{
-                        pubName = gameArrayList.get(i);
+                        pubName = "\n"+ gameArrayList.get(i);
                     }
                 }
 
@@ -354,7 +352,7 @@ public class GameActivity extends Activity {
                         pubName = pubName + ", \n" + gameArrayList.get(i);
                     }
                     else{
-                        pubName = gameArrayList.get(i);
+                        pubName = "\n"+gameArrayList.get(i);
                     }
                 }
 
