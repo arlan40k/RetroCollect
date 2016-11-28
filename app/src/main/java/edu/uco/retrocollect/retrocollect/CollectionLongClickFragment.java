@@ -71,7 +71,7 @@ public class CollectionLongClickFragment extends DialogFragment {
         selectedGame = new Game(gameTitle,gameId,gameReleaseYear,
                 gameReleaseDate,gamePublisher,gameStudio,gameRating, gameCoverHash);
 
-
+        //selectedGame.setGameUserRating((float) 1.5);
 
         //gameIdToRemove = getArguments().getString("gameIdToRemove");
 

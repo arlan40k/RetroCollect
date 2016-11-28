@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +26,15 @@ public class GameActivity extends Activity {
 
     private final static String TAG = "GameActivity";
     Bundle bundle;
+    Game myGame;
     private TextView gameTitleTextView, gamePublisherTextView, gameStudioTextView,
             gameReleaseYearTextView, gameReleaseDateTextView, gameRatingTextView, gameValueTextView;
     private ImageView gameCoverBackgroundImageView, gameCoverImageView;
     private ProgressBar ratingProgressBar;
+    private RatingBar gameUserRatingBar;
     private Button merchantsButton, gamefaqsButton;
     private String title;
+    private float gameUserRating;
     private final String dataErrorString = "";
     private final String gameValueErrorString = "N/A";
     private int ratingInteger;
@@ -41,7 +45,6 @@ public class GameActivity extends Activity {
 
         setContentView(R.layout.activity_game);
 
-
         gameTitleTextView = (TextView) findViewById(R.id.gameTitleTextView);
         gamePublisherTextView = (TextView) findViewById(R.id.gamePublisherTextView);
         gameStudioTextView = (TextView) findViewById(R.id.gameStudioTextView);
@@ -50,6 +53,8 @@ public class GameActivity extends Activity {
         gameRatingTextView = (TextView) findViewById(R.id.gameRatingTextView);
         gameValueTextView = (TextView) findViewById(R.id.gameValueTextView);
         ratingProgressBar = (ProgressBar) findViewById(R.id.gameRatingProgressBar);
+        gameUserRatingBar = (RatingBar) findViewById(R.id.gameUserRatingBar);
+
         merchantsButton = (Button) findViewById(R.id.merchantsButton);
         merchantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +72,16 @@ public class GameActivity extends Activity {
         if (bundle != null) {
 
             title = bundle.getString("gameTitle");
-
+            myGame = bundle.getParcelable("temporaryGame");
+            gameUserRating = myGame.getGameUserRating();
+            Log.d("gameUserRating", Float.toString(gameUserRating));
+            gameUserRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    myGame.setGameUserRating(rating);
+                }
+            });
+            gameUserRatingBar.setRating(gameUserRating);
             if (title != null) {
                 gameTitleTextView.setText(title);
                 gamefaqsButton.setOnClickListener(new View.OnClickListener() {
