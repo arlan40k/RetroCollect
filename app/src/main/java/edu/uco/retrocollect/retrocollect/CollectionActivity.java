@@ -92,9 +92,9 @@ public class CollectionActivity extends Activity {
         //totalPrice = Double.toString(actualPrice);
         if(!actualPrice.equals("N/A")) {
             totalPrice = String.format("%.2f", actualPrice);
-            tickerView.setText("Collection Value: " + totalPrice);
+            tickerView.setText("Collection Value: $" + totalPrice);
         }else{
-            tickerView.setText("Collection Value: " + actualPrice);
+            tickerView.setText("Collection Value: $" + actualPrice);
         }
         gamesList = (GridView) findViewById(R.id.gamesList);
 
@@ -485,11 +485,11 @@ public class CollectionActivity extends Activity {
 
             if(game.getGameValue() != null)
             {
-                priceTextView.setText(game.getGameValue());
+                priceTextView.setText("$" + game.getGameValue());
             }
             else
             {
-                priceTextView.setText("N/A");
+                priceTextView.setText("$N/A");
             }
 
             return convertView;

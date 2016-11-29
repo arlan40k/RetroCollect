@@ -73,15 +73,20 @@ public class GameActivity extends Activity {
 
             title = bundle.getString("gameTitle");
             myGame = bundle.getParcelable("temporaryGame");
-            gameUserRating = myGame.getGameUserRating();
-            Log.d("gameUserRating", Float.toString(gameUserRating));
-            gameUserRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                @Override
-                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                    myGame.setGameUserRating(rating);
-                }
-            });
-            gameUserRatingBar.setRating(gameUserRating);
+            if (myGame != null){
+                gameUserRating = myGame.getGameUserRating();
+                Log.d("gameUserRating", Float.toString(gameUserRating));
+                gameUserRatingBar.setRating(gameUserRating);
+                gameUserRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                        myGame.setGameUserRating(rating);
+                    }
+                });
+
+
+            }
+
             if (title != null) {
                 gameTitleTextView.setText(title);
                 gamefaqsButton.setOnClickListener(new View.OnClickListener() {

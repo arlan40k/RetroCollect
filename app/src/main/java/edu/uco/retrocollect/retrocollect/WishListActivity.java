@@ -94,9 +94,9 @@ public class WishListActivity extends Activity {
         //totalPrice = Double.toString(actualPrice);
         if(!actualPrice.equals("N/A")) {
             totalPrice = String.format("%.2f", actualPrice);
-            tickerView.setText("Collection Value: " + totalPrice);
+            tickerView.setText("Collection Value: $" + totalPrice);
         }else{
-            tickerView.setText("Collection Value: " + actualPrice);
+            tickerView.setText("Collection Value: $" + actualPrice);
         }
         gamesList = (GridView) findViewById(R.id.gamesList);
 
@@ -420,7 +420,7 @@ public class WishListActivity extends Activity {
                     +  game.getCoverHash() +  ".jpg").into(imageView);
 
             nameTextView.setText(game.getTitle());
-            priceTextView.setText(game.getGameValue());
+            priceTextView.setText("$" + game.getGameValue());
 
 
             return convertView;
