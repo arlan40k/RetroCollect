@@ -33,7 +33,7 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
             GAME_PUBLISHER, GAME_STUDIO, GAME_RATING, GAME_USER_RATING, COVER_HASH, GAME_VALUE};
 
     // Database Version
-    private static final int DATABASE_VERSION = 64;
+    private static final int DATABASE_VERSION = 65;
     // Database Name
     private static final String DATABASE_NAME = "WishListDB";
 
