@@ -27,13 +27,16 @@ public class SqlGameHelper extends SQLiteOpenHelper {
     private static final String GAME_PUBLISHER = "game_publisher";
     private static final String GAME_STUDIO= "game_studio";
     private static final String GAME_RATING = "game_rating";
+    private static final String GAME_USER_RATING = "game_user_rating"; //game_user_rating added - Nicholas Clemmons
     private static final String COVER_HASH = "cover_hash";
     private static final String GAME_VALUE = "game_value";
     private static final String[] COLUMNS = {KEY_ID,KEY_TITLE, GAME_RELEASE_YEAR, GAME_RELEASE_DATE,
-            GAME_PUBLISHER, GAME_STUDIO, GAME_RATING, COVER_HASH, GAME_VALUE};
+            GAME_PUBLISHER, GAME_STUDIO, GAME_RATING, GAME_USER_RATING, COVER_HASH, GAME_VALUE};//game_user_rating added - Nicholas Clemmons
 
     // Database Version
-    private static final int DATABASE_VERSION = 5;
+    //Changed from '5' to '6' - Nicholas Clemmons
+    private static final int DATABASE_VERSION = 6;
+
     // Database Name
     private static final String DATABASE_NAME = "GameDB";
 
@@ -51,9 +54,10 @@ public class SqlGameHelper extends SQLiteOpenHelper {
                 "game_publisher    TEXT," +
                 "game_studio       TEXT," +
                 "game_rating       TEXT," +
+                "game_user_rating  TEXT," +
                 "cover_hash        TEXT," +
                 "game_value        TEXT)";
-
+        //game_user_rating added - Nicholas Clemmons
         //Create Database
         db.execSQL(CREATE_GAME_TABLE);
         Log.d("create table", db.toString() );
@@ -84,6 +88,7 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         values.put(GAME_PUBLISHER, game.getPublisher()); // get publisher
         values.put(GAME_STUDIO, game.getStudio()); // get publisher
         values.put(GAME_RATING, game.getRating()); // get publisher
+        values.put(GAME_USER_RATING, game.getGameUserRating());//getGameUserRating - Nicholas Clemmons
         values.put(COVER_HASH, game.getCoverHash()); //-HASEEB
         values.put(GAME_VALUE, game.getGameValue());
         Log.d("putHash", game.getCoverHash() + " ");
@@ -124,9 +129,20 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         String gameReleaseDate = cursor.getString(3);
         String gamePublisher = cursor.getString(4);
         String gameStudio = cursor.getString(5);
-        double gameRating = Double.parseDouble(cursor.getString(6));
-        String coverHash = cursor.getString(7);
-        Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher, gameStudio, gameRating, coverHash);
+        double gameRating = Double.parseDouble(cursor.getString(6)); //
+        float gameUserRating = Float.parseFloat(cursor.getString(7)); //gameUserRating added and values increased- Nicholas Clemmons
+        String coverHash = cursor.getString(8); //
+        String gameValue = cursor.getString(9);
+        Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
+                gameStudio, gameRating, gameUserRating, coverHash, gameValue);//gameUserRating and gameValue added and values increased- Nicholas Clemmons
+        if(gameValue != null)
+        {
+            game.setGameValue(gameValue);
+        }
+        else
+        {
+            game.setGameValue("N/A");
+        }
         //log
         Log.d("getGame("+title+")", game.toString());
 
@@ -152,7 +168,7 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         // 3. if we got results get the first one
         if (cursor != null)
             cursor.moveToFirst();
-//aa
+
         // 4. build book object
 
         String gameId = cursor.getString(0);
@@ -162,9 +178,11 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         String gamePublisher = cursor.getString(4);
         String gameStudio = cursor.getString(5);
         double gameRating = Double.parseDouble(cursor.getString(6));
-        String coverHash = cursor.getString(7);
-        String gameValue = cursor.getString(8);
-        Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher, gameStudio, gameRating, coverHash);
+        float gameUserRating = Float.parseFloat(cursor.getString(7)); //gameUserRating added and values increased- Nicholas Clemmons
+        String coverHash = cursor.getString(8);
+        String gameValue = cursor.getString(9);
+        Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
+                gameStudio, gameRating, gameUserRating, coverHash, gameValue);//gameUserRating and gameValue added and values increased- Nicholas Clemmons
         if(gameValue != null)
         {
             game.setGameValue(gameValue);
@@ -202,9 +220,11 @@ public class SqlGameHelper extends SQLiteOpenHelper {
                 String gamePublisher = cursor.getString(4);
                 String gameStudio = cursor.getString(5);
                 double gameRating = Double.parseDouble(cursor.getString(6));
-                String coverHash = cursor.getString(7);
-                String gameValue = cursor.getString(8);
-                game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher, gameStudio, gameRating, coverHash);
+                float gameUserRating = Float.parseFloat(cursor.getString(7)); //gameUserRating added and values increased- Nicholas Clemmons
+                String coverHash = cursor.getString(8);
+                String gameValue = cursor.getString(9);
+                game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
+                        gameStudio, gameRating, gameUserRating, coverHash, gameValue);//gameUserRating and gameValue added and values increased- Nicholas Clemmons
                 Log.d("titlesql", gameTitle +" ");
                 Log.d("gameIdsql", gameId+ " ");
                 Log.d("coverHashSql", coverHash + " ");
@@ -221,7 +241,6 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         }
 
         Log.d("getAllBooks()", games.toString());
-
 
         return games;
     }
@@ -240,6 +259,7 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         values.put(GAME_PUBLISHER, game.getPublisher()); // get publisher
         values.put(GAME_STUDIO, game.getStudio()); // get publisher
         values.put(GAME_RATING, game.getRating()); // get publisher
+        values.put(GAME_USER_RATING, game.getGameUserRating());//getGameUserRating - Nicholas Clemmons
         values.put(COVER_HASH, game.getCoverHash()); //-HASEEB
         values.put(GAME_VALUE, game.getGameValue());
         // 3. updating row

@@ -105,7 +105,8 @@ public class Game implements Parcelable{
         this.gameReleaseDate = gameReleaseDate;
     }
 
-    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate, String gamePublisher) {
+    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate,
+                String gamePublisher) {
         this.gameTitle = gameTitle;
         this.gameId = gameId;
         this.gameReleaseYear = gameReleaseYear;
@@ -113,7 +114,8 @@ public class Game implements Parcelable{
         this.gamePublisher = gamePublisher;
     }
 
-    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate, String gamePublisher, String gameStudio) {
+    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate,
+                String gamePublisher, String gameStudio) {
         this.gameTitle = gameTitle;
         this.gameId = gameId;
         this.gameReleaseYear = gameReleaseYear;
@@ -122,7 +124,8 @@ public class Game implements Parcelable{
         this.gameStudio = gameStudio;
     }
 
-    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate, String gamePublisher, String gameStudio, double gameRating) {
+    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate,
+                String gamePublisher, String gameStudio, double gameRating) {
         this.gameTitle = gameTitle;
         this.gameId = gameId;
         this.gameReleaseYear = gameReleaseYear;
@@ -144,7 +147,46 @@ public class Game implements Parcelable{
         this.gameRating = gameRating;
         this.coverHash = coverHash;
     }
+    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate,
+                String gamePublisher, String gameStudio, double gameRating, float gameUserRating) {
+        this.gameTitle = gameTitle;
+        this.gameId = gameId;
+        this.gameReleaseYear = gameReleaseYear;
+        this.gameReleaseDate = gameReleaseDate;
+        this.gamePublisher = gamePublisher;
+        this.gameStudio = gameStudio;
+        this.gameRating = gameRating;
+        this.gameUserRating = gameUserRating;
+    }
 
+    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate,
+                String gamePublisher, String gameStudio, double gameRating, float gameUserRating,
+                String coverHash) {
+        this.gameTitle = gameTitle;
+        this.gameId = gameId;
+        this.gameReleaseYear = gameReleaseYear;
+        this.gameReleaseDate = gameReleaseDate;
+        this.gamePublisher = gamePublisher;
+        this.gameStudio = gameStudio;
+        this.gameRating = gameRating;
+        this.coverHash = coverHash;
+        this.gameUserRating = gameUserRating;
+    }
+
+    public Game(String gameTitle, String gameId, double gameReleaseYear, String gameReleaseDate,
+                String gamePublisher, String gameStudio, double gameRating, float gameUserRating,
+                String coverHash, String gameValue ) {
+        this.gameTitle = gameTitle;
+        this.gameId = gameId;
+        this.gameReleaseYear = gameReleaseYear;
+        this.gameReleaseDate = gameReleaseDate;
+        this.gamePublisher = gamePublisher;
+        this.gameStudio = gameStudio;
+        this.gameRating = gameRating;
+        this.coverHash = coverHash;
+        this.gameValue = gameValue;
+        this.gameUserRating = gameUserRating;
+    }
     @Override
     public String toString() {
         return gameTitle;
