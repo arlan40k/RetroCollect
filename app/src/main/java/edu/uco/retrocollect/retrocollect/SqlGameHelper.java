@@ -134,7 +134,7 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         String coverHash = cursor.getString(8); //
         String gameValue = cursor.getString(9);
         Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
-                gameStudio, gameRating, gameUserRating, coverHash, gameValue);//gameUserRating and gameValue added and values increased- Nicholas Clemmons
+                gameStudio, gameRating, gameUserRating, coverHash);//gameUserRating and gameValue added and values increased- Nicholas Clemmons
         if(gameValue != null)
         {
             game.setGameValue(gameValue);
@@ -182,7 +182,7 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         String coverHash = cursor.getString(8);
         String gameValue = cursor.getString(9);
         Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
-                gameStudio, gameRating, gameUserRating, coverHash, gameValue);//gameUserRating and gameValue added and values increased- Nicholas Clemmons
+                gameStudio, gameRating, gameUserRating, coverHash);//gameUserRating and gameValue added and values increased- Nicholas Clemmons
         if(gameValue != null)
         {
             game.setGameValue(gameValue);
@@ -224,7 +224,7 @@ public class SqlGameHelper extends SQLiteOpenHelper {
                 String coverHash = cursor.getString(8);
                 String gameValue = cursor.getString(9);
                 game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
-                        gameStudio, gameRating, gameUserRating, coverHash, gameValue);//gameUserRating and gameValue added and values increased- Nicholas Clemmons
+                        gameStudio, gameRating, gameUserRating, coverHash);//gameUserRating and gameValue added and values increased- Nicholas Clemmons
                 Log.d("titlesql", gameTitle +" ");
                 Log.d("gameIdsql", gameId+ " ");
                 Log.d("coverHashSql", coverHash + " ");

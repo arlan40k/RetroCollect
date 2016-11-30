@@ -32,16 +32,20 @@ public class GameActivity extends Activity {
     private ImageView gameCoverBackgroundImageView, gameCoverImageView;
     private ProgressBar ratingProgressBar;
     private RatingBar gameUserRatingBar;
-    private Button merchantsButton, gamefaqsButton;
+    private Button merchantsButton, gamefaqsButton, ratingButton;
     private String title;
     private float gameUserRating;
     private final String dataErrorString = "";
     private final String gameValueErrorString = "N/A";
     private int ratingInteger;
 
+    SqlWishListHelper sqlWishListHelper = new SqlWishListHelper(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //SqlWishListHelper sqlWishListHelper = new SqlWishListHelper(this);
 
         setContentView(R.layout.activity_game);
 
@@ -64,6 +68,7 @@ public class GameActivity extends Activity {
             }
         });
         gamefaqsButton = (Button) findViewById(R.id.gamefaqsButton);
+        ratingButton = (Button) findViewById(R.id.ratingSaveButton);
 
         //gameCoverImageView = (ImageView) findViewById(R.id.gameCoverImageView);
         gameCoverBackgroundImageView = (ImageView) findViewById(R.id.gameCoverBackgroundImageView);
@@ -72,7 +77,9 @@ public class GameActivity extends Activity {
         if (bundle != null) {
 
             title = bundle.getString("gameTitle");
-            myGame = bundle.getParcelable("temporaryGame");
+           // myGame = bundle.getParcelable("temporaryGame");
+            myGame = sqlWishListHelper.getGame(title);
+
             if (myGame != null){
                 gameUserRating = myGame.getGameUserRating();
                 Log.d("gameUserRating", Float.toString(gameUserRating));
@@ -80,7 +87,11 @@ public class GameActivity extends Activity {
                 gameUserRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                     @Override
                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                        myGame.setGameUserRating(rating);
+                       // myGame.setGameUserRating(rating);
+                       // sqlWishListHelper.updateGame(myGame);
+                       // Toast.makeText(getApplicationContext(), "HEY", Toast.LENGTH_SHORT).show();
+                       // Log.d("intoWishDB", Float.toString(rating));
+
                     }
                 });
 
@@ -101,7 +112,7 @@ public class GameActivity extends Activity {
             } else {
                 gameTitleTextView.setText(dataErrorString);
             }
-            String value = bundle.getString("gameValue");
+            String value = myGame.getGameValue(); //bundle.getString("gameValue");
             if (value != null) {
                 gameValueTextView.setText("$"+ value);
             } else {
@@ -181,6 +192,38 @@ public class GameActivity extends Activity {
             }
 
         }
+
+        //put button here
+        ratingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float rating1 = gameUserRatingBar.getRating();
+                /*
+                String id = " ";
+                if(bundle!=null){
+                    id = bundle.getString("gameId")+ " ";
+                }
+                */
+                String title;
+                title =  bundle.getString("gameTitle");
+                //Log.d("intoWish", id);
+
+                
+
+                //String stringRat = Float.toString(myGame.getGameUserRating()) + " ";
+                //Log.d("intoWis", stringRat);
+
+                if(myGame !=  null){
+                    myGame.setGameUserRating(rating1);
+                    sqlWishListHelper.updateGame(myGame);
+                    Log.d("intoWi", "did we make it this far?");
+                    //sqlWishListHelper.addGame(myGame);
+
+                }
+
+                Log.d("intoWishDB", Float.toString(rating1));
+            }
+        });
     }
     class LoadGameRatingValueTask extends AsyncTask<Integer, Integer, Void> {
 

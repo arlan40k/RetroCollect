@@ -26,13 +26,14 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
     private static final String GAME_PUBLISHER = "game_publisher";
     private static final String GAME_STUDIO= "game_studio";
     private static final String GAME_RATING = "game_rating";
+    private static final String GAME_USER_RATING = "game_user_rating";
     private static final String COVER_HASH = "cover_hash";
     private static final String GAME_VALUE = "game_value";
     private static final String[] COLUMNS = {KEY_ID,KEY_TITLE, GAME_RELEASE_YEAR, GAME_RELEASE_DATE,
-            GAME_PUBLISHER, GAME_STUDIO, GAME_RATING, COVER_HASH, GAME_VALUE};
+            GAME_PUBLISHER, GAME_STUDIO, GAME_RATING, GAME_USER_RATING, COVER_HASH, GAME_VALUE};
 
     // Database Version
-    private static final int DATABASE_VERSION = 63;
+    private static final int DATABASE_VERSION = 64;
     // Database Name
     private static final String DATABASE_NAME = "WishListDB";
 
@@ -50,6 +51,7 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
                 "game_publisher    TEXT," +
                 "game_studio       TEXT," +
                 "game_rating       TEXT," +
+                "game_user_rating  TEXT," +
                 "cover_hash        TEXT, " +
                 "game_value        TEXT)";
 
@@ -83,6 +85,7 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
         values.put(GAME_PUBLISHER, game.getPublisher()); // get publisher
         values.put(GAME_STUDIO, game.getStudio()); // get publisher
         values.put(GAME_RATING, game.getRating()); // get publisher
+        values.put(GAME_USER_RATING, Float.toString(game.getGameUserRating()));
         values.put(COVER_HASH, game.getCoverHash()); //-HASEEB
         values.put(GAME_VALUE, game.getGameValue());
         // 3. insert
@@ -123,10 +126,11 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
         String gamePublisher = cursor.getString(4);
         String gameStudio = cursor.getString(5);
         double gameRating = Double.parseDouble(cursor.getString(6));
-        String coverHash = cursor.getString(7);
-        String gameValue = cursor.getString(8);
+        float gameUserRating = Float.parseFloat(cursor.getString(7));
+        String coverHash = cursor.getString(8);
+        String gameValue = cursor.getString(9);
         Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
-                gameStudio, gameRating, coverHash);
+                gameStudio, gameRating, gameUserRating,coverHash);
         if(gameValue != null)
         {
             game.setGameValue(gameValue);
@@ -170,10 +174,11 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
         String gamePublisher = cursor.getString(4);
         String gameStudio = cursor.getString(5);
         double gameRating = Double.parseDouble(cursor.getString(6));
-        String coverHash = cursor.getString(7); // -HASEEB
-        String gameValue = cursor.getString(8);
+        float gameUserRating = Float.parseFloat(cursor.getString(7));
+        String coverHash = cursor.getString(8); // -HASEEB
+        String gameValue = cursor.getString(9);
         Game game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate,
-                gamePublisher, gameStudio, gameRating, coverHash);
+                gamePublisher, gameStudio, gameRating, gameUserRating, coverHash);
         if(gameValue != null)
         {
             game.setGameValue(gameValue);
@@ -212,10 +217,11 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
                 String gamePublisher = cursor.getString(4);
                 String gameStudio = cursor.getString(5);
                 double gameRating = Double.parseDouble(cursor.getString(6));
-                String coverHash = cursor.getString(7);
-                String gameValue = cursor.getString(8);
+                float gameUserRating = Float.parseFloat(cursor.getString(7));
+                String coverHash = cursor.getString(8);
+                String gameValue = cursor.getString(9);
                 game = new Game(gameTitle, gameId, gameReleaseYear, gameReleaseDate, gamePublisher,
-                        gameStudio, gameRating, coverHash);
+                        gameStudio, gameRating, gameUserRating,coverHash);
                 if(gameValue != null)
                 {
                     game.setGameValue(gameValue);
@@ -249,16 +255,18 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
         values.put(GAME_PUBLISHER, game.getPublisher()); // get publisher
         values.put(GAME_STUDIO, game.getStudio()); // get publisher
         values.put(GAME_RATING, game.getRating()); // get publisher
+        values.put(GAME_USER_RATING, Float.toString(game.getGameUserRating()));
         values.put(COVER_HASH, game.getCoverHash());
-        values.put(GAME_VALUE, game.getCoverHash());
+        values.put(GAME_VALUE, game.getGameValue());
         // 3. updating row
         int i = db.update(TABLE_WISHLIST, //table
                 values, // column/value
-                KEY_ID+" = ?", // selections
-                new String[] { String.valueOf(game.getGameId()) }); //selection args
+                KEY_TITLE+" = ?", // selections
+                new String[] { game.getTitle() }); //selection args
 
         // 4. close
         db.close();
+        Log.d("intoWish", String.valueOf(game.getGameId()));
 
         return i;
 

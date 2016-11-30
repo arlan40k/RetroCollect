@@ -32,7 +32,7 @@ public class WishListActivity extends Activity {
 
     private GridView gamesList;
     private String gameTitle, gamePublisher, gameStudio, gameReleaseYear, gameReleaseDate,
-            gameRating, coverHash;
+            gameRating, coverHash, gameId;
     private Game temporaryGame;
 
 
@@ -94,9 +94,9 @@ public class WishListActivity extends Activity {
         //totalPrice = Double.toString(actualPrice);
         if(!actualPrice.equals("N/A")) {
             totalPrice = String.format("%.2f", actualPrice);
-            tickerView.setText("Collection Value: $" + totalPrice);
+            tickerView.setText("Wish List Value: $" + totalPrice);
         }else{
-            tickerView.setText("Collection Value: $" + actualPrice);
+            tickerView.setText("Wish List Value: $" + actualPrice);
         }
         gamesList = (GridView) findViewById(R.id.gamesList);
 
@@ -134,6 +134,11 @@ public class WishListActivity extends Activity {
 
                 Intent intent = new Intent(WishListActivity.this, GameActivity.class);
                 temporaryGame = gameArray[position];
+
+                gameId = temporaryGame.getGameId() + " ";
+                intent.putExtra("gameId", gameId);
+
+                Log.d("intoWss", gameId);
 
                 gameTitle = temporaryGame.getTitle();
                 intent.putExtra("gameTitle", gameTitle);
