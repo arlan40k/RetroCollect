@@ -285,7 +285,7 @@ public class SearchActivity extends Activity {
             {
                 if(loadedPrices.size() > position)
                 {
-                    txtPrice.setText("  " +loadedPrices.get(position));
+                    txtPrice.setText("  $" +loadedPrices.get(position));
                 }
 
             }

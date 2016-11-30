@@ -478,11 +478,11 @@ public class WishListActivity extends Activity {
 
             if(game.getGameValue() != null)
             {
-                priceTextView.setText(game.getGameValue());
+                priceTextView.setText("$" + game.getGameValue());
             }
             else
             {
-                priceTextView.setText("N/A");
+                priceTextView.setText("$N/A");
             }
 
             return convertView;
