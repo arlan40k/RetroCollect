@@ -239,12 +239,12 @@
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/merchantsButton"
                     android:text="gamefaqs" />
-                <Button
+               <!-- <Button
                     android:id="@+id/ratingSaveButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/gamefaqsButton"
-                    android:text="Save Rating"/>
+                    android:text="Save Rating"/> -->
 
             </RelativeLayout>
 

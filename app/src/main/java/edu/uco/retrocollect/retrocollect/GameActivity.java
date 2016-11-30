@@ -32,7 +32,7 @@ public class GameActivity extends Activity {
     private ImageView gameCoverBackgroundImageView, gameCoverImageView;
     private ProgressBar ratingProgressBar;
     private RatingBar gameUserRatingBar;
-    private Button merchantsButton, gamefaqsButton, ratingButton;
+    private Button merchantsButton, gamefaqsButton; /*ratingButton*/;
     private String title, callingActivity;
     private float gameUserRating;
     private final String dataErrorString = "";
@@ -69,7 +69,7 @@ public class GameActivity extends Activity {
             }
         });
         gamefaqsButton = (Button) findViewById(R.id.gamefaqsButton);
-        ratingButton = (Button) findViewById(R.id.ratingSaveButton);
+       // ratingButton = (Button) findViewById(R.id.ratingSaveButton);
 
         //gameCoverImageView = (ImageView) findViewById(R.id.gameCoverImageView);
         gameCoverBackgroundImageView = (ImageView) findViewById(R.id.gameCoverBackgroundImageView);
@@ -106,6 +106,24 @@ public class GameActivity extends Activity {
                        // sqlWishListHelper.updateGame(myGame);
                        // Toast.makeText(getApplicationContext(), "HEY", Toast.LENGTH_SHORT).show();
                        // Log.d("intoWishDB", Float.toString(rating));
+
+                        if(myGame !=  null){
+                            myGame.setGameUserRating(rating);
+
+                            if(callingActivity.equals("WishList")) {
+                                sqlWishListHelper.updateGame(myGame);
+                            }
+                            else if(callingActivity.equals("Collection")){
+                                sqlGameHelper.updateGame(myGame);
+                                Log.d("intoC", "LORD!!! IF YOURE LISTENING! HELP!!!!!!");
+                            }
+
+                            //sqlWishListHelper.updateGame(myGame);
+                            Log.d("intoWi", "did we make it this far?");
+                            //sqlWishListHelper.addGame(myGame);
+
+                        }
+
 
                     }
                 });
@@ -209,6 +227,7 @@ public class GameActivity extends Activity {
         }
 
         //put button here
+        /*
         ratingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,7 +237,7 @@ public class GameActivity extends Activity {
                 if(bundle!=null){
                     id = bundle.getString("gameId")+ " ";
                 }
-                */
+
                 String title;
                 title =  bundle.getString("gameTitle");
                 //Log.d("intoWish", id);
@@ -248,6 +267,7 @@ public class GameActivity extends Activity {
                 Log.d("intoWishDB", Float.toString(rating1));
             }
         });
+        */
     }
     class LoadGameRatingValueTask extends AsyncTask<Integer, Integer, Void> {
 
