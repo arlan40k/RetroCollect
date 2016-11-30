@@ -161,6 +161,8 @@ public class WishListActivity extends Activity {
                 coverHash = temporaryGame.getCoverHash();
                 intent.putExtra("coverHash", coverHash);
 
+                intent.putExtra("callingActivity", "WishList");
+
                 //Adam Bilby
                 String gameValue = String.valueOf(temporaryGame.getGameValue());
 

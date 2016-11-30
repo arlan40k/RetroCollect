@@ -33,13 +33,14 @@ public class GameActivity extends Activity {
     private ProgressBar ratingProgressBar;
     private RatingBar gameUserRatingBar;
     private Button merchantsButton, gamefaqsButton, ratingButton;
-    private String title;
+    private String title, callingActivity;
     private float gameUserRating;
     private final String dataErrorString = "";
     private final String gameValueErrorString = "N/A";
     private int ratingInteger;
 
     SqlWishListHelper sqlWishListHelper = new SqlWishListHelper(this);
+    SqlGameHelper sqlGameHelper = new SqlGameHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +75,25 @@ public class GameActivity extends Activity {
         gameCoverBackgroundImageView = (ImageView) findViewById(R.id.gameCoverBackgroundImageView);
 
         bundle = getIntent().getExtras();
+
+        callingActivity = bundle.getString("callingActivity");
+
+        if (callingActivity == null){
+            callingActivity = "N/A";
+        }
         if (bundle != null) {
 
             title = bundle.getString("gameTitle");
            // myGame = bundle.getParcelable("temporaryGame");
-            myGame = sqlWishListHelper.getGame(title);
+            if(callingActivity.equals("WishList")) {
+                myGame = sqlWishListHelper.getGame(title);
+            }
+            else if(callingActivity.equals("Collection")){
+                myGame = sqlGameHelper.getGame(title);
+            }
+            else{
+                myGame = bundle.getParcelable("temporaryGame");
+            }
 
             if (myGame != null){
                 gameUserRating = myGame.getGameUserRating();
@@ -112,7 +127,7 @@ public class GameActivity extends Activity {
             } else {
                 gameTitleTextView.setText(dataErrorString);
             }
-            String value = myGame.getGameValue(); //bundle.getString("gameValue");
+            String value =  bundle.getString("gameValue");
             if (value != null) {
                 gameValueTextView.setText("$"+ value);
             } else {
@@ -215,7 +230,16 @@ public class GameActivity extends Activity {
 
                 if(myGame !=  null){
                     myGame.setGameUserRating(rating1);
-                    sqlWishListHelper.updateGame(myGame);
+
+                    if(callingActivity.equals("WishList")) {
+                        sqlWishListHelper.updateGame(myGame);
+                    }
+                    else if(callingActivity.equals("Collection")){
+                        sqlGameHelper.updateGame(myGame);
+                        Log.d("intoC", "LORD!!! IF YOURE LISTENING! HELP!!!!!!");
+                    }
+
+                    //sqlWishListHelper.updateGame(myGame);
                     Log.d("intoWi", "did we make it this far?");
                     //sqlWishListHelper.addGame(myGame);
 

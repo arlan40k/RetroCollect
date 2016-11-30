@@ -165,6 +165,7 @@ public class CollectionActivity extends Activity {
                 String gameValue = String.valueOf(temporaryGame.getGameValue());
 
                 intent.putExtra("gameValue", gameValue);
+                intent.putExtra("callingActivity", "Collection");
 
                 startActivity(intent);
             }

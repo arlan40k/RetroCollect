@@ -34,8 +34,8 @@ public class SqlGameHelper extends SQLiteOpenHelper {
             GAME_PUBLISHER, GAME_STUDIO, GAME_RATING, GAME_USER_RATING, COVER_HASH, GAME_VALUE};//game_user_rating added - Nicholas Clemmons
 
     // Database Version
-    //Changed from '5' to '6' - Nicholas Clemmons
-    private static final int DATABASE_VERSION = 6;
+
+    private static final int DATABASE_VERSION = 9;
 
     // Database Name
     private static final String DATABASE_NAME = "GameDB";
@@ -88,7 +88,7 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         values.put(GAME_PUBLISHER, game.getPublisher()); // get publisher
         values.put(GAME_STUDIO, game.getStudio()); // get publisher
         values.put(GAME_RATING, game.getRating()); // get publisher
-        values.put(GAME_USER_RATING, game.getGameUserRating());//getGameUserRating - Nicholas Clemmons
+        values.put(GAME_USER_RATING, Float.toString(game.getGameUserRating()));//getGameUserRating - Nicholas Clemmons
         values.put(COVER_HASH, game.getCoverHash()); //-HASEEB
         values.put(GAME_VALUE, game.getGameValue());
         Log.d("putHash", game.getCoverHash() + " ");
@@ -259,16 +259,19 @@ public class SqlGameHelper extends SQLiteOpenHelper {
         values.put(GAME_PUBLISHER, game.getPublisher()); // get publisher
         values.put(GAME_STUDIO, game.getStudio()); // get publisher
         values.put(GAME_RATING, game.getRating()); // get publisher
-        values.put(GAME_USER_RATING, game.getGameUserRating());//getGameUserRating - Nicholas Clemmons
+        values.put(GAME_USER_RATING, Float.toString(game.getGameUserRating()));
         values.put(COVER_HASH, game.getCoverHash()); //-HASEEB
         values.put(GAME_VALUE, game.getGameValue());
         // 3. updating row
         int i = db.update(TABLE_GAMES, //table
                 values, // column/value
-                KEY_ID+" = ?", // selections
-                new String[] { String.valueOf(game.getGameId()) }); //selection args
+                KEY_TITLE+" = ?", // selections
+                new String[] { game.getTitle()}); //selection args
 
         // 4. close
+
+        Log.d("intoCo", "we made it dawg");
+
         db.close();
 
         return i;

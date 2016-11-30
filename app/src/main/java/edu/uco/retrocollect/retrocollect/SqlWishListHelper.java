@@ -77,7 +77,7 @@ public class SqlWishListHelper extends SQLiteOpenHelper {
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-       // values.put(KEY_ID, game.getGameId()); //-HASEEB
+        values.put(KEY_ID, game.getGameId()); //-HASEEB
        // Log.d("delete3", game.getGameId());
         values.put(KEY_TITLE, game.getTitle()); // get title
         values.put(GAME_RELEASE_YEAR, game.getReleaseYear()); // get release year
