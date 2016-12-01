@@ -277,7 +277,8 @@ public class SearchActivity extends Activity {
             ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
             TextView txtPrice = (TextView) rowView.findViewById(price);
             new PriceAsynTask().execute(game[position]);
-            Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_small/"
+            Picasso.with(getApplicationContext()).load("https://images.igdb.com/igdb/image/" +
+                    "upload/t_cover_small/"
                     +  hashes[position] +  ".jpg").into(imageView);
 
             txtTitle.setText(game[position]);

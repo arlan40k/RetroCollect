@@ -216,8 +216,8 @@ public class GameActivity extends Activity {
                         "e/upload/t_cover_big_2x/"
                         + cover + ".jpg").into(gameCoverImageView);*/
 
-                Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/imag" +
-                        "e/upload/t_cover_big_2x/"
+                Picasso.with(getApplicationContext()).load("https://images.igdb.com/igdb/image/" +
+                        "upload/t_cover_big_2x/"
                         + cover + ".jpg").into(gameCoverBackgroundImageView);
 
                 //Log.d(TAG, cover);

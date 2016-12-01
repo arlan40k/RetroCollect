@@ -417,7 +417,10 @@ public class CollectionActivity extends Activity {
             //Adam Bilby
             final TextView priceTextView = (TextView)convertView.findViewById(R.id.textview_game_value);
             // 4
-            Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_small_2x/"
+            //https://res.cloudinary.com/igdb/image/upload/t_cover_small_2x/
+            //https://images.igdb.com/igdb/image/upload/t_cover_small_2x/
+            Picasso.with(getApplicationContext()).load("https://images.igdb.com/igdb/image/" +
+                    "upload/t_cover_small_2x/"
                     +  game.getCoverHash() +  ".jpg").into(imageView);
 
             nameTextView.setText(game.getTitle());
@@ -479,7 +482,8 @@ public class CollectionActivity extends Activity {
             //Adam Bilby
             final TextView priceTextView = (TextView)convertView.findViewById(R.id.textview_game_value);
             // 4
-            Picasso.with(getApplicationContext()).load("https://res.cloudinary.com/igdb/image/upload/t_cover_small_2x/"
+            Picasso.with(getApplicationContext()).load("https://images.igdb.com/igdb/image/" +
+                    "upload/t_cover_small_2x/"
                     +  game.getCoverHash() +  ".jpg").into(imageView);
 
             nameTextView.setText(game.getTitle());
