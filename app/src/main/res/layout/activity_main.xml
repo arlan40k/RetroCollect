@@ -23,22 +23,11 @@
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"/>
 
-    <!--
-
-    <Button
-        android:layout_below="@id/searchButton"
-        android:text="@string/collection"
-        android:id="@+id/collectionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-        -->
-
     <br.com.bloder.magic.view.MagicButton
         android:id="@+id/wishListButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:magic_button_size="60dp"
+        app:magic_button_size="75dp"
         app:button_icon="@mipmap/ic_favorite"
         app:button_icon_width="40dp"
         app:button_icon_height="40dp"
@@ -55,11 +44,11 @@
         android:id="@+id/localMerchantsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:magic_button_size="60dp"
+        app:magic_button_size="75dp"
         app:button_icon="@mipmap/ic_map"
         app:button_icon_width="40dp"
         app:button_icon_height="40dp"
-        app:hide_text=" Merchants"
+        app:hide_text="   Merchants"
         app:hide_text_size="10sp"
         app:hide_text_color="@color/primary_text"
         app:icon_button_color="@color/primary"
@@ -67,35 +56,6 @@
         android:layout_marginTop="11dp"
         android:layout_below="@+id/wishListButton"
         android:layout_alignStart="@+id/wishListButton" />
-<!--
-    <br.com.bloder.magic.view.MagicButton
-        android:id="@+id/launchWidget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:magic_button_size="75dp"
-        app:button_icon="@mipmap/ic_launcher"
-        app:button_icon_width="40dp"
-        app:button_icon_height="40dp"
-        app:hide_text="   Widget"
-        app:hide_text_size="10sp"
-        app:hide_text_color="@color/primary_text"
-        app:icon_button_color="@color/primary"
-        app:expandable_area_color="@color/primary_dark"
-        android:layout_marginTop="11dp"
-        android:layout_below="@+id/barcodeButton"
-        android:layout_alignStart="@+id/barcodeButton" />
--->
-
-    <!--
-    <Button
-        android:id="@+id/launchWidget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:layout_below="@+id/barcodeButton"
-        android:layout_alignStart="@+id/barcodeButton" />
-
-    -->
 
     <EditText
         android:id="@+id/searchBar"
@@ -117,7 +77,7 @@
         android:id="@+id/collectionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:magic_button_size="60dp"
+        app:magic_button_size="75dp"
         app:button_icon="@mipmap/ic_collection"
         app:button_icon_width="40dp"
         app:button_icon_height="40dp"
@@ -134,7 +94,7 @@
         android:id="@+id/barcodeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:magic_button_size="60dp"
+        app:magic_button_size="75dp"
         app:button_icon="@mipmap/ic_camera"
         app:button_icon_width="40dp"
         app:button_icon_height="40dp"
@@ -151,7 +111,7 @@
         android:id="@+id/launchWidget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:magic_button_size="60dp"
+        app:magic_button_size="75dp"
         app:button_icon="@mipmap/ic_widget"
         app:button_icon_width="40dp"
         app:button_icon_height="40dp"
@@ -163,27 +123,5 @@
         android:layout_below="@+id/barcodeButton"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="14dp" />
-    <!--
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/barcodeButton"
-        android:layout_below="@+id/localMerchantsButton"/>
-
-
-        <Button
-            android:layout_below="@id/collectionButton"
-            android:text="@string/wishList"
-            android:id="@+id/wishListButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:layout_below="@id/wishListButton"
-            android:text="Local Merchants"
-            android:id="@+id/localMerchantsButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    -->
 
 </RelativeLayout>

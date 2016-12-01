@@ -97,8 +97,6 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
         }
 
 
-
-
         apiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -135,14 +133,7 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
                 // result of the request.
             }
         }
-        //Used for non-gps locationing
-/*      String lat = getIntent().getStringExtra("LAT");
-        String lng = getIntent().getStringExtra("LNG");*/
 
-/*        if (!lat.equals("") && !lng.equals(""))
-            loc = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
-        else
-            loc = new LatLng(35.638033, -97.485540);*/
         markers.clear();
         placeIDs.clear();
         storeInfo.clear();
@@ -180,9 +171,7 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
 
         new HttpGet().execute();
         Thread t1 = new Waiter();
-        Thread t2 = new Updater();
         t1.start();
-        t2.start();
         //comgooglemaps://?q=Pizza&center=37.759748,-122.427135
 
         //https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=YOUR_API_KEY3
@@ -436,13 +425,4 @@ public class LocalMerchantActivity extends FragmentActivity implements OnMapRead
                 }
             }
         }
-
-    private class Updater extends Thread {
-        public void run(){
-
-        }
-
-
-
-    }
 }

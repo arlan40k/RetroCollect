@@ -24,7 +24,6 @@ import android.widget.ImageView;
  * Created by Garrett A. Clement on 11/15/2016.
  */
 
-//The basis for this bubble widget was derived from https://droidqd.wordpress.com/2015/01/07/how-to-make-a-floating-face-bubble-on-home-screen-in-android/
 public class BubbleWidgetService extends Service {
 
     private WindowManager wm;
@@ -33,9 +32,6 @@ public class BubbleWidgetService extends Service {
     public static Thread myService;
     public  boolean keepListening = true;
     private int screenWidth;
-    private int screenHeight;
-    private long pressedTime;
-    private final static long REMOVE_TIME = 3000;
     ActivityManager am;
     ComponentName cn;
     public void onCreate(){
@@ -54,8 +50,6 @@ public class BubbleWidgetService extends Service {
         Point size = new Point();
         display.getSize(size);
         screenWidth = size.x;
-        screenHeight = size.y;
-
 
         bubbleImage.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -74,14 +68,12 @@ public class BubbleWidgetService extends Service {
             @Override
             public void onClick(View v) {
 
-
                     Intent i = new Intent(getBaseContext(), MainActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);
             }
         });
 
-        //Set Parameters
         final LayoutParams params = new WindowManager.LayoutParams(
                 LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT,
@@ -98,43 +90,28 @@ public class BubbleWidgetService extends Service {
         try{
            bubbleImage.setOnTouchListener(new View.OnTouchListener(){
             WindowManager.LayoutParams paramsT = params;
-               private  int initX;
-               private int initY;
-               private float initTouchX;
-               private float initTouchY;
-               private long touchStartTime = 0;
+               private  int ix;
+               private int iy;
+               private float tPositionX;
+               private float tPositionY;
 
                @Override
                public boolean onTouch(View v, MotionEvent event) {
-                   //Removes the bubble image on a long press.
-                   pressedTime = System.currentTimeMillis();
 
                    switch(event.getAction())
                    {
                        case MotionEvent.ACTION_DOWN:
-                           pressedTime = (int) System.currentTimeMillis();
                            bubbleImage.setAlpha((float) 1);
 
-                           touchStartTime = System.currentTimeMillis();
-                           initX = params.x;
-                           initY = params.y;
-                           initTouchX = event.getRawX();
-                           initTouchY = event.getRawY();
+                           ix = params.x;
+                           iy = params.y;
+                            tPositionX = event.getRawX();
+                           tPositionY = event.getRawY();
                            break;
                        case MotionEvent.ACTION_UP:
+
                            event.getRawX();
-                           long cTime = System.currentTimeMillis() - pressedTime;
-                           if(System.currentTimeMillis() - pressedTime > REMOVE_TIME && initX == params.x)
-                           {
-                               wm.removeView(bubbleImage);
-                               stopSelf();
-                               return false;
-                           }
                            bubbleImage.setAlpha((float) 0.4);
-
-                       //   params.gravity = Gravity.TOP | Gravity.LEFT;
-                       //    params.x = 0;
-
                            if(params.x <= screenWidth/2)
                                params.x = -40;
                            else
@@ -143,9 +120,8 @@ public class BubbleWidgetService extends Service {
 
                            break;
                        case MotionEvent.ACTION_MOVE:
-                           touchStartTime = System.currentTimeMillis();
-                           params.x = initX + (int) (event.getRawX() - initTouchX);
-                           params.y = initY + (int) (event.getRawY() - initTouchY);
+                           params.x = ix + (int) (event.getRawX() -  tPositionX);
+                           params.y = iy + (int) (event.getRawY() - tPositionY);
                            wm.updateViewLayout(v, params);
                            break;
                    }
@@ -155,7 +131,7 @@ public class BubbleWidgetService extends Service {
 
         }catch (Exception e){
             e.printStackTrace();
-            Log.d(TAG, "Bubble Functionallity failure");
+            Log.d(TAG, "Bubble Functionality failure");
         }
 
         Receiver re = new Receiver();
@@ -179,14 +155,10 @@ public class BubbleWidgetService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-/*            if(intent.getStringExtra("TIME").equals(null))
-                System.out.print("HI");*/
-
             if(intent.getStringExtra("DISPLAY").equals("TRUE"))
                 bubbleImage.setVisibility(View.VISIBLE);
             else
                 bubbleImage.setVisibility(View.INVISIBLE);
-            //((TextView)findViewById(R.id.clock)).setText(intent.getStringExtra("TIME"));
 
         }
     }
@@ -205,8 +177,6 @@ public class BubbleWidgetService extends Service {
                 try {
                     Thread.sleep(1000);
                     cn = am.getRunningTasks(1).get(0).topActivity;
-                    Log.d("Current_Activity",  cn.getPackageName());
-                    Log.d("Current_Activity",  cn.getClassName());
                     if(cn.getPackageName().equals("edu.uco.retrocollect.retrocollect"))
                         intent.putExtra("DISPLAY", "FALSE");
                     else

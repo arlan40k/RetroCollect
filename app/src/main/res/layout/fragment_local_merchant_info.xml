@@ -10,6 +10,9 @@
         android:layout_height="wrap_content"
         android:divider="#323232"
         android:dividerHeight="1dp"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+
+        />
+
 
 </FrameLayout>

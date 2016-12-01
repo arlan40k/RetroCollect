@@ -134,7 +134,7 @@ public class MainActivity extends Activity {
                 //Checks to see if we can use a bubble.
                 if(checkOverlaysPermission())
                 {
-                    Toast.makeText(MainActivity.this, "Bubble Widget Launched!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Bubble widget now running.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, BubbleWidgetService.class);
                     startService(intent);
                 }
