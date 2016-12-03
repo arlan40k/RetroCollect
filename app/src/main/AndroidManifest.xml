@@ -21,6 +21,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/RetroCollect">
+        <!--
+            RetroCollect icon based on image by iconfinder user Zlatko Najdenovski
+            https://www.iconfinder.com/icons/809507/game_gaming_joystick_multimedia_technology_icon#size=512
+            Licensed under "free for personal use".
+        -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
